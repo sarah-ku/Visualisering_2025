@@ -17,7 +17,6 @@ language:
     chapter_name: "Kapitel "
 
 rmd_files: [
-  "index.Rmd",
   "01-basics.Rmd",
   "02-rmark.Rmd"
 ]
