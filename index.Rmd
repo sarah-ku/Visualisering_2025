@@ -1,4 +1,4 @@
---- 
+---
 title: "Analyse og visualisering af biologiske datasæt - 2025"
 author: "Sarah Rennie"
 date: "Last updated: `r Sys.Date()`"
@@ -7,10 +7,8 @@ documentclass: book
 bibliography: [book.bib]
 biblio-style: apalike
 link-citations: yes
-#output: [bookdown::gitbook, bookdown::pdf_document]
+
 output: 
-  #pdf_document:
-  #  latex_engine: pdflatex
   html_document:
     toc: true
     toc_float: true
@@ -36,17 +34,15 @@ knitr::write_bib(c(
 
 \mainmatter
 
-
-
-# Lidt om kurset {-}
+# Lidt om kurset
 
 Denne hjemmeside er kursusnotaterne til de indskrevne studerende i 2024. De er skrevet 100% af mig (din underviser og kursusansvarlig, Sarah Rennie). Jeg håber, det er intuitivt at finde rundt på siden, men har du forslag til forbedringer, skriv meget gerne til mig.
 
-## Outline {-}
+## Outline
 
 Der er i alt 13 emner i kurset.
 
-## Bedømmelse {-}
+## Bedømmelse
 
 Kurset bedømmes således:
 
@@ -55,10 +51,9 @@ Kurset bedømmes således:
 
 Quizzerne gør det nemt at tjekke viden undervejs, men udgør ikke en del af den samlede karakter.
 
-## Bare lidt om underviserne {-}
+## Bare lidt om underviserne
 
 Sarah
 
 Jeg er adjunkt på biologiske institut. Jeg kommer oprindeligt fra Storbritannien og flyttede til Danmark i 2015. Jeg bor sammen med min mand og vores 3 børn.
-
 

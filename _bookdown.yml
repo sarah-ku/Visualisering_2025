@@ -1,7 +1,10 @@
 delete_merged_file: true
 name: Visualisering_2024
-book_filename: "index"
-output_dir: "docs"
+
+book_filename: "index"      # This tells Bookdown to name the main output file "index.html"
+output_dir: "docs"          # The rendered site will be in the "docs" folder
+
+
 output:
   html_document:
     toc: true
@@ -12,6 +15,12 @@ output:
 language:
   ui:
     chapter_name: "Kapitel "
+
+rmd_files: [
+  "index.Rmd",
+  "01-basics.Rmd",
+  "02-rmark.Rmd"
+]
 
 new_session: yes
 

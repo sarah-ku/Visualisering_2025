@@ -1,3 +1,8 @@
+
+
+
+\mainmatter
+
 # Grundlæggende R {#baser}
 
 
@@ -33,7 +38,7 @@ Følg venligst RStudios egne anvisninger til at få det installeret. Bemærk, at
 
 <div class="figure" style="text-align: center">
 <img src="plots/RStudio_overview.png" alt="Image source: https://epirhandbook.com/en/r-basics.html" width="90%" height="90%" />
-<p class="caption">Image source: https://epirhandbook.com/en/r-basics.html</p>
+<p class="caption">(\#fig:unnamed-chunk-2)Image source: https://epirhandbook.com/en/r-basics.html</p>
 </div>
 
 Du kan læse følgende for at lære de fire forskellige vinduer i RStudio at kende:
@@ -531,11 +536,11 @@ x #så har vi 25 værdier fra en normal distribution med mean=0 og standard devi
 ```
 
 ```
-#>  [1] -1.51493965 -0.03349416 -1.05627479  0.90618948  0.17606984 -0.28937527
-#>  [7]  1.43131120 -1.03543718  0.53078279  1.32343574  0.15389106  1.06077067
-#> [13] -2.98325714 -1.17925409  0.19558072  1.06784920  0.24848548 -1.29112985
-#> [19] -2.28963278 -0.05256816 -0.12155553  0.44235210  0.53614259 -1.13896468
-#> [25] -0.54705177
+#>  [1]  1.37422497  0.07081215 -0.74004626  0.22603291  0.03730780 -0.30739053
+#>  [7] -0.62742757  0.32582428  0.33577351 -0.66994374  0.62101208  0.12641288
+#> [13] -0.01317602 -1.02769690 -0.28715446  0.56492965  1.28536988  0.03340366
+#> [19]  0.87466161 -0.17591845  0.35925925  0.49099888  0.64575824 -1.46714213
+#> [25]  0.83044646
 ```
 
 I stedet for at kigge på alle værdier på én gang, vil vi måske hellere kigge kun på de første (eller sidste) værdier:
@@ -543,13 +548,13 @@ I stedet for at kigge på alle værdier på én gang, vil vi måske hellere kigg
 
 ``` r
 head(x) #første 6
-#> [1] -1.51493965 -0.03349416 -1.05627479  0.90618948  0.17606984 -0.28937527
+#> [1]  1.1875427  1.0187011  0.4961876 -1.5606348  0.7530980 -1.4530402
 tail(x) #sidste 6
-#> [1] -0.05256816 -0.12155553  0.44235210  0.53614259 -1.13896468 -0.54705177
+#> [1] -0.3313650  1.4707874  2.6278484  0.2546649  0.8092121 -2.2188393
 x[1] #første værdi
-#> [1] -1.51494
+#> [1] 1.187543
 x[length(x)] #sidste data point
-#> [1] -0.5470518
+#> [1] -2.218839
 ```
 
 Bemærk, at i modsætning til Python og mange andre programmeringssprog, bruger R en 1-baseret indeksering. Det betyder, at den første værdi er x[1] og ikke x[0] som i Python.
@@ -579,7 +584,7 @@ c(my_mean,my_median,my_max,my_min,my_var,my_sd) #print results
 ```
 
 ```
-#> [1] -0.21840297 -0.03349416  1.43131120 -2.98325714  1.24981582  1.11795162
+#> [1]  0.1154533  0.1264129  1.3742250 -1.4671421  0.4689355  0.6847886
 ```
 
 Man kan også lave et summary af dataen, som består af mange af de statistiker navnt ovenpå:
@@ -590,8 +595,8 @@ summary(x)
 ```
 
 ```
-#>     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-#> -2.98326 -1.05627 -0.03349 -0.21840  0.53078  1.43131
+#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#> -1.4671 -0.2872  0.1264  0.1155  0.5649  1.3742
 ```
 
 ### `tapply()`

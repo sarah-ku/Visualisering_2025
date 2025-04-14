@@ -1,0 +1,21 @@
+bookdown::gitbook:
+  css: assets/style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">Visualisering_2024</a></li>
+      after: |
+        <li><a href="https://sarah-ku.github.io/" target="blank">Published with bookdown</a></li>
+    download: [pdf]
+    edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: pdflatex
+  citation_package: natbib
+  pandoc_args: [--top-level-division=chapter, --wrap=none]
+  toc_depth: 3
+  toc_unnumbered: no
+  toc_appendix: yes
+  highlight_bw: yes
+  keep_tex: yes
