@@ -1,5 +1,7 @@
 delete_merged_file: true
 name: Visualisering_2024
+book_filename: "index"
+output_dir: "docs"
 output:
   html_document:
     toc: true
