@@ -1,9 +1,7 @@
 
 
-
-\mainmatter
-
 # Grundlæggende R {#baser}
+
 
 
 <img src="plots/logo_baseR.png" width="20%" height="20%" style="display: block; margin: auto;" />
@@ -114,6 +112,70 @@ data(iris)
 
 Så er en _dataframe_, der hedder 'iris' tilgængelige som en _objekt_ i _workspacen_ - se den "Environment" fane på højere side i RStudio, eller indtaste `ls()`, så bør du kunne se et objekt med navnet 'iris'. Man kan kun arbejde med objekter som er en del af workspacen.
 
+
+``` r
+head(iris) #first few rows
+```
+
+```
+#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#> 1          5.1         3.5          1.4         0.2  setosa
+#> 2          4.9         3.0          1.4         0.2  setosa
+#> 3          4.7         3.2          1.3         0.2  setosa
+#> 4          4.6         3.1          1.5         0.2  setosa
+#> 5          5.0         3.6          1.4         0.2  setosa
+#> 6          5.4         3.9          1.7         0.4  setosa
+```
+
+``` r
+tail(iris) #last few rows
+```
+
+```
+#>     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+#> 145          6.7         3.3          5.7         2.5 virginica
+#> 146          6.7         3.0          5.2         2.3 virginica
+#> 147          6.3         2.5          5.0         1.9 virginica
+#> 148          6.5         3.0          5.2         2.0 virginica
+#> 149          6.2         3.4          5.4         2.3 virginica
+#> 150          5.9         3.0          5.1         1.8 virginica
+```
+
+``` r
+str(iris) #structure
+```
+
+```
+#> 'data.frame':	150 obs. of  5 variables:
+#>  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+#>  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+#>  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+#>  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+#>  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
+```
+
+``` r
+summary(iris) #summary per column
+```
+
+```
+#>   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+#>  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+#>  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+#>  Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+#>  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+#>  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+#>  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+#>        Species  
+#>  setosa    :50  
+#>  versicolor:50  
+#>  virginica :50  
+#>                 
+#>                 
+#> 
+```
+
+
 ### Importering af data fra .txt fil
 
 Det er meget hyppigt, at man har sin data i formen af en .txt fil eller .xlsx fil på sin computer. Den nemmeste måde at få åbnet en .txt fil er ved at bruge `read.table()`, som i nedenstående:
@@ -143,6 +205,16 @@ data <- read_excel("data.xlsx")
 data
 ```
 
+Hvis man gerne vil referere til en bestemt ark, så kan man bruge en ekstra indstilling:
+
+
+``` r
+library(readxl)
+data <- read_excel("data.xlsx",sheet=1)
+data
+```
+
+
 ### Kaggle
 
 Hvis du gerne vil øve dig med statistike analyser (udover nuværende kursus), er Kaggle en fantastisk ressource til at finde forskellige datasæt. I rigtige mange tilfælde kan man også finde analyser some andre har lavet I R (også Python), hvilket kan inspirere jeres egen læring.
@@ -168,6 +240,43 @@ OBS: en objekts værdi kan nem overskrives - vær opmærksomt på rækkefølgen 
 ``` r
 x <- 2 #x er defineret som 2
 x <- 4 #nu er x omdefineret som 4
+```
+
+Man kan også tilføjer to objektor sammen:
+
+
+``` r
+a <- 5 #a er definiret som 5
+b <- a + x
+b # 5 + 4
+```
+
+```
+#> [1] 9
+```
+
+Vær opmærksom på, at jeg kan ændre på `a`, uden at `b` ændre sig automatisk:
+
+
+``` r
+a <- 23
+b #stadig 5 + 4
+```
+
+```
+#> [1] 9
+```
+
+Hvis man vil opdatere `b`, så skal den defineres igen:
+
+
+``` r
+b <- a + x
+b # 23 + 4
+```
+
+```
+#> [1] 27
 ```
 
 
@@ -536,11 +645,11 @@ x #så har vi 25 værdier fra en normal distribution med mean=0 og standard devi
 ```
 
 ```
-#>  [1]  1.37422497  0.07081215 -0.74004626  0.22603291  0.03730780 -0.30739053
-#>  [7] -0.62742757  0.32582428  0.33577351 -0.66994374  0.62101208  0.12641288
-#> [13] -0.01317602 -1.02769690 -0.28715446  0.56492965  1.28536988  0.03340366
-#> [19]  0.87466161 -0.17591845  0.35925925  0.49099888  0.64575824 -1.46714213
-#> [25]  0.83044646
+#>  [1] -0.7995164 -0.1453109  1.5507010 -0.2481836 -1.0357289 -0.2316026
+#>  [7]  1.2412568  1.1399380 -0.2906140  0.3371403  0.5556572 -2.9009026
+#> [13] -0.7281946 -1.2615137  1.5120590 -1.0877585 -4.0387585 -0.7410380
+#> [19]  0.1075008 -1.2015246 -0.3974863  0.1528689 -1.7640585  0.9231465
+#> [25]  0.9524846
 ```
 
 I stedet for at kigge på alle værdier på én gang, vil vi måske hellere kigge kun på de første (eller sidste) værdier:
@@ -548,13 +657,13 @@ I stedet for at kigge på alle værdier på én gang, vil vi måske hellere kigg
 
 ``` r
 head(x) #første 6
-#> [1]  1.1875427  1.0187011  0.4961876 -1.5606348  0.7530980 -1.4530402
+#> [1] -0.7995164 -0.1453109  1.5507010 -0.2481836 -1.0357289 -0.2316026
 tail(x) #sidste 6
-#> [1] -0.3313650  1.4707874  2.6278484  0.2546649  0.8092121 -2.2188393
+#> [1] -1.2015246 -0.3974863  0.1528689 -1.7640585  0.9231465  0.9524846
 x[1] #første værdi
-#> [1] 1.187543
+#> [1] -0.7995164
 x[length(x)] #sidste data point
-#> [1] -2.218839
+#> [1] 0.9524846
 ```
 
 Bemærk, at i modsætning til Python og mange andre programmeringssprog, bruger R en 1-baseret indeksering. Det betyder, at den første værdi er x[1] og ikke x[0] som i Python.
@@ -584,7 +693,7 @@ c(my_mean,my_median,my_max,my_min,my_var,my_sd) #print results
 ```
 
 ```
-#> [1]  0.1154533  0.1264129  1.3742250 -1.4671421  0.4689355  0.6847886
+#> [1] -0.3359775 -0.2481836  1.5507010 -4.0387585  1.7563789  1.3252845
 ```
 
 Man kan også lave et summary af dataen, som består af mange af de statistiker navnt ovenpå:
@@ -596,7 +705,7 @@ summary(x)
 
 ```
 #>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#> -1.4671 -0.2872  0.1264  0.1155  0.5649  1.3742
+#> -4.0388 -1.0357 -0.2482 -0.3360  0.5557  1.5507
 ```
 
 ### `tapply()`
@@ -656,7 +765,7 @@ Her er en oversigt over nogle af de mest grundlæggende tests, som man kan udfø
 
 Først og fremmest er det vigtigt at kunne huske p-værdi både i forhold til definitionen og i forhold til hvordan det fortolkes.
 
-P-værdien er sandsynligheden for at observere et resultat lige så ekstremt eller mere ekstremt end det observerede, givet at null-hypotesen er sand. Null-hypotesen er en antagelse om, at der ikke er nogen signifikant forskel mellem grupper eller variabler i det dataset, som der arbejdes med.
+__P-værdien er sandsynligheden for at observere et resultat lige så ekstremt eller mere ekstremt end det observerede, givet at null-hypotesen er sand__. Null-hypotesen er en antagelse om, at der ikke er nogen signifikant forskel mellem grupper eller variabler i det dataset, som der arbejdes med.
 
 Hvis p-værdien er mindre end det valgte signifikansniveau (typisk 0,05), så betyder det, at det observerede resultat er usandsynligt at opstå ved ren tilfældighed, og null-hypotesen forkastes til fordel for den alternative hypotese om, at der er en signifikant forskel mellem grupper eller variabler i datasættet.
 
@@ -946,7 +1055,7 @@ Formål: måler (en retningsbestemt) relation mellem to kontinuerte variabler. I
 
 Eksempel - datasættet `mtcars`, response (afgængig) variabel er `mpg` og predictor (uafhængig) variabel er `wt`. 
 
-<img src="01-basics_files/figure-html/unnamed-chunk-54-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="01-basics_files/figure-html/unnamed-chunk-59-1.svg" width="672" style="display: block; margin: auto;" />
 
 Man skriver relationen i R som `mpg ~ wt` og benytter `lm()`(`lm(mpg~wt,data=mtcars)`): 
 
@@ -1024,7 +1133,7 @@ Koden `plot(mylm,which=c(1))` angiver residualer vs predikterede (fitted) værdi
 plot(mylm,which=c(1))
 ```
 
-<img src="01-basics_files/figure-html/unnamed-chunk-57-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="01-basics_files/figure-html/unnamed-chunk-62-1.svg" width="672" style="display: block; margin: auto;" />
 
 Med koden `plot(mylm,which=c(2))` kan man tjekke antagelsen på en normal fordeling. Punkterne skal være nogenlunde tæt på den diagonale linje.
 
@@ -1033,7 +1142,7 @@ Med koden `plot(mylm,which=c(2))` kan man tjekke antagelsen på en normal fordel
 plot(mylm,which=c(2))
 ```
 
-<img src="01-basics_files/figure-html/unnamed-chunk-58-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="01-basics_files/figure-html/unnamed-chunk-63-1.svg" width="672" style="display: block; margin: auto;" />
 
 ### Multiple lineær regression
 
@@ -1498,7 +1607,7 @@ par(mfrow=c(1,2))
 plot(model_h1,which=c(1,2))
 ```
 
-<img src="01-basics_files/figure-html/unnamed-chunk-103-1.svg" width="672" style="display: block; margin: auto;" />
+<img src="01-basics_files/figure-html/unnamed-chunk-108-1.svg" width="672" style="display: block; margin: auto;" />
 
 Kig på outputtet:
 

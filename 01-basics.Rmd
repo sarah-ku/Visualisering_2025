@@ -1,9 +1,7 @@
 
 
-
-\mainmatter
-
 # Grundlæggende R {#baser}
+
 
 
 ```{r, echo=FALSE,fig.width = 1,fig.height=1,out.height="20%",out.width="20%"}
@@ -116,6 +114,17 @@ data(iris)
 
 Så er en _dataframe_, der hedder 'iris' tilgængelige som en _objekt_ i _workspacen_ - se den "Environment" fane på højere side i RStudio, eller indtaste `ls()`, så bør du kunne se et objekt med navnet 'iris'. Man kan kun arbejde med objekter som er en del af workspacen.
 
+```{r}
+head(iris) #first few rows
+
+tail(iris) #last few rows
+
+str(iris) #structure
+
+summary(iris) #summary per column
+```
+
+
 ### Importering af data fra .txt fil
 
 Det er meget hyppigt, at man har sin data i formen af en .txt fil eller .xlsx fil på sin computer. Den nemmeste måde at få åbnet en .txt fil er ved at bruge `read.table()`, som i nedenstående:
@@ -142,6 +151,15 @@ data <- read_excel("data.xlsx")
 data
 ```
 
+Hvis man gerne vil referere til en bestemt ark, så kan man bruge en ekstra indstilling:
+
+```{r,eval=F}
+library(readxl)
+data <- read_excel("data.xlsx",sheet=1)
+data
+```
+
+
 ### Kaggle
 
 Hvis du gerne vil øve dig med statistike analyser (udover nuværende kursus), er Kaggle en fantastisk ressource til at finde forskellige datasæt. I rigtige mange tilfælde kan man også finde analyser some andre har lavet I R (også Python), hvilket kan inspirere jeres egen læring.
@@ -165,6 +183,28 @@ OBS: en objekts værdi kan nem overskrives - vær opmærksomt på rækkefølgen 
 ```{r}
 x <- 2 #x er defineret som 2
 x <- 4 #nu er x omdefineret som 4
+```
+
+Man kan også tilføjer to objektor sammen:
+
+```{r}
+a <- 5 #a er definiret som 5
+b <- a + x
+b # 5 + 4
+```
+
+Vær opmærksom på, at jeg kan ændre på `a`, uden at `b` ændre sig automatisk:
+
+```{r}
+a <- 23
+b #stadig 5 + 4
+```
+
+Hvis man vil opdatere `b`, så skal den defineres igen:
+
+```{r}
+b <- a + x
+b # 23 + 4
 ```
 
 
@@ -490,7 +530,7 @@ Her er en oversigt over nogle af de mest grundlæggende tests, som man kan udfø
 
 Først og fremmest er det vigtigt at kunne huske p-værdi både i forhold til definitionen og i forhold til hvordan det fortolkes.
 
-P-værdien er sandsynligheden for at observere et resultat lige så ekstremt eller mere ekstremt end det observerede, givet at null-hypotesen er sand. Null-hypotesen er en antagelse om, at der ikke er nogen signifikant forskel mellem grupper eller variabler i det dataset, som der arbejdes med.
+__P-værdien er sandsynligheden for at observere et resultat lige så ekstremt eller mere ekstremt end det observerede, givet at null-hypotesen er sand__. Null-hypotesen er en antagelse om, at der ikke er nogen signifikant forskel mellem grupper eller variabler i det dataset, som der arbejdes med.
 
 Hvis p-værdien er mindre end det valgte signifikansniveau (typisk 0,05), så betyder det, at det observerede resultat er usandsynligt at opstå ved ren tilfældighed, og null-hypotesen forkastes til fordel for den alternative hypotese om, at der er en signifikant forskel mellem grupper eller variabler i datasættet.
 

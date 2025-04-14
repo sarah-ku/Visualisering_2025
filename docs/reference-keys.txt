@@ -1,4 +1,3 @@
-fig:unnamed-chunk-2
 baser
 inledning-til-kapitel
 rstudio
@@ -64,3 +63,4 @@ ofte-set-fejl
 problemstillinger-1
 færdig-for-i-dag-og-næste-gang
 ekstra-links
+fig:unnamed-chunk-2

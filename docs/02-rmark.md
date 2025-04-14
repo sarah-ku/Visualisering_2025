@@ -4,7 +4,6 @@ always_allow_html: true
 
 # Introduktion til R Markdown {#rmarkdown}
 
-
 <img src="plots/hex-rmarkdown.png" width="20%" height="20%" style="display: block; margin: auto;" />
 
 “Du kan aldrig krydse havet, før du har modet til at miste synet af kysten.” – Christopher Columbus
@@ -28,6 +27,7 @@ Checklist til Chapter 2: R Markdown
 ## Hvad er R Markdown?
 
 R Markdown er en nem og fleksibel måde at arbejde med R i projekter på. Her kan du kombinere din R-kode, output og tekst i samme dokument og generere et pænt HTML-dokument, som potentielt kan deles med andre. Jeg anbefaler, at du bruger R Markdown til alle opgaver i kurset. 
+
 
 :::pin
 

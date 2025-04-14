@@ -1,14 +1,8 @@
 ---
 always_allow_html: true
-output: learnr::tutorial
-runtime: shiny_prerendered
 ---
 
 # Introduktion til R Markdown {#rmarkdown}
-
-```{r setup, include=FALSE}
-library(learnr)
-```
 
 ```{r, echo=FALSE,fig.width = 1,fig.height=1,out.height="20%",out.width="20%"}
 # Bigger fig.width
@@ -39,9 +33,6 @@ Checklist til Chapter 2: R Markdown
 
 R Markdown er en nem og fleksibel måde at arbejde med R i projekter på. Her kan du kombinere din R-kode, output og tekst i samme dokument og generere et pænt HTML-dokument, som potentielt kan deles med andre. Jeg anbefaler, at du bruger R Markdown til alle opgaver i kurset. 
 
-```{r addition, exercise=TRUE}
-1 + 1
-```
 
 :::pin
 
