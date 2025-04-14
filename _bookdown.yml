@@ -1,0 +1,16 @@
+delete_merged_file: true
+name: Visualisering_2024
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_download: true
+  bookdown::pdf_book:
+    keep_tex: true
+language:
+  ui:
+    chapter_name: "Kapitel "
+
+new_session: yes
+
+before_chapter_script: "_common.R"
