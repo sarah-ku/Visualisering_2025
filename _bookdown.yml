@@ -18,7 +18,8 @@ language:
 
 rmd_files: [
   "01-basics.Rmd",
-  "02-rmark.Rmd"
+  "02-rmark.Rmd",
+  "03-visual.Rmd"
 ]
 
 new_session: yes

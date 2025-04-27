@@ -4,7 +4,8 @@
 
 
 
-<img src="plots/logo_baseR.png" width="20%" height="20%" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=0.2\linewidth,height=0.2\textheight]{plots/logo_baseR} \end{center}
 
 
 “Det er ikke, fordi noget er svært, at vi ikke tør, det er, fordi vi ikke tør, at noget er svært” - Seneca
@@ -34,10 +35,14 @@ Følg venligst RStudios egne anvisninger til at få det installeret. Bemærk, at
 
 ### De forskellige vinduer i RStudio
 
-<div class="figure" style="text-align: center">
-<img src="plots/RStudio_overview.png" alt="Image source: https://epirhandbook.com/en/r-basics.html" width="90%" height="90%" />
-<p class="caption">(\#fig:unnamed-chunk-2)Image source: https://epirhandbook.com/en/r-basics.html</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth,height=0.9\textheight]{plots/RStudio_overview} 
+
+}
+
+\caption{Image source: https://epirhandbook.com/en/r-basics.html}(\#fig:unnamed-chunk-2)
+\end{figure}
 
 Du kan læse følgende for at lære de fire forskellige vinduer i RStudio at kende:
 
@@ -645,11 +650,11 @@ x #så har vi 25 værdier fra en normal distribution med mean=0 og standard devi
 ```
 
 ```
-#>  [1] -0.7995164 -0.1453109  1.5507010 -0.2481836 -1.0357289 -0.2316026
-#>  [7]  1.2412568  1.1399380 -0.2906140  0.3371403  0.5556572 -2.9009026
-#> [13] -0.7281946 -1.2615137  1.5120590 -1.0877585 -4.0387585 -0.7410380
-#> [19]  0.1075008 -1.2015246 -0.3974863  0.1528689 -1.7640585  0.9231465
-#> [25]  0.9524846
+#>  [1]  0.00379161  1.98025420  1.31046157  1.18123436 -0.73299507  0.70134993
+#>  [7]  0.54793846 -0.46672429 -0.45699025 -0.38362651  0.29812415  0.27418473
+#> [13] -0.90807122 -2.04363456  1.54181822  0.95008536 -0.41213706 -1.46734354
+#> [19] -1.15206050  0.10246445 -1.20231415  0.10019741 -0.44732516  0.31659788
+#> [25]  0.34229420
 ```
 
 I stedet for at kigge på alle værdier på én gang, vil vi måske hellere kigge kun på de første (eller sidste) værdier:
@@ -657,13 +662,13 @@ I stedet for at kigge på alle værdier på én gang, vil vi måske hellere kigg
 
 ``` r
 head(x) #første 6
-#> [1] -0.7995164 -0.1453109  1.5507010 -0.2481836 -1.0357289 -0.2316026
+#> [1]  0.00379161  1.98025420  1.31046157  1.18123436 -0.73299507  0.70134993
 tail(x) #sidste 6
-#> [1] -1.2015246 -0.3974863  0.1528689 -1.7640585  0.9231465  0.9524846
+#> [1]  0.1024644 -1.2023142  0.1001974 -0.4473252  0.3165979  0.3422942
 x[1] #første værdi
-#> [1] -0.7995164
+#> [1] 0.00379161
 x[length(x)] #sidste data point
-#> [1] 0.9524846
+#> [1] 0.3422942
 ```
 
 Bemærk, at i modsætning til Python og mange andre programmeringssprog, bruger R en 1-baseret indeksering. Det betyder, at den første værdi er x[1] og ikke x[0] som i Python.
@@ -693,7 +698,8 @@ c(my_mean,my_median,my_max,my_min,my_var,my_sd) #print results
 ```
 
 ```
-#> [1] -0.3359775 -0.2481836  1.5507010 -4.0387585  1.7563789  1.3252845
+#> [1] -0.0008970316  0.1001974148  1.9802541987 -2.0436345630  0.9548344631
+#> [6]  0.9771563146
 ```
 
 Man kan også lave et summary af dataen, som består af mange af de statistiker navnt ovenpå:
@@ -704,8 +710,8 @@ summary(x)
 ```
 
 ```
-#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#> -4.0388 -1.0357 -0.2482 -0.3360  0.5557  1.5507
+#>      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+#> -2.043635 -0.466724  0.100197 -0.000897  0.547938  1.980254
 ```
 
 ### `tapply()`
@@ -1055,7 +1061,8 @@ Formål: måler (en retningsbestemt) relation mellem to kontinuerte variabler. I
 
 Eksempel - datasættet `mtcars`, response (afgængig) variabel er `mpg` og predictor (uafhængig) variabel er `wt`. 
 
-<img src="01-basics_files/figure-html/unnamed-chunk-59-1.svg" width="672" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics{01-basics_files/figure-latex/unnamed-chunk-59-1} \end{center}
 
 Man skriver relationen i R som `mpg ~ wt` og benytter `lm()`(`lm(mpg~wt,data=mtcars)`): 
 
@@ -1133,7 +1140,9 @@ Koden `plot(mylm,which=c(1))` angiver residualer vs predikterede (fitted) værdi
 plot(mylm,which=c(1))
 ```
 
-<img src="01-basics_files/figure-html/unnamed-chunk-62-1.svg" width="672" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics{01-basics_files/figure-latex/unnamed-chunk-62-1} \end{center}
 
 Med koden `plot(mylm,which=c(2))` kan man tjekke antagelsen på en normal fordeling. Punkterne skal være nogenlunde tæt på den diagonale linje.
 
@@ -1142,7 +1151,9 @@ Med koden `plot(mylm,which=c(2))` kan man tjekke antagelsen på en normal fordel
 plot(mylm,which=c(2))
 ```
 
-<img src="01-basics_files/figure-html/unnamed-chunk-63-1.svg" width="672" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics{01-basics_files/figure-latex/unnamed-chunk-63-1} \end{center}
 
 ### Multiple lineær regression
 
@@ -1607,7 +1618,9 @@ par(mfrow=c(1,2))
 plot(model_h1,which=c(1,2))
 ```
 
-<img src="01-basics_files/figure-html/unnamed-chunk-108-1.svg" width="672" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics{01-basics_files/figure-latex/unnamed-chunk-108-1} \end{center}
 
 Kig på outputtet:
 
