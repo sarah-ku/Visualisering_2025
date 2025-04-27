@@ -1,11 +1,7 @@
----
-always_allow_html: true
----
 
 # Introduktion til R Markdown {#rmarkdown}
 
-
-\begin{center}\includegraphics[width=0.2\linewidth,height=0.2\textheight]{plots/hex-rmarkdown} \end{center}
+<img src="plots/hex-rmarkdown.png" width="20%" height="20%" style="display: block; margin: auto;" />
 
 “Du kan aldrig krydse havet, før du har modet til at miste synet af kysten.” – Christopher Columbus
 

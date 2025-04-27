@@ -10,8 +10,8 @@ output:
     toc: true
     toc_float: true
     code_download: true
-  bookdown::pdf_book:
-    keep_tex: true
+#  bookdown::pdf_book:
+#    keep_tex: true
 language:
   ui:
     chapter_name: "Kapitel "
@@ -19,7 +19,8 @@ language:
 rmd_files: [
   "01-basics.Rmd",
   "02-rmark.Rmd",
-  "03-visual.Rmd"
+  "03-visual.Rmd",
+  "04-visual2.Rmd"
 ]
 
 new_session: yes

@@ -1,4 +1,5 @@
 
+always_allow_html: true
 
 # Grundlæggende R {#baser}
 

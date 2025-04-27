@@ -1,6 +1,3 @@
----
-always_allow_html: true
----
 
 # Visualisering - ggplot2 dag 1 {#visual1}
 
