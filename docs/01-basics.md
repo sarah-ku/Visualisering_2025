@@ -1,8 +1,4 @@
-
-always_allow_html: true
-
 # Grundlæggende R {#baser}
-
 
 
 <img src="plots/logo_baseR.png" width="20%" height="20%" style="display: block; margin: auto;" />

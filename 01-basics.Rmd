@@ -1,8 +1,4 @@
-
-always_allow_html: true
-
 # Grundlæggende R {#baser}
-
 
 
 ```{r, echo=FALSE,fig.width = 1,fig.height=1,out.height="20%",out.width="20%"}

@@ -38,6 +38,8 @@ knitr::write_bib(
 )
 ```
 
+
+
 \frontmatter
 
 
@@ -64,4 +66,4 @@ Sarah
 
 Jeg er adjunkt på biologiske institut. Jeg kommer oprindeligt fra Storbritannien og flyttede til Danmark i 2015. Jeg bor sammen med min mand og vores 3 børn.
 
-
+\mainmatter

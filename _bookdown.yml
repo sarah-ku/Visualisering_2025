@@ -1,9 +1,11 @@
-# Project configuration for bookdown
+# _bookdown.yml
 delete_merged_file: true
-book_filename: "index"              # main HTML will be docs/index.html
-output_dir: "docs"                  # render site into docs/
+book_filename: "index"        # Ensures the main HTML file is named index.html
+output_dir: "docs"            # Your GitHub Pages folder
 
-# Define the exact merge order of Rmd files
+
+
+# List all Rmd files in build order; index.Rmd must come first:
 rmd_files:
   - "index.Rmd"
   - "01-basics.Rmd"
@@ -13,13 +15,9 @@ rmd_files:
   - "05-tidyverse1_LY.Rmd"
   - "06-tidyverse2_LY.Rmd"
 
-# Start each chapter in a fresh R session
 new_session: yes
-
-# Run this script before each chapter (e.g., load functions)
 before_chapter_script: "_common.R"
 
-# UI language tweaks
 language:
   ui:
     chapter_name: "Kapitel "
