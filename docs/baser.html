@@ -795,20 +795,20 @@ Figure 1.1: Image source: <a href="https://epirhandbook.com/en/r-basics.html" cl
 <p>Man kan nemt lave sin egne ‘fake’ data ved at simulere det fra en fordeling, der typisk er normalfordelingen, da den er den mest almindelige fordeling i den virkelige verden (husk den klassiske klokkeform). I R kan funktionen rnorm bruges til at simulere data. Først angiver man antallet af observationer, og derefter den gennemsnitlige værdi og standardafvigelsen (sd), som er de to nødvendige parametre for at beskrive en normalfordeling.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="baser.html#cb66-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">25</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>) <span class="co">#standard normal distribution</span></span>
 <span id="cb66-2"><a href="baser.html#cb66-2" tabindex="-1"></a>x <span class="co">#så har vi 25 værdier fra en normal distribution med mean=0 og standard deviation=1.</span></span></code></pre></div>
-<pre><code>#&gt;  [1]  1.3235113 -0.5879181  0.2169707 -0.3279726  0.5022096 -1.8990946
-#&gt;  [7]  1.6237339  0.2148960  1.3245535  2.0385775 -1.9104727  0.5027698
-#&gt; [13]  0.9860929  0.5025941 -1.0193760  0.1964125 -0.4438619  1.3036814
-#&gt; [19]  0.6714722  0.4854994 -1.2183844  0.8371294 -0.5401923  1.0586318
-#&gt; [25]  1.1917611</code></pre>
+<pre><code>#&gt;  [1]  0.02789143  0.58515341  0.01129935  0.19840032 -1.11725559 -0.14227591
+#&gt;  [7] -0.90454042 -1.66886381 -0.40297609  1.71280434  0.99384436 -0.48499370
+#&gt; [13] -2.21590369  0.24386782 -0.82779740  0.17922205 -1.47593775 -0.40385263
+#&gt; [19]  1.67456278  0.31529854  0.11879888  0.91930162  0.35366009  0.10430681
+#&gt; [25]  0.35294273</code></pre>
 <p>I stedet for at kigge på alle værdier på én gang, vil vi måske hellere kigge kun på de første (eller sidste) værdier:</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="baser.html#cb68-1" tabindex="-1"></a><span class="fu">head</span>(x) <span class="co">#første 6</span></span>
-<span id="cb68-2"><a href="baser.html#cb68-2" tabindex="-1"></a><span class="co">#&gt; [1]  1.3235113 -0.5879181  0.2169707 -0.3279726  0.5022096 -1.8990946</span></span>
+<span id="cb68-2"><a href="baser.html#cb68-2" tabindex="-1"></a><span class="co">#&gt; [1]  0.02789143  0.58515341  0.01129935  0.19840032 -1.11725559 -0.14227591</span></span>
 <span id="cb68-3"><a href="baser.html#cb68-3" tabindex="-1"></a><span class="fu">tail</span>(x) <span class="co">#sidste 6</span></span>
-<span id="cb68-4"><a href="baser.html#cb68-4" tabindex="-1"></a><span class="co">#&gt; [1]  0.4854994 -1.2183844  0.8371294 -0.5401923  1.0586318  1.1917611</span></span>
+<span id="cb68-4"><a href="baser.html#cb68-4" tabindex="-1"></a><span class="co">#&gt; [1] 0.3152985 0.1187989 0.9193016 0.3536601 0.1043068 0.3529427</span></span>
 <span id="cb68-5"><a href="baser.html#cb68-5" tabindex="-1"></a>x[<span class="dv">1</span>] <span class="co">#første værdi</span></span>
-<span id="cb68-6"><a href="baser.html#cb68-6" tabindex="-1"></a><span class="co">#&gt; [1] 1.323511</span></span>
+<span id="cb68-6"><a href="baser.html#cb68-6" tabindex="-1"></a><span class="co">#&gt; [1] 0.02789143</span></span>
 <span id="cb68-7"><a href="baser.html#cb68-7" tabindex="-1"></a>x[<span class="fu">length</span>(x)] <span class="co">#sidste data point</span></span>
-<span id="cb68-8"><a href="baser.html#cb68-8" tabindex="-1"></a><span class="co">#&gt; [1] 1.191761</span></span></code></pre></div>
+<span id="cb68-8"><a href="baser.html#cb68-8" tabindex="-1"></a><span class="co">#&gt; [1] 0.3529427</span></span></code></pre></div>
 <p>Bemærk, at i modsætning til Python og mange andre programmeringssprog, bruger R en 1-baseret indeksering. Det betyder, at den første værdi er x[1] og ikke x[0] som i Python.</p>
 </div>
 <div id="measures-of-central-tendency" class="section level3 hasAnchor" number="1.10.2">
@@ -859,11 +859,11 @@ Figure 1.1: Image source: <a href="https://epirhandbook.com/en/r-basics.html" cl
 <span id="cb69-5"><a href="baser.html#cb69-5" tabindex="-1"></a>my_var <span class="ot">&lt;-</span> <span class="fu">var</span>(x)</span>
 <span id="cb69-6"><a href="baser.html#cb69-6" tabindex="-1"></a>my_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
 <span id="cb69-7"><a href="baser.html#cb69-7" tabindex="-1"></a><span class="fu">c</span>(my_mean,my_median,my_max,my_min,my_var,my_sd) <span class="co">#print results</span></span></code></pre></div>
-<pre><code>#&gt; [1]  0.2813290  0.5022096  2.0385775 -1.9104727  1.1054846  1.0514203</code></pre>
+<pre><code>#&gt; [1] -0.0741217  0.1043068  1.7128043 -2.2159037  0.8953351  0.9462215</code></pre>
 <p>Man kan også lave et summary af dataen, som består af mange af de statistiker navnt ovenpå:</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="baser.html#cb71-1" tabindex="-1"></a><span class="fu">summary</span>(x)</span></code></pre></div>
-<pre><code>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#&gt; -1.9105 -0.4439  0.5022  0.2813  1.0586  2.0386</code></pre>
+<pre><code>#&gt;     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+#&gt; -2.21590 -0.48499  0.10431 -0.07412  0.35294  1.71280</code></pre>
 </div>
 <div id="tapply" class="section level3 hasAnchor" number="1.10.3">
 <h3><span class="header-section-number">1.10.3</span> <code>tapply()</code><a href="baser.html#tapply" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1111,7 +1111,7 @@ Figure 1.1: Image source: <a href="https://epirhandbook.com/en/r-basics.html" cl
 <p><em>OBS: se også video i forbindelse med Rmarkdown (næste emne), hvor jeg gennemgå lineær regression med R</em></p>
 <p>Formål: måler (en retningsbestemt) relation mellem to kontinuerte variabler. I simpel lineær regression svarer det til, at man gerne vil finde den rette linje gennem punkterne, der bedste beskriver relationen.</p>
 <p>Eksempel - datasættet <code>mtcars</code>, response (afgængig) variabel er <code>mpg</code> og predictor (uafhængig) variabel er <code>wt</code>.</p>
-<p><img src="01-basics_files/figure-html/unnamed-chunk-59-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="00-basics_files/figure-html/unnamed-chunk-59-1.svg" width="672" style="display: block; margin: auto;" /></p>
 <p>Man skriver relationen i R som <code>mpg ~ wt</code> og benytter <code>lm()</code>(<code>lm(mpg~wt,data=mtcars)</code>):</p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="baser.html#cb99-1" tabindex="-1"></a>mylm <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt, <span class="at">data=</span>mtcars)  <span class="co"># build linear regression model</span></span>
 <span id="cb99-2"><a href="baser.html#cb99-2" tabindex="-1"></a>mylm</span></code></pre></div>
@@ -1168,10 +1168,10 @@ Figure 1.1: Image source: <a href="https://epirhandbook.com/en/r-basics.html" cl
 </ul>
 <p>Koden <code>plot(mylm,which=c(1))</code> angiver residualer vs predikterede (fitted) værdier - de skal være tilfældigt fordelt over plottet og prikkernes varians skal være nogenlunde konstant langt x-aksen (det giver, at den røde linje er flade).</p>
 <div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="baser.html#cb103-1" tabindex="-1"></a><span class="fu">plot</span>(mylm,<span class="at">which=</span><span class="fu">c</span>(<span class="dv">1</span>))</span></code></pre></div>
-<p><img src="01-basics_files/figure-html/unnamed-chunk-62-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="00-basics_files/figure-html/unnamed-chunk-62-1.svg" width="672" style="display: block; margin: auto;" /></p>
 <p>Med koden <code>plot(mylm,which=c(2))</code> kan man tjekke antagelsen på en normal fordeling. Punkterne skal være nogenlunde tæt på den diagonale linje.</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="baser.html#cb104-1" tabindex="-1"></a><span class="fu">plot</span>(mylm,<span class="at">which=</span><span class="fu">c</span>(<span class="dv">2</span>))</span></code></pre></div>
-<p><img src="01-basics_files/figure-html/unnamed-chunk-63-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="00-basics_files/figure-html/unnamed-chunk-63-1.svg" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="multiple-lineær-regression" class="section level3 hasAnchor" number="1.11.11">
 <h3><span class="header-section-number">1.11.11</span> Multiple lineær regression<a href="baser.html#multiple-lineær-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1461,7 +1461,7 @@ Figure 1.1: Image source: <a href="https://epirhandbook.com/en/r-basics.html" cl
 <div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="baser.html#cb133-1" tabindex="-1"></a><span class="co">#check assumptions for alternative model</span></span>
 <span id="cb133-2"><a href="baser.html#cb133-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb133-3"><a href="baser.html#cb133-3" tabindex="-1"></a><span class="fu">plot</span>(model_h1,<span class="at">which=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span></code></pre></div>
-<p><img src="01-basics_files/figure-html/unnamed-chunk-108-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="00-basics_files/figure-html/unnamed-chunk-108-1.svg" width="672" style="display: block; margin: auto;" /></p>
 <p>Kig på outputtet:</p>
 <ul>
 <li>Hvilken model reflekterer nulhypotesen?</li>
@@ -1541,7 +1541,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-basics.Rmd",
+    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/00-basics.Rmd",
     "text": "Edit"
   },
   "history": {

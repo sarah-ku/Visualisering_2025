@@ -1,25 +1,18 @@
 ---
-title: "Analyse og visualisering af biologiske datasæt – 2025"
-author: "Sarah Rennie"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
+title:       "Analyse og visualisering af biologiske datasæt – 2025"
+author:      "Sarah Rennie"
+date:        "`r Sys.Date()`"
+site:        bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 description: "Course materials for Analyse og visualisering af biologiske datasæt 2025"
 cover-image: ai_cover.jpeg
-output:
-  bookdown::gitbook:
-    css: assets/style.css
-    toc: true
-    toc_depth: 3
-    toc_float: true
-    number_sections: true
-    code_folding: show
 always_allow_html: true
-graphics: yes
+graphics:     yes
 ---
+
 
 
 ```{r setup, include = FALSE}
@@ -31,19 +24,14 @@ knitr::opts_chunk$set(
 ```
 
 ```{r include=FALSE}
-# Auto-generate a bib file for R packages
-knitr::write_bib(
-  packages = c(.packages(), 'bookdown', 'knitr', 'rmarkdown'),
-  file = 'packages.bib'
-)
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
 ```
 
 
-
-\frontmatter
-
-
-## Lidt om kurset {-}
+# Lidt om kurset {-}
 
 Denne hjemmeside er kursusnotaterne til de indskrevne studerende i 2024. De er skrevet 100% af mig (din underviser og kursusansvarlig, Sarah Rennie). Jeg håber, det er intuitivt at finde rundt på siden, men har du forslag til forbedringer, skriv meget gerne til mig.
 
@@ -66,4 +54,4 @@ Sarah
 
 Jeg er adjunkt på biologiske institut. Jeg kommer oprindeligt fra Storbritannien og flyttede til Danmark i 2015. Jeg bor sammen med min mand og vores 3 børn.
 
-\mainmatter
+

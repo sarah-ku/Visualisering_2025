@@ -1144,7 +1144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb297-2"><a href="data.html#cb297-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Pclass,<span class="at">fill=</span><span class="fu">as.factor</span>(Pclass))) <span class="sc">+</span> </span>
 <span id="cb297-3"><a href="data.html#cb297-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;count&quot;</span>) <span class="sc">+</span></span>
 <span id="cb297-4"><a href="data.html#cb297-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="05-tidyverse1_LY_files/figure-html/unnamed-chunk-43-1.svg" width="288" style="display: block; margin: auto;" /></p>
+<p><img src="04-tidyverse1_LY_files/figure-html/unnamed-chunk-43-1.svg" width="288" style="display: block; margin: auto;" /></p>
 <p>Jeg gør det lidt mere kompliceret i følgende eksempel, hvor jeg tager udgangspunkt i <code>titanic_clean</code>, laver en ny kolonne kaldet <code>Adult</code> ved at bruge <code>mutate()</code>, og derefter bruger jeg den resulterende dataframe i <code>ggplot()</code> funktionen til at lave et plot, hvor jeg tæller antallet af voksne og børn:</p>
 <!-- Lave Adult kolon og lave et barplot -->
 <div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="data.html#cb298-1" tabindex="-1"></a>titanic_clean <span class="sc">%&gt;%</span> </span>
@@ -1152,7 +1152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb298-3"><a href="data.html#cb298-3" tabindex="-1"></a>   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Adult,<span class="at">fill=</span>Adult)) <span class="sc">+</span> </span>
 <span id="cb298-4"><a href="data.html#cb298-4" tabindex="-1"></a>   <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;count&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb298-5"><a href="data.html#cb298-5" tabindex="-1"></a>   <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="05-tidyverse1_LY_files/figure-html/unnamed-chunk-44-1.svg" width="288" style="display: block; margin: auto;" /></p>
+<p><img src="04-tidyverse1_LY_files/figure-html/unnamed-chunk-44-1.svg" width="288" style="display: block; margin: auto;" /></p>
 <p>Så kan man se, at der var 600 voksne og lidt over 100 børn ombord på skibet.</p>
 </div>
 <div id="misc-funktioner-som-er-nyttige-at-vide" class="section level2 hasAnchor" number="5.9">
@@ -1390,7 +1390,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/05-tidyverse1_LY.Rmd",
+    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-tidyverse1_LY.Rmd",
     "text": "Edit"
   },
   "history": {

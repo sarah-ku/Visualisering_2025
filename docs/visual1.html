@@ -634,7 +634,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; 150          5.9         3.0          5.1         1.8  virginica</code></pre>
 <p>Forestil dig, at vi gerne vil lave et plot, som viser sammenhængen mellem længden og bredden af ‘sepals’ (bægerblade) - specifikt er vi interesserede i kolonnerne <code>iris$Sepal.Length</code> og <code>iris$Sepal.Width</code>. Lad os starte med at visualisere variablerne i base-R, ved at bruge <code>plot</code>:</p>
 <div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="visual1.html#cb159-1" tabindex="-1"></a><span class="fu">plot</span>(iris<span class="sc">$</span>Sepal.Length, iris<span class="sc">$</span>Sepal.Width)</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-9-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-9-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Man kan gøre det meget pænere eksempelvis ved at bruge forskellige farver til at betegne de forskellige arter, eller ved at give en hensigtsmæssig overskrift eller aksenavne.</p>
 </div>
 <div id="vores-første-ggplot" class="section level2 hasAnchor" number="3.3">
@@ -644,16 +644,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb160-2"><a href="visual1.html#cb160-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
 <p>For at lave et plot med <code>ggplot2</code> tager man altid udgangspunkt i funktionen <code>ggplot()</code>. Først specificerer vi vores data - altså at vi vil gerne bruge dataframe <code>iris</code>. Dernæst angiver vi indenfor funktionen <code>aes()</code> (som sidder indenfor <code>ggplot()</code>), at x-aksen skal være <code>Sepal.Length</code> og y-aksen <code>Sepal.Width</code>. Det ser sådan ud:</p>
 <div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="visual1.html#cb161-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width))</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-11-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-11-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <p>Koden fungerer, men bemærk, at plottet er helt tomt og derfor ikke særligt brugbart. Men der er skabt et grundlag (se aksenavne osv.). Det er tomt fordi vi endnu ikke har specificeret, hvilken plottype det skal være - for eksempel søljediagram/barplot, histogram, punktplot/scatter plot (jeg vælge de engelske begreber herfra for at skabe den bedste sammenhæng med koden). Vi vil gerne bruge et scatter plot, som i <strong>ggplot2</strong> er angivet med funktionen <code>geom_point()</code>. Vi tilslutter derfor funktionen <code>geom_point()</code> til den <code>ggplot()</code> funktion, som vi allerede har specificeret. Husk altid, at man bruger <code>+</code> til at forbinde de to “komponenter” (altså <code>ggplot()</code> og <code>geom_point()</code>) af plottet (ellers få vi fortsat et tomt plot).</p>
 <p>Koden er således:</p>
 <div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="visual1.html#cb162-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width)) <span class="sc">+</span></span>
 <span id="cb162-2"><a href="visual1.html#cb162-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-12-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-12-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <p>Bemærk, at vi ikke har skrevet noget indeni de runde parenteser i funktionen <code>geom_point()</code>. Det betyder, at vi accepterer alle standard- eller ‘default’ parametre, som funktionen tager. Hvis vi vil have noget andet end de standard parametre, kan vi godt specificere det. For eksempel kan vi gøre punkterne lidt større end ved standarden (prøve at tjekke <code>?geom_point()</code> for at se en list overfor de mulige parametre, som man kan justere):</p>
 <div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="visual1.html#cb163-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width)) <span class="sc">+</span></span>
 <span id="cb163-2"><a href="visual1.html#cb163-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-13-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-13-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <p>Vi har nu et plot, som vi kan sammenligne med det ovenstående plot lavet i base-pakken. Ligesom i base-pakken vil vi gerne tilføje nogle ting for at gøre vores plot til vores <em>færdige figur</em>. Her i <strong>ggplot2</strong> gøres det ved at tilføje flere komponenter ovenpå, med brugen af <code>+</code>, ligesom vi gjorde da vi tilføjede <code>geom_point()</code> til <code>ggplot()</code>. Men først nogle generelle ord om <strong>ggplot2</strong> og filosofien bag pakken.</p>
 </div>
 <div id="lidt-om-ggplot2" class="section level2 hasAnchor" number="3.4">
@@ -689,7 +689,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>I de fleste tilfælde bruger man funktionen <code>aes()</code> indenfor <code>ggplot()</code>, hvilket betyder, at variablerne, der er specificeret inden for <code>aes()</code>, gælder globalt over alle komponenter i plottet. Man kan faktisk også skrive en lokal <code>aes()</code> inden for selve <code>geom</code>-funktionen, som i følgende eksempel:</p>
 <div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="visual1.html#cb165-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris) <span class="sc">+</span></span>
 <span id="cb165-2"><a href="visual1.html#cb165-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width))</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-16-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-16-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <p>Vi får det samme plot som før, men det er kun <code>geom_point()</code>, der er påvirket af specificeringen inden for <code>aes()</code>. I simple situationer som dette er der ingen forskel, men når man har mange forskellige komponenter i spil, kan det nogle gange give mening at bruge lokal æstetik.</p>
 </div>
 </div>
@@ -700,14 +700,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb166-2"><a href="visual1.html#cb166-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb166-3"><a href="visual1.html#cb166-3" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sepal Length&quot;</span>) <span class="sc">+</span></span>
 <span id="cb166-4"><a href="visual1.html#cb166-4" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Sepal Width&quot;</span>)</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-17-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-17-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <p>Vi tilføjer en titel med funktionen <code>ggtitle()</code>:</p>
 <div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="visual1.html#cb167-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width)) <span class="sc">+</span></span>
 <span id="cb167-2"><a href="visual1.html#cb167-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb167-3"><a href="visual1.html#cb167-3" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sepal Length&quot;</span>) <span class="sc">+</span></span>
 <span id="cb167-4"><a href="visual1.html#cb167-4" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Sepal Width&quot;</span>) <span class="sc">+</span></span>
 <span id="cb167-5"><a href="visual1.html#cb167-5" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Scatter plot of Sepal Width vs Sepal Length&quot;</span>)</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-18-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-18-1.svg" width="384" style="display: block; margin: auto;" /></p>
 </div>
 <div id="ændre-farver" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Ændre farver<a href="visual1.html#ændre-farver" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -717,7 +717,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb168-3"><a href="visual1.html#cb168-3" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sepal Length&quot;</span>) <span class="sc">+</span></span>
 <span id="cb168-4"><a href="visual1.html#cb168-4" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Sepal Width&quot;</span>) <span class="sc">+</span></span>
 <span id="cb168-5"><a href="visual1.html#cb168-5" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Scatter plot of Sepal Width vs Sepal Length&quot;</span>)</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-19-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-19-1.svg" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <div id="ændre-tema" class="section level2 hasAnchor" number="3.7">
 <h2><span class="header-section-number">3.7</span> Ændre tema<a href="visual1.html#ændre-tema" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -728,7 +728,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb169-4"><a href="visual1.html#cb169-4" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Sepal Width&quot;</span>) <span class="sc">+</span></span>
 <span id="cb169-5"><a href="visual1.html#cb169-5" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Scatter plot of Sepal Width vs Sepal Length&quot;</span>) <span class="sc">+</span></span>
 <span id="cb169-6"><a href="visual1.html#cb169-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-20-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-20-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Her er nogle eksempler på mulige temaer, som du kan bruge i dine plotter (det er dog generelt op til dig).</p>
 <table>
 <thead>
@@ -804,7 +804,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb170-3"><a href="visual1.html#cb170-3" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Sepal Length&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb170-4"><a href="visual1.html#cb170-4" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Boxplot&quot;</span>) <span class="sc">+</span></span>
 <span id="cb170-5"><a href="visual1.html#cb170-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-21-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-21-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p><strong>Lave punkter ovenpå</strong></p>
 <p>Det kan ofte være nyttigt at plotte de faktiske datapunkter oven på et boxplot, så man kan se både fordelingen i dataene samt de rå data. En løsning er at benytte <code>geom_point()</code> ved at tilføje det som komponent over vores eksisterende kode.</p>
 <div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="visual1.html#cb171-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>iris, <span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
@@ -813,7 +813,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb171-4"><a href="visual1.html#cb171-4" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Sepal Length&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb171-5"><a href="visual1.html#cb171-5" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Boxplot with points overlayed&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb171-6"><a href="visual1.html#cb171-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-22-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-22-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Man kan dog se, at det ikke er særlig informativt, da alle punkter er på den samme lodrette linje. Hvis der er mange punkter med samme eller næsten samme værdier, kan man ikke se de fleste af dem i plottet. En bedre løsning er at indføre noget tilfældighed i punkterne langs x-aksen, så at man tydeligere kan se dem. Dette kaldes “jitter”, og man specificere jitter ved at bruge <code>geom_jitter()</code> i stedet for <code>geom_point()</code>.</p>
 <div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="visual1.html#cb172-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>iris, <span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
 <span id="cb172-2"><a href="visual1.html#cb172-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
@@ -821,7 +821,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb172-4"><a href="visual1.html#cb172-4" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Sepal Length&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb172-5"><a href="visual1.html#cb172-5" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Boxplot with jitter&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb172-6"><a href="visual1.html#cb172-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-23-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-23-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Man kan også specificere <code>alpha</code>, som gøre punkterne mere gennemsigtige og mindre markante. Man kan også ændre på <code>width</code>, som kontrollerer deres spredning langs x-axsen.</p>
 <div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="visual1.html#cb173-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>iris, <span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
 <span id="cb173-2"><a href="visual1.html#cb173-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
@@ -829,7 +829,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb173-4"><a href="visual1.html#cb173-4" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Sepal Length&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb173-5"><a href="visual1.html#cb173-5" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Boxplot with jitter and transparency&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb173-6"><a href="visual1.html#cb173-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-24-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-24-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p><strong>Fjerne legend hvis unødvendige</strong></p>
 <!-- ### this doesn't work great - find out why  -->
 <p>Man kan se, at når man specificerer farver, får man en legende på højre side af plottet. I dette tilfælde er det faktisk ikke nødvendigt, da man kan se uden legende, hvad de tre boxplots refererer til. Derfor fjerner vi legenden fra plottet ved at bruge <code>theme(legend.position="none")</code>.</p>
@@ -839,14 +839,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb174-4"><a href="visual1.html#cb174-4" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Sepal Length&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb174-5"><a href="visual1.html#cb174-5" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Boxplot with jitter and no legend&quot;</span>) <span class="sc">+</span></span>
 <span id="cb174-6"><a href="visual1.html#cb174-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>)</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-25-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-25-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <p>Man kan, som alternativ til ovenstående, fjerne legend ved at tilføje <code>show.legend = FALSE</code> som indstilling i den <code>geom</code>, der generere den. Være opmærksomme på, at i dette tilfælde skal man skrive <code>show.legend = FALSE</code> i både <code>geom_boxplot()</code> og <code>geom_jitter()</code> funktioner for at få legenden helet fjernet.</p>
 <div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="visual1.html#cb175-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>iris, <span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
 <span id="cb175-2"><a href="visual1.html#cb175-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
 <span id="cb175-3"><a href="visual1.html#cb175-3" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb175-4"><a href="visual1.html#cb175-4" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Sepal Length&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb175-5"><a href="visual1.html#cb175-5" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Boxplot with jitter and no legend&quot;</span>) </span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-26-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-26-1.svg" width="384" style="display: block; margin: auto;" /></p>
 </div>
 <div id="barplot-geom_bar" class="section level3 hasAnchor" number="3.8.2">
 <h3><span class="header-section-number">3.8.2</span> Barplot (<code>geom_bar</code>)<a href="visual1.html#barplot-geom_bar" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -856,7 +856,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb176-2"><a href="visual1.html#cb176-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>) <span class="sc">+</span></span>
 <span id="cb176-3"><a href="visual1.html#cb176-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Number of observations by species&quot;</span>) <span class="sc">+</span></span>
 <span id="cb176-4"><a href="visual1.html#cb176-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-27-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-27-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p><strong>Barplot: stack vs dodge</strong></p>
 <p>Hvis man har flere kategoriske variabler, kan man lave barplots på forskellige måder. Til datasættet tilføjer vi en ekstra kategorisk variabel med navn <code>Sepal.Group</code>, som adskiller mellem <code>Long</code> og <code>Short</code> værdier af variablen <code>Sepal.Length</code>. Her specificerer jeg bare (med funktionen <code>ifelse()</code>), at hvis <code>Sepal.Length</code>er længere end den gennemsnitlige <code>Sepal.Length</code>, så er det betragtet <code>Long</code>, ellers er det <code>Short</code>, som i følgende:</p>
 <div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="visual1.html#cb177-1" tabindex="-1"></a>iris<span class="sc">$</span>Sepal.Group <span class="ot">&lt;-</span> </span>
@@ -868,19 +868,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb178-2"><a href="visual1.html#cb178-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>) <span class="sc">+</span></span>
 <span id="cb178-3"><a href="visual1.html#cb178-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Number of observations by species&quot;</span>) <span class="sc">+</span></span>
 <span id="cb178-4"><a href="visual1.html#cb178-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-29-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-29-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Mange gange foretrækker man at have søjler stående ved siden af i stedet for på toppen af hinanden. Dette kan opnås ved blot at tilføje <code>position="dodge"</code> inde i <code>geom_bar()</code>.</p>
 <div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="visual1.html#cb179-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">fill=</span>Sepal.Group)) <span class="sc">+</span> </span>
 <span id="cb179-2"><a href="visual1.html#cb179-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>, <span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
 <span id="cb179-3"><a href="visual1.html#cb179-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Number of observations by species&quot;</span>) <span class="sc">+</span></span>
 <span id="cb179-4"><a href="visual1.html#cb179-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-30-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-30-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Som et eksempel på fleksibiliteten i pakken <code>ggplot2</code>, kan jeg nævne, at det kan være irriterende, når bredden af søjlerne for arten setosa i et barplot er dobbelt så bred som de andre søjler, fordi der ikke er nogen observationer i setosa-gruppen med en <code>Long</code> værdi i variablen <code>Sepal.Group</code>. En løsning på dette kan findes ved at tilføje <code>position=position_dodge2(preserve = "single")</code> i <code>geom_bar()</code>. Denne parameter gør bredden på alle søjler ens, uanset om der er data i alle kategorier eller ej.</p>
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="visual1.html#cb180-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">fill=</span>Sepal.Group)) <span class="sc">+</span> </span>
 <span id="cb180-2"><a href="visual1.html#cb180-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;count&quot;</span>, <span class="at">position =</span> <span class="fu">position_dodge2</span>(<span class="at">preserve =</span> <span class="st">&quot;single&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb180-3"><a href="visual1.html#cb180-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Number of observations by species&quot;</span>) <span class="sc">+</span></span>
 <span id="cb180-4"><a href="visual1.html#cb180-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-31-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-31-1.svg" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="histogram-geom_histogram" class="section level3 hasAnchor" number="3.8.3">
 <h3><span class="header-section-number">3.8.3</span> Histogram (<code>geom_histogram</code>)<a href="visual1.html#histogram-geom_histogram" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -891,14 +891,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb181-3"><a href="visual1.html#cb181-3" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sepal Length&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb181-4"><a href="visual1.html#cb181-4" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Iris histogram&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb181-5"><a href="visual1.html#cb181-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-32-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-32-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Man kan også gøre det nemmere at skelne mellem de tre arter ved at sætte <code>alpha=0.5</code> inden for <code>geom_histogram</code> og ved at angive en linjefarve som parameter ind i <code>geom_histogram()</code>.</p>
 <div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="visual1.html#cb182-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
 <span id="cb182-2"><a href="visual1.html#cb182-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha=</span><span class="fl">0.5</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb182-3"><a href="visual1.html#cb182-3" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sepal Length&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb182-4"><a href="visual1.html#cb182-4" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Iris histogram&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb182-5"><a href="visual1.html#cb182-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-33-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-33-1.svg" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <div id="density-geom_density" class="section level3 hasAnchor" number="3.8.4">
 <h3><span class="header-section-number">3.8.4</span> Density (<code>geom_density</code>)<a href="visual1.html#density-geom_density" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -908,7 +908,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb183-3"><a href="visual1.html#cb183-3" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sepal Length&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb183-4"><a href="visual1.html#cb183-4" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Density plot&quot;</span>) <span class="sc">+</span></span>
 <span id="cb183-5"><a href="visual1.html#cb183-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-34-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-34-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p><strong>Density plot med fill og gennemsigtig farver</strong></p>
 <p>Vi kan angive en værdi for <code>alpha</code> indenfor <code>geom_density()</code>. Som før, specificerer parameteren <code>alpha</code> gennemsigtigheden af density kurverne i plottet.</p>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="visual1.html#cb184-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
@@ -916,7 +916,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb184-3"><a href="visual1.html#cb184-3" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sepal Length&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb184-4"><a href="visual1.html#cb184-4" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Density plot with alpha=0.5&quot;</span>) <span class="sc">+</span></span>
 <span id="cb184-5"><a href="visual1.html#cb184-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-35-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-35-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p><strong>Tilføje middelværdi linjer</strong></p>
 <p>Vi bruger funktionen <code>tapply()</code> til at beregne middelværdierne af <code>Sepal.Length</code> for hver af de tre <code>Species</code>. Vi kan derefter tilføje dem som lodrette linjer til vores plot. Her bruger vi <code>geom_vline()</code> (OBS, det er <code>geom_hline()</code>, hvis man vil have en vandret linje) og fortæller, at <code>xintercept</code> skal være lig med de middelværdier, som vi har beregnet. Parameteren <code>lty=2</code> (i.e., linetype) betyder, at vi vil gerne have en stiplede (“dashed”) linje.</p>
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="visual1.html#cb185-1" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">tapply</span>(iris<span class="sc">$</span>Sepal.Length,iris<span class="sc">$</span>Species,median)</span>
@@ -927,7 +927,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb185-6"><a href="visual1.html#cb185-6" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Density plot with alpha=0.5&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb185-7"><a href="visual1.html#cb185-7" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> means,<span class="at">lty=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
 <span id="cb185-8"><a href="visual1.html#cb185-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-36-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-36-1.svg" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <div id="line-plot-geom_line" class="section level3 hasAnchor" number="3.8.5">
 <h3><span class="header-section-number">3.8.5</span> Line plot (<code>geom_line()</code>)<a href="visual1.html#line-plot-geom_line" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -952,7 +952,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb189-2"><a href="visual1.html#cb189-2" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb189-3"><a href="visual1.html#cb189-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Populations in Scandinavia over time&quot;</span>, <span class="at">x =</span> <span class="st">&quot;År&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Befolkningsstørrelse i millioner&quot;</span>) <span class="sc">+</span></span>
 <span id="cb189-4"><a href="visual1.html#cb189-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-39-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-39-1.svg" width="480" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="troubleshooting" class="section level2 hasAnchor" number="3.9">
@@ -991,7 +991,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>price</code> på y-aksen</li>
 </ul>
 <p>Så at du har noget at sammenligne med, skal dit plot se sådan ud:</p>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-42-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-42-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <p><strong>3)</strong> Tilføj følgende komponenter til dit plot fra <strong>2)</strong>:</p>
 <ul>
 <li>En x-akse label (<code>xlab()</code>) og en y-akse label (<code>ylab()</code>)</li>
@@ -1000,7 +1000,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Husk at forbinde komponenterne med <code>+</code> og skriv de nye komponenter på deres egen linje.</li>
 </ul>
 <p>Det skal se sådan ud:</p>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-43-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-43-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <p><strong>4)</strong> Ændr temaet på dit plot til <code>theme_classic()</code> eller <code>theme_minimal()</code> i stedet for <code>theme_bw()</code> og se på resultatet.</p>
 <ul>
 <li>Hvis man (måske ved et uheld) skriver <strong>to</strong> temaer på samme tid (f.eks. <code>+ theme_bw() + theme_classic()</code>), hvilket tema vil så blive anvendt i plottet?</li>
@@ -1020,7 +1020,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>En mulig løsning, der bruger hele datasættet men uden at have mange punkter på plottet, er at lave en contour plot ved at erstatte <code>geom_point()</code> med <code>geom_density_2d()</code>. Prøv det.</p></li>
 </ul>
 <p>Det ser sådan ud (OBS: vi bruger indstilling <code>bins=50</code> ind i <code>geom_density_2d()</code> men prøv gerne at justere på antallet af bins).</p>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-44-1.svg" width="384" style="display: block; margin: auto;" />
+<p><img src="02-visual_files/figure-html/unnamed-chunk-44-1.svg" width="384" style="display: block; margin: auto;" />
 Som ekstra kan du prøve indstillingen <code>geom = "polygon"</code> inde i <code>stat_density_2d</code>. <a href="https://r-charts.com/correlation/contour-plot-ggplot2/">Der er andre muligheder her.</a></p>
 <p><strong>7)</strong> Fortsæt med at anvende <code>diamonds</code> datasættet til at lave et boxplot:</p>
 <ul>
@@ -1030,7 +1030,7 @@ Som ekstra kan du prøve indstillingen <code>geom = "polygon"</code> inde i <cod
 <li>bruge temaet <code>theme_bw()</code></li>
 </ul>
 <p>Det skal se sådan ud:</p>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-45-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-45-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <ul>
 <li>Hvordan ser det ud, hvis man bruger <code>colour</code> i stedet for <code>fill</code>? Eller hvis man specificerer begge to?</li>
 </ul>
@@ -1041,7 +1041,7 @@ Som ekstra kan du prøve indstillingen <code>geom = "polygon"</code> inde i <cod
 <li>Man kan også tilføj <code>show.legend=FALSE</code> til både <code>geom_boxplot()</code> og <code>geom_jitter()</code> i stedet for - prøv det i stedet for <code>theme(legend.position="none")</code>. Er det nok at tilføje <code>show.legend=FALSE</code> til kun én af de to geoms?</li>
 </ul>
 <p>Det skal se sådan ud:</p>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-46-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-46-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <ul>
 <li>Man kan også prøve at forbedre plottet ved at give nogle indstillinger ind i <code>geom_jitter()</code>, for eksempel kan man prøve <code>geom_jitter(size=.2,color="grey",alpha=0.5)</code> for at punkterne fylder mindre i plottet (ellers kan man overveje at fjerne dem).</li>
 </ul>
@@ -1058,7 +1058,7 @@ Som ekstra kan du prøve indstillingen <code>geom = "polygon"</code> inde i <cod
 <li>Brug også indstillingen <code>color="black"</code> og noter effekten</li>
 <li>Tilføj et tema</li>
 </ul>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-47-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-47-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p><strong>10)</strong> Lav en histogram</p>
 <ul>
 <li>Variablen <code>depth</code> på x-aksen</li>
@@ -1068,7 +1068,7 @@ Som ekstra kan du prøve indstillingen <code>geom = "polygon"</code> inde i <cod
 <li>Tilføj et tema osv.</li>
 </ul>
 <p>Det ser sådan ud:</p>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-48-1.svg" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-48-1.svg" width="576" style="display: block; margin: auto;" /></p>
 <ul>
 <li>Nu får du et tip: Ændr på parameteren <code>bins</code> ind i <code>geom_histogram()</code>-funktionen.</li>
 </ul>
@@ -1082,7 +1082,7 @@ Som ekstra kan du prøve indstillingen <code>geom = "polygon"</code> inde i <cod
 <li>Hint: Brug <code>tapply</code> til at beregne medianværdierne og <code>geom_vline</code> til at tilføje lodrette linjer.</li>
 </ul></li>
 </ul>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-49-1.svg" width="576" style="display: block; margin: auto;" />
+<p><img src="02-visual_files/figure-html/unnamed-chunk-49-1.svg" width="576" style="display: block; margin: auto;" />
 * Ekstra - hvis du ville have linjerne til at passe sammen med farverne til dine density plots, så se den næste code chunk og prøv at forstå koden.</p>
 <div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="visual1.html#cb192-1" tabindex="-1"></a><span class="co">#calculate medians</span></span>
 <span id="cb192-2"><a href="visual1.html#cb192-2" tabindex="-1"></a>mymedians <span class="ot">&lt;-</span> <span class="do">## din tapply funktion her</span></span>
@@ -1095,7 +1095,7 @@ Som ekstra kan du prøve indstillingen <code>geom = "polygon"</code> inde i <cod
 <span id="cb192-9"><a href="visual1.html#cb192-9" tabindex="-1"></a><span class="do">####   </span><span class="al">TODO</span><span class="do">: ERSTAT geom_vline() med følgende:</span></span>
 <span id="cb192-10"><a href="visual1.html#cb192-10" tabindex="-1"></a><span class="do">####   geom_vline(data = mean_df, aes(xintercept = mean, colour=cut),lty=2)</span></span></code></pre></div>
 <p>Det endelige resultat:</p>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-51-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-51-1.svg" width="672" style="display: block; margin: auto;" /></p>
 <p><strong>12)</strong> Lav et simple line plot. Åbn datsættet <code>BOD</code>:</p>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="visual1.html#cb193-1" tabindex="-1"></a><span class="fu">data</span>(BOD)</span>
 <span id="cb193-2"><a href="visual1.html#cb193-2" tabindex="-1"></a><span class="co">#BOD: This dataset contains the biochemical oxygen demand (BOD) of water samples taken at different time points.</span></span></code></pre></div>
@@ -1105,12 +1105,12 @@ Som ekstra kan du prøve indstillingen <code>geom = "polygon"</code> inde i <cod
 <li>anvend geom <code>geom_line()</code></li>
 <li>vælg selv ettiketter, title og tema</li>
 </ul>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-53-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-53-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <p><strong>13</strong> Lav et line plot (<code>geom_line()</code>). Åbn datasættet <code>CO2</code>:</p>
 <div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="visual1.html#cb194-1" tabindex="-1"></a><span class="fu">data</span>(CO2)</span></code></pre></div>
 <p>Lav en delmængde til typen “Quebec” (variablen <code>Type</code>). Derefter, anvend din delmængde til at lave et line plot med variablen <code>conc</code> på x-aksen, variablen <code>uptake</code>. Dit plot bør have seks linjer (en til hver plant i variablen <code>Plant</code>) og linjerne farves efter behandlingsmetode (variablen <code>Treatment</code>).</p>
 <p>Det endelige resultat kunne se sådan ud:</p>
-<p><img src="03-visual_files/figure-html/unnamed-chunk-56-1.svg" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="02-visual_files/figure-html/unnamed-chunk-56-1.svg" width="576" style="display: block; margin: auto;" /></p>
 <p><strong>14)</strong> En ekstra øvelse: Arbejd frit med at lave andre plots fra nogle af de andre indbygget datasæt i R (indtast <code>datasets::</code> så kommer der en list af muligheder).</p>
 <p>I alle tilfælde, tilføj akse-labels, en titel, et tema osv.</p>
 </div>
@@ -1157,7 +1157,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-visual.Rmd",
+    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-visual.Rmd",
     "text": "Edit"
   },
   "history": {

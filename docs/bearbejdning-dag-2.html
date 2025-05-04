@@ -481,7 +481,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb316-3"><a href="bearbejdning-dag-2.html#cb316-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">meanSurvived =</span> <span class="fu">mean</span>(Survived)) <span class="sc">%&gt;%</span></span>
 <span id="cb316-4"><a href="bearbejdning-dag-2.html#cb316-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Sex,<span class="at">y=</span>meanSurvived,<span class="at">fill=</span>Sex)) <span class="sc">+</span> </span>
 <span id="cb316-5"><a href="bearbejdning-dag-2.html#cb316-5" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>,<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="06-tidyverse2_LY_files/figure-html/unnamed-chunk-11-1.svg" width="288" style="display: block; margin: auto;" /></p>
+<p><img src="05-tidyverse2_LY_files/figure-html/unnamed-chunk-11-1.svg" width="288" style="display: block; margin: auto;" /></p>
 <div id="reference-af-summarise-funktioner" class="section level3 hasAnchor" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Reference af <code>summarise()</code>-funktioner<a href="bearbejdning-dag-2.html#reference-af-summarise-funktioner" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Her er nogle funktioner, som man ofte bruger med <code>summarise()</code> (der er mange andre muligheder).</p>
@@ -550,7 +550,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb319-8"><a href="bearbejdning-dag-2.html#cb319-8" tabindex="-1"></a></span>
 <span id="cb319-9"><a href="bearbejdning-dag-2.html#cb319-9" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
 <span id="cb319-10"><a href="bearbejdning-dag-2.html#cb319-10" tabindex="-1"></a><span class="fu">grid.arrange</span>(plotA,plotB,<span class="at">ncol=</span><span class="dv">2</span>) <span class="co">#plot both together</span></span></code></pre></div>
-<p><img src="06-tidyverse2_LY_files/figure-html/unnamed-chunk-13-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="05-tidyverse2_LY_files/figure-html/unnamed-chunk-13-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Vi kan se, at kvinder i gennemsnit var lidt yngre end mænd og havde en højere sandsynlighed for at være i første klasse. Et interessant spørgsmål er, hvordan man kan lave de ovenstående plots uden at bruge to forskellige <code>ggplot</code>-kommandoer. Med andre ord, hvordan man kan lave en automatisk løsning, hvor vi kan plotte flere summeringsstatistikker med kun én <code>ggplot</code>-kommando. Vi vil se, hvordan det kan gøres ved først at konvertere datasættet til long-form.</p>
 </div>
 <div id="mere-avanceret-group_by" class="section level3 hasAnchor" number="6.2.3">
@@ -601,7 +601,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb324-3"><a href="bearbejdning-dag-2.html#cb324-3" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>Pclass) <span class="sc">+</span> </span>
 <span id="cb324-4"><a href="bearbejdning-dag-2.html#cb324-4" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Proportion survived&quot;</span>) <span class="sc">+</span></span>
 <span id="cb324-5"><a href="bearbejdning-dag-2.html#cb324-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="06-tidyverse2_LY_files/figure-html/unnamed-chunk-16-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="05-tidyverse2_LY_files/figure-html/unnamed-chunk-16-1.svg" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <div id="funktionen-ungroup" class="section level3 hasAnchor" number="6.2.4">
 <h3><span class="header-section-number">6.2.4</span> Funktionen <code>ungroup()</code><a href="bearbejdning-dag-2.html#funktionen-ungroup" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -734,7 +734,7 @@ Figure 6.2: wide til long med Iris
 <span id="cb336-2"><a href="bearbejdning-dag-2.html#cb336-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
 <span id="cb336-3"><a href="bearbejdning-dag-2.html#cb336-3" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>trait) <span class="sc">+</span></span>
 <span id="cb336-4"><a href="bearbejdning-dag-2.html#cb336-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="06-tidyverse2_LY_files/figure-html/unnamed-chunk-26-1.svg" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="05-tidyverse2_LY_files/figure-html/unnamed-chunk-26-1.svg" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="separate" class="section level3 hasAnchor" number="6.3.3">
 <h3><span class="header-section-number">6.3.3</span> <code>separate()</code><a href="bearbejdning-dag-2.html#separate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -775,7 +775,7 @@ Figure 6.2: wide til long med Iris
 <span id="cb341-5"><a href="bearbejdning-dag-2.html#cb341-5" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
 <span id="cb341-6"><a href="bearbejdning-dag-2.html#cb341-6" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>measure) <span class="sc">+</span></span>
 <span id="cb341-7"><a href="bearbejdning-dag-2.html#cb341-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="06-tidyverse2_LY_files/figure-html/unnamed-chunk-29-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="05-tidyverse2_LY_files/figure-html/unnamed-chunk-29-1.svg" width="672" style="display: block; margin: auto;" /></p>
 <p>Se også <code>unite()</code> som gøre det modsatte til <code>separate()</code>.</p>
 </div>
 </div>
@@ -824,7 +824,7 @@ Figure 6.2: wide til long med Iris
 <span id="cb346-4"><a href="bearbejdning-dag-2.html#cb346-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb346-5"><a href="bearbejdning-dag-2.html#cb346-5" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>name) <span class="sc">+</span></span>
 <span id="cb346-6"><a href="bearbejdning-dag-2.html#cb346-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="06-tidyverse2_LY_files/figure-html/unnamed-chunk-32-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="05-tidyverse2_LY_files/figure-html/unnamed-chunk-32-1.svg" width="672" style="display: block; margin: auto;" /></p>
 <ul>
 <li><code>facet_wrap()</code></li>
 </ul>
@@ -835,7 +835,7 @@ Figure 6.2: wide til long med Iris
 <span id="cb347-4"><a href="bearbejdning-dag-2.html#cb347-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb347-5"><a href="bearbejdning-dag-2.html#cb347-5" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>name,<span class="at">scales=</span><span class="st">&quot;free&quot;</span>,<span class="at">ncol=</span><span class="dv">4</span>) <span class="sc">+</span>  </span>
 <span id="cb347-6"><a href="bearbejdning-dag-2.html#cb347-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="06-tidyverse2_LY_files/figure-html/unnamed-chunk-33-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="05-tidyverse2_LY_files/figure-html/unnamed-chunk-33-1.svg" width="672" style="display: block; margin: auto;" /></p>
 <div id="demonstration-af-pivot_wider" class="section level3 hasAnchor" number="6.4.1">
 <h3><span class="header-section-number">6.4.1</span> Demonstration af <code>pivot_wider()</code><a href="bearbejdning-dag-2.html#demonstration-af-pivot_wider" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Det er også brugbart at kende måden at man skifter fra long form til wide form.</p>
@@ -965,7 +965,7 @@ Figure 6.2: wide til long med Iris
 <span id="cb359-6"><a href="bearbejdning-dag-2.html#cb359-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb359-7"><a href="bearbejdning-dag-2.html#cb359-7" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Expression split according to strain&quot;</span>)</span>
 <span id="cb359-8"><a href="bearbejdning-dag-2.html#cb359-8" tabindex="-1"></a>gg2</span></code></pre></div>
-<p><img src="06-tidyverse2_LY_files/figure-html/unnamed-chunk-42-1.svg" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="05-tidyverse2_LY_files/figure-html/unnamed-chunk-42-1.svg" width="576" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="bearbejdning-dag-2.html#cb360-1" tabindex="-1"></a>gg1 <span class="ot">&lt;-</span> data_join <span class="sc">%&gt;%</span> </span>
 <span id="cb360-2"><a href="bearbejdning-dag-2.html#cb360-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>expression,<span class="at">x=</span><span class="fu">as.factor</span>(batch),<span class="at">fill=</span>gene)) <span class="sc">+</span> </span>
 <span id="cb360-3"><a href="bearbejdning-dag-2.html#cb360-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
@@ -975,7 +975,7 @@ Figure 6.2: wide til long med Iris
 <span id="cb360-7"><a href="bearbejdning-dag-2.html#cb360-7" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Expression split according to batch&quot;</span>)</span>
 <span id="cb360-8"><a href="bearbejdning-dag-2.html#cb360-8" tabindex="-1"></a></span>
 <span id="cb360-9"><a href="bearbejdning-dag-2.html#cb360-9" tabindex="-1"></a>gg1</span></code></pre></div>
-<p><img src="06-tidyverse2_LY_files/figure-html/unnamed-chunk-43-1.svg" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="05-tidyverse2_LY_files/figure-html/unnamed-chunk-43-1.svg" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="problemstillinger-5" class="section level2 hasAnchor" number="6.6">
@@ -1007,7 +1007,7 @@ Figure 6.2: wide til long med Iris
 <p><strong>b)</strong> Brug din nye dataframe med dine opsummeringsstatistikker til at lave et søjlediagram med <code>stat="identity"</code> (i stedet for <code>stat="count"</code> som er standarden), der viser den gennemsnitlige alder på y-aksen og er opdelt efter <code>Pclass</code> på x-aksen (vær opmærksom på datatypen for <code>Pclass</code> med hensyn til farverne/x-aksen).</p>
 <p><strong>c)</strong> Anvend <code>pivot_longer()</code> på din dataframe med dine opsummeringsstatistikker (brug indstillingen <code>cols = -Pclass</code> i funktionen).</p>
 <p><strong>d)</strong> Brug din long-form dataframe af dine opsummeringsstatistikker til at lave plots af alle opsummeringsstatistikker med én <code>ggplot</code> kommando (adskil dem ved at benytte <code>facet_wrap</code> så du har et plot til hvert opsummeringsstatistik og opdele efter <code>Pclass</code> indenfor hvert plot, ligesom i følgende).</p>
-<p><img src="06-tidyverse2_LY_files/figure-html/unnamed-chunk-49-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="05-tidyverse2_LY_files/figure-html/unnamed-chunk-49-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <hr />
 <p><strong>Problem 4</strong></p>
 <p><strong>a)</strong> Beregn de samme opsummeringsstatistikker som i <strong>2</strong>), men anvend <code>group_by()</code> for først at opdele efter <strong>både</strong> variablerne <code>Pclass</code> og <code>Sex</code>.</p>
@@ -1017,7 +1017,7 @@ Figure 6.2: wide til long med Iris
 </ul>
 <p><strong>b)</strong> Brug <code>pivot_longer()</code>-funktionen til at omdanne datasættet til long-form med dine opsummeringsstatistikker i en enkelt kolonne. Nøglekolonnen skal hedde <code>stat</code>, og kolonnen med værdierne skal hedde <code>values</code>.</p>
 <p><strong>c)</strong> Lav et plot af alle opsummeringsstatistikker, som er i long-format og ligner følgende plot.</p>
-<p><img src="06-tidyverse2_LY_files/figure-html/unnamed-chunk-52-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="05-tidyverse2_LY_files/figure-html/unnamed-chunk-52-1.svg" width="672" style="display: block; margin: auto;" /></p>
 <hr />
 <p><strong>Problem 5</strong> <em><code>group_by()</code> med tre variabler og <code>summarise()</code></em>. Prøv en kombination med tre forskellige variabler (vælg selv) indenfor <code>group_by()</code> og brug <code>summarise()</code> til at beregne middelværdien for variablen <code>Fare</code>.</p>
 <ul>
@@ -1026,7 +1026,7 @@ Figure 6.2: wide til long med Iris
 </ul>
 <hr />
 <p><strong>Problem 6</strong> <em><code>pivot_longer()</code></em> Først skal du lave to nye variabler ud fra <code>SibSp</code> og <code>Parch</code>, hvor der står “yes”, hvis værdien er større end 0. Anvend derefter <code>select()</code> på <code>Fare</code>, <code>Age</code> og dine to nye variabler. Lav derefter følgende plot:</p>
-<p><img src="06-tidyverse2_LY_files/figure-html/unnamed-chunk-54-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="05-tidyverse2_LY_files/figure-html/unnamed-chunk-54-1.svg" width="672" style="display: block; margin: auto;" /></p>
 <hr />
 <p><strong>Problem 7</strong> <em><code>Pivot_wider()</code></em> Vi har en <code>tribble</code>, som jeg har kopieret fra <a href="https://r4ds.had.co.nz/index.html" class="uri">https://r4ds.had.co.nz/index.html</a>.</p>
 <div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="bearbejdning-dag-2.html#cb364-1" tabindex="-1"></a>people <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
@@ -1105,7 +1105,7 @@ Figure 6.2: wide til long med Iris
 </ul>
 <hr />
 <p><strong>Problem 11</strong> <em>Ekstra pivot_longer() øvelse</em> Åbn datasættet <code>airquality</code> (<code>data(airquality)</code>) og lav følgende plot:</p>
-<p><img src="06-tidyverse2_LY_files/figure-html/unnamed-chunk-66-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="05-tidyverse2_LY_files/figure-html/unnamed-chunk-66-1.svg" width="672" style="display: block; margin: auto;" /></p>
 <hr />
 <p><strong>Problem 12</strong> Åbn <code>table2</code> (data(table2)) og gør den til at ser sådan ud:</p>
 <pre><code>#&gt; # A tibble: 6 × 4
@@ -1178,7 +1178,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/06-tidyverse2_LY.Rmd",
+    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/05-tidyverse2_LY.Rmd",
     "text": "Edit"
   },
   "history": {

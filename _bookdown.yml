@@ -1,23 +1,19 @@
-# _bookdown.yml
 delete_merged_file: true
-book_filename: "index"        # Ensures the main HTML file is named index.html
-output_dir: "docs"            # Your GitHub Pages folder
-
-
-
-# List all Rmd files in build order; index.Rmd must come first:
-rmd_files:
-  - "index.Rmd"
-  - "01-basics.Rmd"
-  - "02-rmark.Rmd"
-  - "03-visual.Rmd"
-  - "04-visual2.Rmd"
-  - "05-tidyverse1_LY.Rmd"
-  - "06-tidyverse2_LY.Rmd"
-
-new_session: yes
-before_chapter_script: "_common.R"
-
+name: Visualisering_2025
+output:
+  bookdown::gitbook:
+    css: assets/style.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: true
+    code_folding: show
 language:
   ui:
     chapter_name: "Kapitel "
+
+new_session: yes
+
+before_chapter_script: "_common.R"
+
+
