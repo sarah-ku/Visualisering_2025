@@ -1,5 +1,6 @@
 delete_merged_file: true
 name: Visualisering_2025
+output_dir: "docs"         # put built site into docs/
 output:
   bookdown::gitbook:
     css: assets/style.css
