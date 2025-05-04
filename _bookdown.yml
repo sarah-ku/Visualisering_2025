@@ -1,30 +1,25 @@
+# Project configuration for bookdown
 delete_merged_file: true
-name: Visualisering_2024
+book_filename: "index"              # main HTML will be docs/index.html
+output_dir: "docs"                  # render site into docs/
 
-book_filename: "index"      # This tells Bookdown to name the main output file "index.html"
-output_dir: "docs"          # The rendered site will be in the "docs" folder
+# Define the exact merge order of Rmd files
+rmd_files:
+  - "index.Rmd"
+  - "01-basics.Rmd"
+  - "02-rmark.Rmd"
+  - "03-visual.Rmd"
+  - "04-visual2.Rmd"
+  - "05-tidyverse1_LY.Rmd"
+  - "06-tidyverse2_LY.Rmd"
 
+# Start each chapter in a fresh R session
+new_session: yes
 
-output:
-  html_document:
-    toc: true
-    toc_float: true
-    code_download: true
-#  bookdown::pdf_book:
-#    keep_tex: true
+# Run this script before each chapter (e.g., load functions)
+before_chapter_script: "_common.R"
+
+# UI language tweaks
 language:
   ui:
     chapter_name: "Kapitel "
-
-rmd_files: [
-  "01-basics.Rmd",
-  "02-rmark.Rmd",
-  "03-visual.Rmd",
-  "04-visual2.Rmd",
-  "05-tidyverse1_LY.Rmd",
-  "06-tidyverse2_LY.Rmd"
-]
-
-new_session: yes
-
-before_chapter_script: "_common.R"

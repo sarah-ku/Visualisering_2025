@@ -646,11 +646,11 @@ x #så har vi 25 værdier fra en normal distribution med mean=0 og standard devi
 ```
 
 ```
-#>  [1]  2.19663751  1.43193421 -0.68061176  1.00822417  0.04563440  0.29806474
-#>  [7]  0.18157101  0.04704029 -1.54678938 -0.07827096 -0.87368691 -0.53801288
-#> [13]  0.10897834 -0.15454312  0.18363461 -0.52971203  1.69726105  1.39695825
-#> [19]  0.63259556 -0.84672289 -0.30220343 -0.44896181 -0.88421840  0.89351954
-#> [25] -0.10490166
+#>  [1]  1.3235113 -0.5879181  0.2169707 -0.3279726  0.5022096 -1.8990946
+#>  [7]  1.6237339  0.2148960  1.3245535  2.0385775 -1.9104727  0.5027698
+#> [13]  0.9860929  0.5025941 -1.0193760  0.1964125 -0.4438619  1.3036814
+#> [19]  0.6714722  0.4854994 -1.2183844  0.8371294 -0.5401923  1.0586318
+#> [25]  1.1917611
 ```
 
 I stedet for at kigge på alle værdier på én gang, vil vi måske hellere kigge kun på de første (eller sidste) værdier:
@@ -658,13 +658,13 @@ I stedet for at kigge på alle værdier på én gang, vil vi måske hellere kigg
 
 ``` r
 head(x) #første 6
-#> [1]  2.1966375  1.4319342 -0.6806118  1.0082242  0.0456344  0.2980647
+#> [1]  1.3235113 -0.5879181  0.2169707 -0.3279726  0.5022096 -1.8990946
 tail(x) #sidste 6
-#> [1] -0.8467229 -0.3022034 -0.4489618 -0.8842184  0.8935195 -0.1049017
+#> [1]  0.4854994 -1.2183844  0.8371294 -0.5401923  1.0586318  1.1917611
 x[1] #første værdi
-#> [1] 2.196638
+#> [1] 1.323511
 x[length(x)] #sidste data point
-#> [1] -0.1049017
+#> [1] 1.191761
 ```
 
 Bemærk, at i modsætning til Python og mange andre programmeringssprog, bruger R en 1-baseret indeksering. Det betyder, at den første værdi er x[1] og ikke x[0] som i Python.
@@ -694,7 +694,7 @@ c(my_mean,my_median,my_max,my_min,my_var,my_sd) #print results
 ```
 
 ```
-#> [1]  0.1253367  0.0456344  2.1966375 -1.5467894  0.8218226  0.9065443
+#> [1]  0.2813290  0.5022096  2.0385775 -1.9104727  1.1054846  1.0514203
 ```
 
 Man kan også lave et summary af dataen, som består af mange af de statistiker navnt ovenpå:
@@ -705,8 +705,8 @@ summary(x)
 ```
 
 ```
-#>     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-#> -1.54679 -0.52971  0.04563  0.12534  0.63260  2.19664
+#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#> -1.9105 -0.4439  0.5022  0.2813  1.0586  2.0386
 ```
 
 ### `tapply()`

@@ -1,42 +1,45 @@
 ---
-title: "Analyse og visualisering af biologiske datasæt - 2025"
+title: "Analyse og visualisering af biologiske datasæt – 2025"
 author: "Sarah Rennie"
-date: "Last updated: `r Sys.Date()`"
+date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
-bibliography: [book.bib]
+bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-output: 
-  output: bookdown::gitbook
-  html_document:
-    toc: true
-    toc_float: true
-    code_folding: show
-url: https://sarah-ku.github.io/
-cover-image: ai_cover.jpeg
-graphics: yes
-always_allow_html: true
 description: "Course materials for Analyse og visualisering af biologiske datasæt 2025"
+cover-image: ai_cover.jpeg
+output:
+  bookdown::gitbook:
+    css: assets/style.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: true
+    code_folding: show
+always_allow_html: true
+graphics: yes
 ---
 
+
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = T, eval = T, fig.width = 5, fig.height = 5, 
-    tidy.opts = list(width.cutoff = 60), tidy = F)
+knitr::opts_chunk$set(
+  echo = TRUE, eval = TRUE,
+  fig.width = 5, fig.height = 5,
+  tidy.opts = list(width.cutoff = 60), tidy = FALSE
+)
 ```
 
 ```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
+# Auto-generate a bib file for R packages
+knitr::write_bib(
+  packages = c(.packages(), 'bookdown', 'knitr', 'rmarkdown'),
+  file = 'packages.bib'
+)
 ```
 
-\mainmatter
+\frontmatter
 
----
-always_allow_html: true
----
 
 ## Lidt om kurset {-}
 
