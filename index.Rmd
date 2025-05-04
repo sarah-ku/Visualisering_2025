@@ -33,7 +33,9 @@ knitr::write_bib(c(
 
 \mainmatter
 
-
+---
+always_allow_html: true
+---
 
 ## Lidt om kurset {-}
 

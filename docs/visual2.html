@@ -376,59 +376,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.2.1</span> Zoom (<code>coord_cartesian()</code>, <code>expand_limits()</code>)<a href="visual2.html#zoom-coord_cartesian-expand_limits" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Man kan bruge funktionen <code>coord_cartesian()</code> til at zoome ind på et bestemt område på plottet. <strong>Indenfor</strong> <code>coord_cartesian()</code> angives <code>xlim()</code> og <code>ylim()</code>, som specificerer de øvre og nedre grænser langs henholdsvis x-aksen og y-aksen. Man kan også bruge <code>xlim()</code> og <code>ylim()</code> uden <code>coord_cartesian()</code>, men i dette tilfælde bliver punkterne, som ikke kan ses i plottet (fordi deres koordinater ligger udenfor de angivne grænser) ignoreret (med en advarsel). Med <code>coord_cartesian()</code> beholder man til gengæld samtlige data, og man får således ikke en advarsel.</p>
 <p>Nedenfor kan I ser vores oprindelige scatter plot:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="visual2.html#cb1-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Sepal.Width,<span class="at">color =</span> Species)) <span class="sc">+</span></span>
-<span id="cb1-2"><a href="visual2.html#cb1-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb1-3"><a href="visual2.html#cb1-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="visual2.html#cb195-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Sepal.Width,<span class="at">color =</span> Species)) <span class="sc">+</span></span>
+<span id="cb195-2"><a href="visual2.html#cb195-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb195-3"><a href="visual2.html#cb195-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-7-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Og her anvender jeg funktionen <code>coord_cartesian()</code> samt <code>xlim()</code> og <code>ylim()</code> til at zoome ind på et ønsket område på plottet.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="visual2.html#cb2-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Sepal.Width,<span class="at">color =</span> Species)) <span class="sc">+</span></span>
-<span id="cb2-2"><a href="visual2.html#cb2-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb2-3"><a href="visual2.html#cb2-3" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">2.2</span>,<span class="fl">4.5</span>)) <span class="sc">+</span></span>
-<span id="cb2-4"><a href="visual2.html#cb2-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="visual2.html#cb196-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Sepal.Width,<span class="at">color =</span> Species)) <span class="sc">+</span></span>
+<span id="cb196-2"><a href="visual2.html#cb196-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb196-3"><a href="visual2.html#cb196-3" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">2.2</span>,<span class="fl">4.5</span>)) <span class="sc">+</span></span>
+<span id="cb196-4"><a href="visual2.html#cb196-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-8-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Du kan også zoome ud ved at bruge <code>expand_limits()</code>. For eksempel, hvis jeg gerne vil have punkterne <span class="math inline">\(x = 0\)</span> og <span class="math inline">\(y = 0\)</span> (<code>c(0,0)</code>, eller “origin”) med i selve plottet:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="visual2.html#cb3-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width,<span class="at">col=</span>Species)) <span class="sc">+</span></span>
-<span id="cb3-2"><a href="visual2.html#cb3-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb3-3"><a href="visual2.html#cb3-3" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="visual2.html#cb3-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="visual2.html#cb197-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width,<span class="at">col=</span>Species)) <span class="sc">+</span></span>
+<span id="cb197-2"><a href="visual2.html#cb197-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb197-3"><a href="visual2.html#cb197-3" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb197-4"><a href="visual2.html#cb197-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-9-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Det kan være brubart i situationer, hvor man for eksempel har flere etiketter omkring punkterne i selve plottet, som bedre kan ses, hvis man tillader lidt ekstra plads.</p>
 </div>
 <div id="transformering-af-akserne---log-sqrt-osv-scale_x_continuous." class="section level3 hasAnchor" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> Transformering af akserne - log, sqrt osv (<code>scale_x_continuous</code>).<a href="visual2.html#transformering-af-akserne---log-sqrt-osv-scale_x_continuous." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Nogle gange kan det være svært at visualisere visse variable på grund af deres fordeling. Hvis der er mange outliers i variablen, vil de fleste punkter samles i et lille område i plottet. Transformering af x-aksen og/eller y-aksen med enten <code>log</code> eller <code>sqrt</code> er især en populær tilgang, så dataene kan bliver visualiseret på en mere informativ måde.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="visual2.html#cb4-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width,<span class="at">col=</span>Species)) <span class="sc">+</span></span>
-<span id="cb4-2"><a href="visual2.html#cb4-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span> </span>
-<span id="cb4-3"><a href="visual2.html#cb4-3" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="visual2.html#cb4-4" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb4-5"><a href="visual2.html#cb4-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="visual2.html#cb198-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width,<span class="at">col=</span>Species)) <span class="sc">+</span></span>
+<span id="cb198-2"><a href="visual2.html#cb198-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb198-3"><a href="visual2.html#cb198-3" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb198-4"><a href="visual2.html#cb198-4" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb198-5"><a href="visual2.html#cb198-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-10-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Man kan også prøve at bruge “sqrt” i stedet for “log2”.</p>
 <p>Det er dog vigtigt at bemærke, at dette er forskelligt fra at transformere selve dataene, som bruges i plottet. Jeg kan for eksempel opnå det samme resultat ved at ændre datasættet, før jeg anvender <code>ggplot2</code>. Her behøver jeg ikke at bruge <code>scale_x_continuous(trans = "log2")</code>, men jeg bemærker, at tallene på akserne reflekterer de transformerede data og ikke de oprindelige værdier. Beslutningen afhænger af, hvad man gerne vil opnå med analysen af dataene.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="visual2.html#cb5-1" tabindex="-1"></a>iris<span class="sc">$</span>Sepal.Length <span class="ot">&lt;-</span> <span class="fu">log2</span>(iris<span class="sc">$</span>Sepal.Length)</span>
-<span id="cb5-2"><a href="visual2.html#cb5-2" tabindex="-1"></a>iris<span class="sc">$</span>Sepal.Width <span class="ot">&lt;-</span> <span class="fu">log2</span>(iris<span class="sc">$</span>Sepal.Width)</span>
-<span id="cb5-3"><a href="visual2.html#cb5-3" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width,<span class="at">col=</span>Species)) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="visual2.html#cb5-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="visual2.html#cb5-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="visual2.html#cb199-1" tabindex="-1"></a>iris<span class="sc">$</span>Sepal.Length <span class="ot">&lt;-</span> <span class="fu">log2</span>(iris<span class="sc">$</span>Sepal.Length)</span>
+<span id="cb199-2"><a href="visual2.html#cb199-2" tabindex="-1"></a>iris<span class="sc">$</span>Sepal.Width <span class="ot">&lt;-</span> <span class="fu">log2</span>(iris<span class="sc">$</span>Sepal.Width)</span>
+<span id="cb199-3"><a href="visual2.html#cb199-3" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width,<span class="at">col=</span>Species)) <span class="sc">+</span></span>
+<span id="cb199-4"><a href="visual2.html#cb199-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb199-5"><a href="visual2.html#cb199-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-11-1.svg" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <div id="flip-coordinates-coord_flip" class="section level3 hasAnchor" number="4.2.3">
 <h3><span class="header-section-number">4.2.3</span> Flip coordinates (<code>coord_flip</code>)<a href="visual2.html#flip-coordinates-coord_flip" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Vi kan bruge <code>coord_flip()</code> til at spejle x-aksen på y-aksen og omvendt (det svarer til at drejer plottet 90 grader). Se følgende eksempel, hvor jeg først opretter variablen <code>Sepal.Group</code>, laver et barplot og anvender <code>coord_flip</code> for at få søjlerne til at stå vandret.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="visual2.html#cb6-1" tabindex="-1"></a><span class="co">#Sepal.Group defineret som i går</span></span>
-<span id="cb6-2"><a href="visual2.html#cb6-2" tabindex="-1"></a>iris<span class="sc">$</span>Sepal.Group <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(iris<span class="sc">$</span>Sepal.Length<span class="sc">&gt;</span><span class="fu">mean</span>(iris<span class="sc">$</span>Sepal.Length),<span class="st">&quot;Long&quot;</span>,<span class="st">&quot;Short&quot;</span>)</span>
-<span id="cb6-3"><a href="visual2.html#cb6-3" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="visual2.html#cb6-4" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Species,<span class="at">fill=</span>Sepal.Group)) <span class="sc">+</span> </span>
-<span id="cb6-5"><a href="visual2.html#cb6-5" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;count&quot;</span>,<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="visual2.html#cb6-6" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb6-7"><a href="visual2.html#cb6-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="visual2.html#cb200-1" tabindex="-1"></a><span class="co">#Sepal.Group defineret som i går</span></span>
+<span id="cb200-2"><a href="visual2.html#cb200-2" tabindex="-1"></a>iris<span class="sc">$</span>Sepal.Group <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(iris<span class="sc">$</span>Sepal.Length<span class="sc">&gt;</span><span class="fu">mean</span>(iris<span class="sc">$</span>Sepal.Length),<span class="st">&quot;Long&quot;</span>,<span class="st">&quot;Short&quot;</span>)</span>
+<span id="cb200-3"><a href="visual2.html#cb200-3" tabindex="-1"></a></span>
+<span id="cb200-4"><a href="visual2.html#cb200-4" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Species,<span class="at">fill=</span>Sepal.Group)) <span class="sc">+</span> </span>
+<span id="cb200-5"><a href="visual2.html#cb200-5" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;count&quot;</span>,<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb200-6"><a href="visual2.html#cb200-6" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb200-7"><a href="visual2.html#cb200-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-12-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Man kan ændre rækkefølgen af de tre <code>Species</code> ved at bruge funktionen <code>scale_x_discrete()</code> og angive den nye rækkefølge med indstillingen <code>limits</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="visual2.html#cb7-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Species,<span class="at">fill=</span>Sepal.Group)) <span class="sc">+</span> </span>
-<span id="cb7-2"><a href="visual2.html#cb7-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;count&quot;</span>,<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="visual2.html#cb7-3" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb7-4"><a href="visual2.html#cb7-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="st">&quot;virginica&quot;</span>, <span class="st">&quot;versicolor&quot;</span>,<span class="st">&quot;setosa&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb7-5"><a href="visual2.html#cb7-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="visual2.html#cb201-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Species,<span class="at">fill=</span>Sepal.Group)) <span class="sc">+</span> </span>
+<span id="cb201-2"><a href="visual2.html#cb201-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;count&quot;</span>,<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb201-3"><a href="visual2.html#cb201-3" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb201-4"><a href="visual2.html#cb201-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="st">&quot;virginica&quot;</span>, <span class="st">&quot;versicolor&quot;</span>,<span class="st">&quot;setosa&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb201-5"><a href="visual2.html#cb201-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-13-1.svg" width="480" style="display: block; margin: auto;" /></p>
 </div>
 </div>
@@ -438,37 +438,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="automatisk-farver" class="section level3 hasAnchor" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Automatisk farver<a href="visual2.html#automatisk-farver" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Her er den nemme løsning, hvor vi anvender automatiseret farvning ved at benytte <code>colour=Species</code> indenfor <code>aes()</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="visual2.html#cb8-1" tabindex="-1"></a><span class="co">#automatisk løsning</span></span>
-<span id="cb8-2"><a href="visual2.html#cb8-2" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width, <span class="at">colour=</span>Species)) <span class="sc">+</span></span>
-<span id="cb8-3"><a href="visual2.html#cb8-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb8-4"><a href="visual2.html#cb8-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="visual2.html#cb202-1" tabindex="-1"></a><span class="co">#automatisk løsning</span></span>
+<span id="cb202-2"><a href="visual2.html#cb202-2" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width, <span class="at">colour=</span>Species)) <span class="sc">+</span></span>
+<span id="cb202-3"><a href="visual2.html#cb202-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb202-4"><a href="visual2.html#cb202-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-14-1.svg" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <div id="manuelle-farver" class="section level3 hasAnchor" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Manuelle farver<a href="visual2.html#manuelle-farver" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Hvis man foretrækker at bruge sine egne farver, kan man gøre det ved at benytte funktionen <code>scale_colour_manual()</code>. Her angiver man stadig <code>colour=Species</code> indenfor <code>aes()</code>, men man specificerer farverne for de forskellige arter indenfor <code>scale_colour_manual</code>, med indstillingen <code>values</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="visual2.html#cb9-1" tabindex="-1"></a><span class="co">#manuelt løsning</span></span>
-<span id="cb9-2"><a href="visual2.html#cb9-2" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width, <span class="at">colour=</span>Species)) <span class="sc">+</span></span>
-<span id="cb9-3"><a href="visual2.html#cb9-3" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;purple&quot;</span>, <span class="st">&quot;yellow&quot;</span>,<span class="st">&quot;pink&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="visual2.html#cb9-4" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb9-5"><a href="visual2.html#cb9-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="visual2.html#cb203-1" tabindex="-1"></a><span class="co">#manuelt løsning</span></span>
+<span id="cb203-2"><a href="visual2.html#cb203-2" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width, <span class="at">colour=</span>Species)) <span class="sc">+</span></span>
+<span id="cb203-3"><a href="visual2.html#cb203-3" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;purple&quot;</span>, <span class="st">&quot;yellow&quot;</span>,<span class="st">&quot;pink&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb203-4"><a href="visual2.html#cb203-4" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb203-5"><a href="visual2.html#cb203-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-15-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>En fantastisk pakke er <code>RColorBrewer</code>. Pakken indeholder mange forskellige “colour palettes”, det vil sige grupper af farver, der passer godt sammen. Man kan derfor slippe for selv at sammensætte en farvekombination, der passer til plottet. Nogle af farvepaletterne tager også hensyn til, om man er farveblind, eller om man ønsker en farvegradient eller et sæt diskrete farver som ikke ligner hinanden.</p>
 <p>I følgende eksempel indlæser jeg pakken <code>RColorBrewer</code> og anvender funktionen <code>scale_colour_brewer</code> med indstillingen <code>palette="Set1"</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="visual2.html#cb10-1" tabindex="-1"></a><span class="co">#install.packages(&quot;RColorBrewer&quot;)</span></span>
-<span id="cb10-2"><a href="visual2.html#cb10-2" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb10-3"><a href="visual2.html#cb10-3" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="visual2.html#cb10-4" tabindex="-1"></a><span class="co">#manuelt løsning</span></span>
-<span id="cb10-5"><a href="visual2.html#cb10-5" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width, <span class="at">colour=</span>Species)) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="visual2.html#cb10-6" tabindex="-1"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette=</span><span class="st">&quot;Set1&quot;</span>) <span class="sc">+</span></span>
-<span id="cb10-7"><a href="visual2.html#cb10-7" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb10-8"><a href="visual2.html#cb10-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="visual2.html#cb204-1" tabindex="-1"></a><span class="co">#install.packages(&quot;RColorBrewer&quot;)</span></span>
+<span id="cb204-2"><a href="visual2.html#cb204-2" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb204-3"><a href="visual2.html#cb204-3" tabindex="-1"></a></span>
+<span id="cb204-4"><a href="visual2.html#cb204-4" tabindex="-1"></a><span class="co">#manuelt løsning</span></span>
+<span id="cb204-5"><a href="visual2.html#cb204-5" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length, <span class="at">y=</span>Sepal.Width, <span class="at">colour=</span>Species)) <span class="sc">+</span></span>
+<span id="cb204-6"><a href="visual2.html#cb204-6" tabindex="-1"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette=</span><span class="st">&quot;Set1&quot;</span>) <span class="sc">+</span></span>
+<span id="cb204-7"><a href="visual2.html#cb204-7" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb204-8"><a href="visual2.html#cb204-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() </span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-16-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Bemærk, at både <code>scale_color_manual()</code> og <code>scale_color_brewer()</code> bruges til at sætte farver på punkter og linjer, hvorimod man ved boxplots eller barplots bruger <code>scale_fill_manual()</code> eller <code>scale_fill_brewer()</code> til at sætte farver på de udfyldte områder. For eksempel vil jeg i følgende eksempel gerne sætte farver på de udfyldte områder i et boxplot:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="visual2.html#cb11-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Species,<span class="at">y=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
-<span id="cb11-2"><a href="visual2.html#cb11-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb11-3"><a href="visual2.html#cb11-3" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette=</span><span class="st">&quot;Set2&quot;</span>)  <span class="sc">+</span> </span>
-<span id="cb11-4"><a href="visual2.html#cb11-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="visual2.html#cb205-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Species,<span class="at">y=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
+<span id="cb205-2"><a href="visual2.html#cb205-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb205-3"><a href="visual2.html#cb205-3" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette=</span><span class="st">&quot;Set2&quot;</span>)  <span class="sc">+</span> </span>
+<span id="cb205-4"><a href="visual2.html#cb205-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-17-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Her er en oversigt over de fire funktioner:</p>
 <table>
@@ -512,19 +512,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="punkt-former" class="section level3 hasAnchor" number="4.3.3">
 <h3><span class="header-section-number">4.3.3</span> Punkt former<a href="visual2.html#punkt-former" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Ligesom man kan lave forskellige farver, kan man også lave forskellige punktformer. Vi starter med den automatiske løsning ligesom vi gjorde med farver. Når det er en variabel, vi angiver, skal variabelnavnet skrives indenfor <code>aes()</code>. <code>shape</code> er en parameter, der er meget specifik for <code>geom_point</code>. Så vi vælger at skrive en ny <code>aes()</code> indenfor <code>geom_point()</code> i stedet for indenfor funktionen <code>ggplot()</code>. Husk, at man i funktionen <code>ggplot()</code> specificerer globale parametre, der gælder for hele plottet, mens man i funktionen <code>geom_point()</code> angiver parametre, der kun gælder for <code>geom_point()</code>. Se følgende eksempel:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="visual2.html#cb12-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Sepal.Width, <span class="at">color =</span> Species)) <span class="sc">+</span></span>
-<span id="cb12-2"><a href="visual2.html#cb12-2" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb12-3"><a href="visual2.html#cb12-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape=</span>Species)) <span class="sc">+</span> </span>
-<span id="cb12-4"><a href="visual2.html#cb12-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="visual2.html#cb206-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Sepal.Width, <span class="at">color =</span> Species)) <span class="sc">+</span></span>
+<span id="cb206-2"><a href="visual2.html#cb206-2" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb206-3"><a href="visual2.html#cb206-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape=</span>Species)) <span class="sc">+</span> </span>
+<span id="cb206-4"><a href="visual2.html#cb206-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-18-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Nu har vi både en farve og en punkt-form til hver art i variablen <code>Species</code>.</p>
 <p><strong><em>Sætte punkt form manuelt</em></strong></p>
 <p>Hvis vi ikke kan lide de tre automatiske punktformer, kan vi ændre dem ved at bruge <code>scale_shape_manual</code>. Her vælger vi for eksempel <code>values=c(1,2,3)</code>, men der er en reference nedenfor, hvor du kan se kombinationer mellem de numeriske tal og punktformer. Så kan du vælge dine favoritter.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="visual2.html#cb13-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Sepal.Width, <span class="at">colour=</span>Species)) <span class="sc">+</span></span>
-<span id="cb13-2"><a href="visual2.html#cb13-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape=</span>Species)) <span class="sc">+</span> </span>
-<span id="cb13-3"><a href="visual2.html#cb13-3" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="visual2.html#cb13-4" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)) <span class="sc">+</span></span>
-<span id="cb13-5"><a href="visual2.html#cb13-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="visual2.html#cb207-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">y =</span> Sepal.Width, <span class="at">colour=</span>Species)) <span class="sc">+</span></span>
+<span id="cb207-2"><a href="visual2.html#cb207-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape=</span>Species)) <span class="sc">+</span> </span>
+<span id="cb207-3"><a href="visual2.html#cb207-3" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb207-4"><a href="visual2.html#cb207-4" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb207-5"><a href="visual2.html#cb207-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-19-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p><strong><em>Reference for punkt former</em></strong></p>
 <p>Her er reference-tabellen for forskellige punktformer i <code>ggplot2</code>:</p>
@@ -536,120 +536,120 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="tilføjelse-af-etiketter-direkte-på-plottet." class="section level3 hasAnchor" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> Tilføjelse af etiketter direkte på plottet.<a href="visual2.html#tilføjelse-af-etiketter-direkte-på-plottet." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Man kan bruge <code>geom_text()</code> til at tilføje tekst til punkterne direkte på plottet. Her kan man fortælle, hvad teksten skal være - i dette tilfælde specificerer vi navnene på biler fra datasættet <code>mtcars</code>. Plottet er et scatterplot mellem variablerne <code>mpg</code> og <code>wt</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="visual2.html#cb14-1" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
-<span id="cb14-2"><a href="visual2.html#cb14-2" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="visual2.html#cb14-3" tabindex="-1"></a>mtcars<span class="sc">$</span>my_labels <span class="ot">&lt;-</span> <span class="fu">row.names</span>(mtcars) <span class="co">#take row names and set as a variable</span></span>
-<span id="cb14-4"><a href="visual2.html#cb14-4" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="visual2.html#cb14-5" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(<span class="at">x=</span>mpg,<span class="at">y=</span>wt)) <span class="sc">+</span> </span>
-<span id="cb14-6"><a href="visual2.html#cb14-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb14-7"><a href="visual2.html#cb14-7" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span>my_labels)) <span class="sc">+</span> </span>
-<span id="cb14-8"><a href="visual2.html#cb14-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="visual2.html#cb208-1" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb208-2"><a href="visual2.html#cb208-2" tabindex="-1"></a></span>
+<span id="cb208-3"><a href="visual2.html#cb208-3" tabindex="-1"></a>mtcars<span class="sc">$</span>my_labels <span class="ot">&lt;-</span> <span class="fu">row.names</span>(mtcars) <span class="co">#take row names and set as a variable</span></span>
+<span id="cb208-4"><a href="visual2.html#cb208-4" tabindex="-1"></a></span>
+<span id="cb208-5"><a href="visual2.html#cb208-5" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(<span class="at">x=</span>mpg,<span class="at">y=</span>wt)) <span class="sc">+</span> </span>
+<span id="cb208-6"><a href="visual2.html#cb208-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb208-7"><a href="visual2.html#cb208-7" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span>my_labels)) <span class="sc">+</span> </span>
+<span id="cb208-8"><a href="visual2.html#cb208-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-21-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <p>For at gøre det nemmere at læse kan man også fjerne selve punkterne:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="visual2.html#cb15-1" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(<span class="at">x=</span>mpg,<span class="at">y=</span>wt)) <span class="sc">+</span> </span>
-<span id="cb15-2"><a href="visual2.html#cb15-2" tabindex="-1"></a>  <span class="co">#geom_point() +</span></span>
-<span id="cb15-3"><a href="visual2.html#cb15-3" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span>my_labels)) <span class="sc">+</span> </span>
-<span id="cb15-4"><a href="visual2.html#cb15-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="visual2.html#cb209-1" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(<span class="at">x=</span>mpg,<span class="at">y=</span>wt)) <span class="sc">+</span> </span>
+<span id="cb209-2"><a href="visual2.html#cb209-2" tabindex="-1"></a>  <span class="co">#geom_point() +</span></span>
+<span id="cb209-3"><a href="visual2.html#cb209-3" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span>my_labels)) <span class="sc">+</span> </span>
+<span id="cb209-4"><a href="visual2.html#cb209-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-22-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <p>Teksten på plottet kan stadig være svær at læse. En god løsning er at bruge R-pakken <code>ggrepel</code>, som vist i følgende eksempel:</p>
 </div>
 <div id="pakken-ggrepel-for-at-tilføje-tekst-labeller" class="section level3 hasAnchor" number="4.4.2">
 <h3><span class="header-section-number">4.4.2</span> Pakken <code>ggrepel</code> for at tilføje tekst labeller<a href="visual2.html#pakken-ggrepel-for-at-tilføje-tekst-labeller" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="visual2.html#cb16-1" tabindex="-1"></a><span class="co">#install.packages(ggrepel) #installere hvis nødvendeigt</span></span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="visual2.html#cb210-1" tabindex="-1"></a><span class="co">#install.packages(ggrepel) #installere hvis nødvendeigt</span></span></code></pre></div>
 <p>For at anvende pakken <code>ggrepel</code> på datasættet <code>mtcars</code>, skal man blot erstatte <code>geom_text()</code> med <code>geom_text_repel()</code>:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="visual2.html#cb17-1" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb17-2"><a href="visual2.html#cb17-2" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(<span class="at">x=</span>mpg,<span class="at">y=</span>wt)) <span class="sc">+</span> </span>
-<span id="cb17-3"><a href="visual2.html#cb17-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb17-4"><a href="visual2.html#cb17-4" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label=</span>my_labels)) <span class="sc">+</span> </span>
-<span id="cb17-5"><a href="visual2.html#cb17-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="visual2.html#cb211-1" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb211-2"><a href="visual2.html#cb211-2" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(<span class="at">x=</span>mpg,<span class="at">y=</span>wt)) <span class="sc">+</span> </span>
+<span id="cb211-3"><a href="visual2.html#cb211-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb211-4"><a href="visual2.html#cb211-4" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label=</span>my_labels)) <span class="sc">+</span> </span>
+<span id="cb211-5"><a href="visual2.html#cb211-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-24-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <p>Nu kan vi se, at der ikke er nogen etiketter, som sidder lige overfor hinanden, fordi <code>ggrepel()</code> har været dygtig nok til at placere dem tæt på deres tilhørende punkter men ikke ovenpå hinanden. Der er også nogle punkter, hvor funktionen har tilføjet en linje for at gøre det klart, hvilken punkt teksten refererer til.</p>
 <p>Vi har dog fået en advarsel i ovenstående kode. Hvis vi vil undgå denne advarsel, kan vi f.eks. specificere <code>max.overlaps = 20</code>.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="visual2.html#cb18-1" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb18-2"><a href="visual2.html#cb18-2" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(<span class="at">x=</span>mpg,<span class="at">y=</span>wt)) <span class="sc">+</span> </span>
-<span id="cb18-3"><a href="visual2.html#cb18-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb18-4"><a href="visual2.html#cb18-4" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label=</span>my_labels),<span class="at">max.overlaps =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
-<span id="cb18-5"><a href="visual2.html#cb18-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="visual2.html#cb212-1" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb212-2"><a href="visual2.html#cb212-2" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(<span class="at">x=</span>mpg,<span class="at">y=</span>wt)) <span class="sc">+</span> </span>
+<span id="cb212-3"><a href="visual2.html#cb212-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb212-4"><a href="visual2.html#cb212-4" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label=</span>my_labels),<span class="at">max.overlaps =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb212-5"><a href="visual2.html#cb212-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-25-1.svg" width="672" style="display: block; margin: auto;" /></p>
 <p>Nu kan du se, at du ikke længere får en advarsel, og der er tilføjet tekst til alle punkterne.</p>
 </div>
 <div id="tilføjelse-af-rektangler-i-regioner-af-interesse-annotate" class="section level3 hasAnchor" number="4.4.3">
 <h3><span class="header-section-number">4.4.3</span> Tilføjelse af rektangler i regioner af interesse (<code>annotate</code>)<a href="visual2.html#tilføjelse-af-rektangler-i-regioner-af-interesse-annotate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Hvis man gerne vil fremhæve et bestemt område i plottet, kan man bruge funktionen <code>annotate()</code>. Prøv selv at regne ud, hvad de indstillinger inden for <code>annotate()</code> betyder i det følgende eksempel:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="visual2.html#cb19-1" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(<span class="at">x=</span>mpg,<span class="at">y=</span>wt)) <span class="sc">+</span> </span>
-<span id="cb19-2"><a href="visual2.html#cb19-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb19-3"><a href="visual2.html#cb19-3" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label=</span>my_labels)) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="visual2.html#cb19-4" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;rect&quot;</span>,<span class="at">xmin=</span><span class="dv">18</span>,<span class="at">xmax=</span><span class="dv">23</span>,<span class="at">ymin=</span><span class="fl">2.5</span>,<span class="at">ymax=</span><span class="dv">3</span>,<span class="at">alpha=</span><span class="fl">0.2</span>,<span class="at">fill=</span><span class="st">&quot;orange&quot;</span>) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="visual2.html#cb19-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="visual2.html#cb213-1" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(<span class="at">x=</span>mpg,<span class="at">y=</span>wt)) <span class="sc">+</span> </span>
+<span id="cb213-2"><a href="visual2.html#cb213-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb213-3"><a href="visual2.html#cb213-3" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label=</span>my_labels)) <span class="sc">+</span></span>
+<span id="cb213-4"><a href="visual2.html#cb213-4" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;rect&quot;</span>,<span class="at">xmin=</span><span class="dv">18</span>,<span class="at">xmax=</span><span class="dv">23</span>,<span class="at">ymin=</span><span class="fl">2.5</span>,<span class="at">ymax=</span><span class="dv">3</span>,<span class="at">alpha=</span><span class="fl">0.2</span>,<span class="at">fill=</span><span class="st">&quot;orange&quot;</span>) <span class="sc">+</span></span>
+<span id="cb213-5"><a href="visual2.html#cb213-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-26-1.svg" width="384" style="display: block; margin: auto;" /></p>
 <p>Man kan også benytte den samme funktion til at tilføje tekst på et bestemt sted:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="visual2.html#cb20-1" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(<span class="at">x=</span>mpg,<span class="at">y=</span>wt)) <span class="sc">+</span> </span>
-<span id="cb20-2"><a href="visual2.html#cb20-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb20-3"><a href="visual2.html#cb20-3" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label=</span>my_labels)) <span class="sc">+</span></span>
-<span id="cb20-4"><a href="visual2.html#cb20-4" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;rect&quot;</span>,<span class="at">xmin=</span><span class="dv">18</span>,<span class="at">xmax=</span><span class="dv">23</span>,<span class="at">ymin=</span><span class="fl">2.5</span>,<span class="at">ymax=</span><span class="dv">3</span>,<span class="at">alpha=</span><span class="fl">0.2</span>,<span class="at">fill=</span><span class="st">&quot;orange&quot;</span>) <span class="sc">+</span></span>
-<span id="cb20-5"><a href="visual2.html#cb20-5" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>,<span class="at">x=</span><span class="dv">25</span>,<span class="at">y=</span><span class="fl">2.75</span>,<span class="at">label=</span><span class="st">&quot;Cars of interest&quot;</span>,<span class="at">col=</span><span class="st">&quot;orange&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb20-6"><a href="visual2.html#cb20-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="visual2.html#cb214-1" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(<span class="at">x=</span>mpg,<span class="at">y=</span>wt)) <span class="sc">+</span> </span>
+<span id="cb214-2"><a href="visual2.html#cb214-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb214-3"><a href="visual2.html#cb214-3" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label=</span>my_labels)) <span class="sc">+</span></span>
+<span id="cb214-4"><a href="visual2.html#cb214-4" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;rect&quot;</span>,<span class="at">xmin=</span><span class="dv">18</span>,<span class="at">xmax=</span><span class="dv">23</span>,<span class="at">ymin=</span><span class="fl">2.5</span>,<span class="at">ymax=</span><span class="dv">3</span>,<span class="at">alpha=</span><span class="fl">0.2</span>,<span class="at">fill=</span><span class="st">&quot;orange&quot;</span>) <span class="sc">+</span></span>
+<span id="cb214-5"><a href="visual2.html#cb214-5" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>,<span class="at">x=</span><span class="dv">25</span>,<span class="at">y=</span><span class="fl">2.75</span>,<span class="at">label=</span><span class="st">&quot;Cars of interest&quot;</span>,<span class="at">col=</span><span class="st">&quot;orange&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb214-6"><a href="visual2.html#cb214-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-27-1.svg" width="384" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="adskille-plots-med-facets-facet_gridfacet_wrap" class="section level2 hasAnchor" number="4.5">
 <h2><span class="header-section-number">4.5</span> Adskille plots med facets (<code>facet_grid</code>/<code>facet_wrap</code>)<a href="visual2.html#adskille-plots-med-facets-facet_gridfacet_wrap" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En stor fordel ved at bruge <code>ggplot</code> er evnen til at bruge funktionerne <code>facet_grid()</code> og <code>facet_wrap()</code> til at adskille værdier af en kategorisk variabel over flere plots. I følgende kode få vi et density plot, hvor de tre kurver, der tilhører de tre arter, ligger oven på hinanden i det samme plot:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="visual2.html#cb21-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
-<span id="cb21-2"><a href="visual2.html#cb21-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb21-3"><a href="visual2.html#cb21-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="visual2.html#cb215-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
+<span id="cb215-2"><a href="visual2.html#cb215-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb215-3"><a href="visual2.html#cb215-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-29-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Med funktionerne <code>facet_grid()</code> eller <code>facet_wrap()</code> bruger vi <code>~</code> (tilde) til at angive, hvordan vi gerne vil visualisere de forskellige plots. Vi skal angive, om vi ønsker at opdele dem over rækker (variablerne venstre for <code>~</code>) eller over kolonner (variablerne til højre for <code>~</code>).</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="visual2.html#cb22-1" tabindex="-1"></a><span class="co">#notrun</span></span>
-<span id="cb22-2"><a href="visual2.html#cb22-2" tabindex="-1"></a><span class="fu">variable</span>(s) to split into row<span class="sc">-</span>wise plots <span class="sc">~</span> <span class="fu">variables</span>(s) to split into column<span class="sc">-</span>wise plots</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="visual2.html#cb216-1" tabindex="-1"></a><span class="co">#notrun</span></span>
+<span id="cb216-2"><a href="visual2.html#cb216-2" tabindex="-1"></a><span class="fu">variable</span>(s) to split into row<span class="sc">-</span>wise plots <span class="sc">~</span> <span class="fu">variables</span>(s) to split into column<span class="sc">-</span>wise plots</span></code></pre></div>
 <p>Det ovenstående density plot af <code>Sepal.Length</code> kan adskilles efter <code>Species</code>, således at man får tre plots med en kolonne til hver af de tre arter ved hjælp af <code>facet_wrap()</code> funktionen:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="visual2.html#cb23-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
-<span id="cb23-2"><a href="visual2.html#cb23-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb23-3"><a href="visual2.html#cb23-3" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>Species) <span class="sc">+</span> <span class="co">#split Species into different column-wise plots</span></span>
-<span id="cb23-4"><a href="visual2.html#cb23-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="visual2.html#cb217-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
+<span id="cb217-2"><a href="visual2.html#cb217-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb217-3"><a href="visual2.html#cb217-3" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>Species) <span class="sc">+</span> <span class="co">#split Species into different column-wise plots</span></span>
+<span id="cb217-4"><a href="visual2.html#cb217-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-31-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Man kan også vælge at fordele plotterne over rækkerne ved hjælp af <code>facet_wrap()</code>. Her skal man dog huske at bruge en <code>.</code> efter <code>~</code> for at betegne, at man kun vil adskille plots over rækkerne, mens man til gengæld kan droppe <code>.</code> hvis man kun vil adskille over kolonner som i det foregående eksempel.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="visual2.html#cb24-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
-<span id="cb24-2"><a href="visual2.html#cb24-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb24-3"><a href="visual2.html#cb24-3" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Species<span class="sc">~</span>.) <span class="sc">+</span> <span class="co">#split Species into different column-wise plots</span></span>
-<span id="cb24-4"><a href="visual2.html#cb24-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="visual2.html#cb218-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
+<span id="cb218-2"><a href="visual2.html#cb218-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb218-3"><a href="visual2.html#cb218-3" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Species<span class="sc">~</span>.) <span class="sc">+</span> <span class="co">#split Species into different column-wise plots</span></span>
+<span id="cb218-4"><a href="visual2.html#cb218-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-32-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Her angives <code>Sepal.Group ~ Species</code>, hvilket betyder, at plotterne bliver adskilt efter både <code>Sepal.Group</code> og <code>Species</code> - <code>Sepal.Group</code> over rækkerne og <code>Species</code> over kolonnerne - ved hjælp af <code>facet_grid()</code> funktionen:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="visual2.html#cb25-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
-<span id="cb25-2"><a href="visual2.html#cb25-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb25-3"><a href="visual2.html#cb25-3" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Sepal.Group<span class="sc">~</span>Species) <span class="sc">+</span> <span class="co">#split Species into different column-wise plots</span></span>
-<span id="cb25-4"><a href="visual2.html#cb25-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="visual2.html#cb219-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
+<span id="cb219-2"><a href="visual2.html#cb219-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb219-3"><a href="visual2.html#cb219-3" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Sepal.Group<span class="sc">~</span>Species) <span class="sc">+</span> <span class="co">#split Species into different column-wise plots</span></span>
+<span id="cb219-4"><a href="visual2.html#cb219-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-34-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>Bemærk forskellen mellem <code>facet_grid()</code> og <code>facet_wrap()</code>:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="visual2.html#cb26-1" tabindex="-1"></a><span class="co">#same plot, replace facet_grid with facet_wrap</span></span>
-<span id="cb26-2"><a href="visual2.html#cb26-2" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
-<span id="cb26-3"><a href="visual2.html#cb26-3" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb26-4"><a href="visual2.html#cb26-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(Sepal.Group<span class="sc">~</span>Species) <span class="sc">+</span> </span>
-<span id="cb26-5"><a href="visual2.html#cb26-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="visual2.html#cb220-1" tabindex="-1"></a><span class="co">#same plot, replace facet_grid with facet_wrap</span></span>
+<span id="cb220-2"><a href="visual2.html#cb220-2" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
+<span id="cb220-3"><a href="visual2.html#cb220-3" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb220-4"><a href="visual2.html#cb220-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(Sepal.Group<span class="sc">~</span>Species) <span class="sc">+</span> </span>
+<span id="cb220-5"><a href="visual2.html#cb220-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-35-1.svg" width="480" style="display: block; margin: auto;" /></p>
 <p>I <code>facet_grid()</code> bliver man tvunget til at få et “grid” layout. Vi har således 6 plot i en 2 x 3 grid (2 niveauer for variablen <code>Sepal.Group</code> og 3 niveauer for variablen <code>Species</code>), og det sker selvom den ene af dem ikke har nogen data - der findes altså ikke observationer, hvor <code>Species</code> er “Setosa” og <code>Sepal.Group</code> er “Long”, men vi får et plot alligevel for at bevare strukturen. Med <code>facet_wrap()</code> bliver plot uden data droppet, og i dette tilfælde får man 5 plots i hvad der kaldes en “ribbon”.</p>
 <p>Med <code>facet_wrap()</code> kan man også angive antallet af rækker og kolonner man vil have for plotterne. For eksempel kan man angive <code>nrow = 1</code> eller <code>ncol = 5</code> for at få alle fem plots på en række.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="visual2.html#cb27-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
-<span id="cb27-2"><a href="visual2.html#cb27-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb27-3"><a href="visual2.html#cb27-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(Sepal.Group<span class="sc">~</span>Species,<span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb27-4"><a href="visual2.html#cb27-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="visual2.html#cb221-1" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
+<span id="cb221-2"><a href="visual2.html#cb221-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb221-3"><a href="visual2.html#cb221-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(Sepal.Group<span class="sc">~</span>Species,<span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb221-4"><a href="visual2.html#cb221-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-36-1.svg" width="624" style="display: block; margin: auto;" /></p>
 <p>Til sidst kan det være, at vi vil gerne frigøre skalaen på y-aksen. På den måde har ikke alle plots de samme maksimale y-værdier, og de enkelte plot benytter i stedet egne værdier til at bestemme skalaen. Det kan være brugbart, hvis man inddrager forskellige målinger. Men vær dog opmærksom på, hvad der bedst giver mening - hvis man direkte vil sammenligne to af plottene, så er det bedre, at de deler samme y-akseskala.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="visual2.html#cb28-1" tabindex="-1"></a><span class="co">#same plot, replace facet_grid with facet_wrap</span></span>
-<span id="cb28-2"><a href="visual2.html#cb28-2" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
-<span id="cb28-3"><a href="visual2.html#cb28-3" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb28-4"><a href="visual2.html#cb28-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(Sepal.Group<span class="sc">~</span>Species,<span class="at">ncol =</span> <span class="dv">5</span>,<span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb28-5"><a href="visual2.html#cb28-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="visual2.html#cb222-1" tabindex="-1"></a><span class="co">#same plot, replace facet_grid with facet_wrap</span></span>
+<span id="cb222-2"><a href="visual2.html#cb222-2" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Sepal.Length,<span class="at">fill=</span>Species)) <span class="sc">+</span> </span>
+<span id="cb222-3"><a href="visual2.html#cb222-3" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb222-4"><a href="visual2.html#cb222-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(Sepal.Group<span class="sc">~</span>Species,<span class="at">ncol =</span> <span class="dv">5</span>,<span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb222-5"><a href="visual2.html#cb222-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-37-1.svg" width="624" style="display: block; margin: auto;" /></p>
 <p>Disse funktioner er meget brugbare, selvom de opnår stort set samme resultat. Der er dog små forskelle mellem dem, som er værd at huske.</p>
 </div>
 <div id="gemme-dit-plot" class="section level2 hasAnchor" number="4.6">
 <h2><span class="header-section-number">4.6</span> Gemme dit plot<a href="visual2.html#gemme-dit-plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Her bruger vi R Markdown til at lave en rapport, som indeholder vores plots. Men det kan også være, at man gerne vil gemme sit plot som en fil på computeren. Til det kan man bruge kommandoen <code>ggsave()</code>:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="visual2.html#cb29-1" tabindex="-1"></a><span class="fu">ggsave</span>(myplot, <span class="st">&quot;myplot.pdf&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="visual2.html#cb223-1" tabindex="-1"></a><span class="fu">ggsave</span>(myplot, <span class="st">&quot;myplot.pdf&quot;</span>)</span></code></pre></div>
 <p>Figuren vil blive gemt i din <em>working directory</em> (eller den mappe, hvor din .Rmd fil ligger). Filtypen <code>.pdf</code> kan erstattes med andre formater, f.eks. <code>.png</code> eller <code>.jpeg</code>. Hvis man gerne vil redigere sit plot (f.eks. i Adobe Illustrator eller Inkscape), vil jeg anbefale at gemme det som <code>.pdf</code>.</p>
 <p>Man kan godt ændre højden og bredden på det gemte plot med <code>width</code> og <code>height</code>:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="visual2.html#cb30-1" tabindex="-1"></a><span class="fu">ggsave</span>(myplot, <span class="st">&quot;myplot.pdf&quot;</span>, <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="visual2.html#cb224-1" tabindex="-1"></a><span class="fu">ggsave</span>(myplot, <span class="st">&quot;myplot.pdf&quot;</span>, <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="dv">4</span>)</span></code></pre></div>
 </div>
 <div id="problemstillinger-3" class="section level2 hasAnchor" number="4.7">
 <h2><span class="header-section-number">4.7</span> Problemstillinger<a href="visual2.html#problemstillinger-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -663,19 +663,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Tjek x-aksen - variablen er numerisk, men bør fortolkes som en faktor. Lav variablen om til en faktor (eller bare skriv <code>as.factor(cyl)</code> i selve plottet) og lav dit plot igen.</p>
 <p><strong>b</strong>) Opdel kolonnerne ved at angive farver efter variablen <code>gear</code> i dit plot (kolonnerne skal sidde ved siden af hinanden). Vær igen opmærksom på, hvordan R fortolker variablen.</p></li>
 </ul>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="visual2.html#cb31-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mtcars, <span class="fu">aes</span>(<span class="at">x =</span> cyl,<span class="at">fill =</span> (gear))) <span class="sc">+</span></span>
-<span id="cb31-2"><a href="visual2.html#cb31-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;count&quot;</span>,<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb31-3"><a href="visual2.html#cb31-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="visual2.html#cb225-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mtcars, <span class="fu">aes</span>(<span class="at">x =</span> cyl,<span class="at">fill =</span> (gear))) <span class="sc">+</span></span>
+<span id="cb225-2"><a href="visual2.html#cb225-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;count&quot;</span>,<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb225-3"><a href="visual2.html#cb225-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="04-visual2_files/figure-html/unnamed-chunk-42-1.svg" width="672" style="display: block; margin: auto;" /></p>
 <hr />
 <p>I det følgende spørgsmål arbejder du med datasættet <code>Palmer Penguins</code>. Pakken <code>palmerpenguins</code> skal installeres hvis du ikke har brugt datasættet før.</p>
 <p>Data beskrivelse: <em>The palmerpenguins data contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica.</em></p>
 <p><img src="plots/palmerpenguins.png" width="20%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="visual2.html#cb32-1" tabindex="-1"></a><span class="co">#install.packages(&quot;palmerpenguins&quot;) #køre hvis ikke allerede installeret</span></span>
-<span id="cb32-2"><a href="visual2.html#cb32-2" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
-<span id="cb32-3"><a href="visual2.html#cb32-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb32-4"><a href="visual2.html#cb32-4" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb32-5"><a href="visual2.html#cb32-5" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="visual2.html#cb226-1" tabindex="-1"></a><span class="co">#install.packages(&quot;palmerpenguins&quot;) #køre hvis ikke allerede installeret</span></span>
+<span id="cb226-2"><a href="visual2.html#cb226-2" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb226-3"><a href="visual2.html#cb226-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb226-4"><a href="visual2.html#cb226-4" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb226-5"><a href="visual2.html#cb226-5" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code></pre></div>
 <pre><code>FALSE # A tibble: 6 × 8
 FALSE   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 FALSE   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
@@ -688,7 +688,7 @@ FALSE 6 Adelie  Torgersen           39.3          20.6               190        
 FALSE # ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <p>Man kan altid anvende <code>?penguins</code> for at se flere detaljer om variablenavner.</p>
 <p><em>Vi skal starte med at rydde lidt op i datasættet. Til det, brug “drop_na()” for at fjerne alle rækker med <code>NA</code> (manglende) værdier (her skal man have tidyverse-pakken indlæst):</em></p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="visual2.html#cb34-1" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">drop_na</span>(penguins)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="visual2.html#cb228-1" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">drop_na</span>(penguins)</span></code></pre></div>
 <hr />
 <p><strong>Problem 3</strong>) <em>Manuelt farver og punkter</em></p>
 <p><strong>a</strong>) Lav et scatter plot med <code>ggplot()</code>-funktionen:</p>
@@ -799,8 +799,8 @@ Figure 4.3: Min løsning
 <ul>
 <li>Hint: start med følgende dataframe, der bruger dine beregnede værdier:</li>
 </ul>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="visual2.html#cb35-1" tabindex="-1"></a>mydf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;species&quot;</span><span class="ot">=</span><span class="fu">names</span>(mean_length), <span class="st">&quot;mlength&quot;</span><span class="ot">=</span>mean_length, <span class="st">&quot;mdepth&quot;</span><span class="ot">=</span>mean_depth)</span>
-<span id="cb35-2"><a href="visual2.html#cb35-2" tabindex="-1"></a>mydf</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="visual2.html#cb229-1" tabindex="-1"></a>mydf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;species&quot;</span><span class="ot">=</span><span class="fu">names</span>(mean_length), <span class="st">&quot;mlength&quot;</span><span class="ot">=</span>mean_length, <span class="st">&quot;mdepth&quot;</span><span class="ot">=</span>mean_depth)</span>
+<span id="cb229-2"><a href="visual2.html#cb229-2" tabindex="-1"></a>mydf</span></code></pre></div>
 <pre><code>#&gt;             species  mlength   mdepth
 #&gt; Adelie       Adelie 38.82397 18.34726
 #&gt; Chinstrap Chinstrap 48.83382 18.42059
