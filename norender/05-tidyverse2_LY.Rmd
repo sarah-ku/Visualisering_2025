@@ -1,7 +1,9 @@
+---
+always_allow_html: true
+---
 
 
-# Bearbejdning dag 2
-
+# Bearbejdning - tidyverse dag 2 {#data}
 
 ```{r, echo=FALSE,fig.width = 1,fig.height=1,comment=FALSE,warning=FALSE,out.width="15%"}
 # Bigger fig.width
@@ -10,7 +12,7 @@ library(knitr)
 include_graphics("plots/hex-tidyverse.png")
 ```
 
-"Fejl ved brug af utilstrækkelige data er meget mindre end dem, der ikke bruger nogen data overhovedet." -- Charles Babbage
+"Fejl ved brug af utilstrækkelige data er meget mindre end når man ikke bruger nogen data overhovedet." -- Charles Babbage
 
 ```{r,echo=FALSE,warning=FALSE,message=FALSE}
 library(tidyverse)
@@ -22,12 +24,11 @@ titanic_clean <- titanic %>%
     drop_na() 
 ```
 
+## Introduktion og læringsmålene
 
-## Indledning og læringsmålene
+I dag fortsætter vi arbejdet med `tidyverse`. Vi fokuserer især på pakkerne `dplyr` og `tidyr`, som kan bruges til at ændre strukturen af et datasæt. Det hjælper blandt andet med at tilpasse data til den krævede struktur for at lave plots med `ggplot2`.
 
-I dag fortsætter vi arbejdet med `tidyverse`, især fokusere vi på pakkerne `dplyr` og `tidyr`, som kan bruges til at ændre strukturen af et datasæt, så det passer til den krævede struktur for at kunne lave plots med `ggplot2`.
-
-I biologi er det ofte tilfældet, at dataene er i en dataframe, mens yderligere oplysninger om prøverne er i en anden dataframe. Derfor vil vi gerne lære, hvordan man forbinder disse to dataframes i R, så vi kan bruge de ekstra oplysninger, når vi laver plots af dataene.
+I biologi er det ofte tilfældet at dataene er i een dataframe mens yderligere oplysninger om prøverne er i en anden dataframe. Derfor vil vi gerne lære, hvordan man forbinder disse dataframes i R. At integrere datasæt hjælper med visualisering af ekstra informationer i jeres plots.
 
 ### Læringsmålene
 
@@ -47,7 +48,7 @@ Du skal kunne:
 
 ### Videoer
 
-* Video 1 - vi skal kigge lidt nærmere på `group_by()` + `summarise()` og forbinde `tidyverse` kode og `ggplot2` kode sammen med %>%/+.
+* Video 1: Kombination af `group_by()` og `summarise()`. Forbinde `tidyverse` og `ggplot2` kode sammen via `%>%` / `+`.
 
 ```{r,echo=FALSE}
 library("vembedr")
@@ -58,7 +59,7 @@ embed_url("https://vimeo.com/546910681")
 
 ---
 
-* Video 2 - wide/long data forms og `pivot_longer()` og bruge den i ggplot2
+* Video 2: Wide/long dataformat, `pivot_longer()` og deres brug i ggplot2.
 
 ```{r,echo=FALSE}
 #library("vembedr")
@@ -72,7 +73,7 @@ embed_url("https://vimeo.com/707081191") #2022
 
 ---
 
-* Video 3 - eksempel med titanic summary statistics
+* Video 3: `titanic` summary statistics eksempel.
 
 ```{r,echo=FALSE}
 #library("vembedr")
@@ -88,7 +89,7 @@ embed_url("https://vimeo.com/707223997") #2022
 
 ---
 
-* Video 4: `left_join()` for at forbine tables med ekstra oplysning
+* Video 4: `left_join()` for at forbinde tabeller med ekstra oplysninger.
 
 ```{r,echo=FALSE}
 #library("vembedr")
@@ -102,13 +103,11 @@ embed_url("https://vimeo.com/707082269") #2022
 ```
 
 
-## `group_by()` med `summarise()` i dplyr-pakken
-
+## Kombinationen af `group_by()` og `summarise()` i `dplyr`-pakken
 
 Ved at kombinere `group_by()` og `summarise()` kan man finde numeriske svar på spørgsmålet: Havde mænd eller kvinder en højere sandsynlighed for at overleve tragedien?
 
-Lad os starte med at se på en løsning med `tapply`, hvor vi udregner proportionen af mænd og kvinder, der overlevede. Følgende kode opdeler variablen `Survived` efter den kategoriske variabel `Sex` og tager middelværdien. Derved får vi proportionen af overlevende efter køn (da `Survived` er kodet sådan, at 1 betyder, at man overlevede, og `0` betyder, at man ikke overlevede).
-
+Lad os starte med at se på en løsning med `tapply`, hvor vi udregner proportionen af mænd og kvinder der overlevede. Følgende kode opdeler variablen `Survived` efter den kategoriske variabel `Sex` og tager det aritmetiske gennemsnit. Dermed får vi proportionen af overlevende efter køn. Vi kan beregne gennemsnittet på den måde, fordi `1` betyder at man overlevede, `0` betyder at man ikke overlevede og at man kan anvende disse numeriske værdier matematisk.
 
 ```{r,tidy=FALSE}
 titanic_clean <- titanic %>% 
@@ -119,14 +118,15 @@ titanic_clean <- titanic %>%
 tapply(titanic_clean$Survived,titanic_clean$Sex,mean)
 ```
 
-Nu skifter vi over til en `tidyverse`-løsning. Lad os tage udgangspunkt i `summarise()`-funktionen. Som et eksempel på, hvordan man bruger funktionen, vil vi beregne en variabel, som hedder "medianFare", og som er lig med `median(Fare)`.
+Nu skifter vi over til en `tidyverse`-løsning. Lad os tage udgangspunkt i `summarise()`-funktionen. Vi vil beregne en variabel, som hedder "medianFare" og som er identisk med `median(Fare)`.
 
 ```{r}
 titanic_clean %>%
-  summarise("medianFare"=median(Fare))
+  summarise("medianFare" = median(Fare))
+  # summarise(medianFare = median(Fare))
 ```
 
-Vi får faktisk en ny dataramme her, med kun den variabel, som vi lige har specificeret. Vi er dog interesseret i proportionen af overlevende, så vi tager middelværdien af variablen `Survived`. Lad os gøre det med `summarise()`:
+Vi får faktisk en ny dataframe her med kun den variabel vi lige har specificeret. Vi er dog interesseret i proportionen af overlevende, så vi tager gennemsnittet af variablen `Survived`. Lad os gøre det med `summarise()`:
 
 ```{r}
 titanic_clean %>%  
@@ -142,14 +142,15 @@ titanic_clean %>%
     summarise(meanSurvived = mean(Survived))
 ```
 
-Lad os tage resultatet fra ovenstående og visualisere det i et barplot, som vist nedenfor:
+Lad os tage resultatet fra ovenstående kode chunk og visualisere det i et barplot / sølediagram:
 
 ```{r,fig.width=3,fig.height=4}
 titanic_clean %>%  
   group_by(Sex) %>% 
   summarise(meanSurvived = mean(Survived)) %>%
-  ggplot(aes(x=Sex,y=meanSurvived,fill=Sex)) + 
-  geom_bar(stat="identity",show.legend = FALSE) + theme_minimal()
+  ggplot(aes(x = Sex, y = meanSurvived, fill = Sex)) + 
+  geom_bar(stat = "identity",show.legend = FALSE) +
+  theme_minimal()
 ```
 
 
@@ -159,16 +160,16 @@ Her er nogle funktioner, som man ofte bruger med `summarise()` (der er mange and
 
 Funktion | Beskrivelse
 --- | ---
-`mean()` | giver os middelværdien af en variabel.
-`sd()` | giver os standardafvigelsen af en variabel.
-`min()` | giver os den laveste værdi af en variabel.
-`max()` | giver os den højeste værdi af en variabel.
-`n()` | giver os antallet af observationer i en variabel og mange flere.
-`first()` | giver os de første værdier.
+`mean()` | beregner gennemsnittet af en variabel (i en gruppe).
+`sd()` | beregner standardafvigelsen af en variabel (i en gruppe).
+`min()` | finder den laveste værdi af en variabel  (i en gruppe).
+`max()` | finder den højeste værdi af en variabel (i en gruppe).
+`n()` | taler observationer i en gruppe eller variabel.
+`first()` | vælger den første værdi af en variabel (i en gruppe).
 
 ### Flere summeringsstatistikker på én gang
 
-Vi kan også lave flere summeringsstatistikker på én gang. For eksempel kan vi anvende funktionen `group_by` med Sex igen, men beregne flere forskellige summeringsstatistikker:
+Vi kan også lave flere summeringsstatistikker på én gang. F.eks. kan vi anvende funktionen `group_by` med `Sex` igen, men beregne flere forskellige summeringsstatistikker:
 
 ```{r}
 titanic_clean_summary_by_sex <- titanic_clean %>%  
@@ -180,8 +181,7 @@ titanic_clean_summary_by_sex <- titanic_clean %>%
 titanic_clean_summary_by_sex
 ```
 
-
-Denne summeringstabel kan igen bruges som et datasæt til at lave et plot med `ggplot2`. Bemærk, at her bruger vi `stat="identity"`, fordi vi ikke skal tælle observationerne op, men blot plotte præcis de tal, der er i datarammen, på y-aksen. I nedenstående eksempel laver vi barplots for `meanAge` og `propFirst`. De er plottet ved hjælp af to forskellige `ggplot`-kommandoer, og bemærk, at de er plottet ved siden af hinanden ved hjælp af en funktion kaldet `grid.arrange()` fra R-pakken `gridExtra`.
+Denne summeringstabel kan bruges igen som et datasæt til at lave et diagram med `ggplot2`. Bemærk, at her bruger vi `stat="identity"`, fordi vi skal ikke tælle observationerne op længere, men bare plotte præcis de tal som allerede er i dataframen. I nedenstående eksempel laver vi søjlediagrammer for `meanAge` og `propFirst`. De er plottet ved hjælp af to forskellige `ggplot`-kommandoer og ved siden af hinanden ved hjælp af en funktion kaldet `grid.arrange()` fra R-pakken `gridExtra`.
  
 ```{r,fig.width=5,fig.height=3,comment=FALSE,message=FALSE,warning=FALSE}
 plotA <- ggplot(data=titanic_clean_summary_by_sex,aes(x=Sex,y=meanAge,fill=Sex)) + 
@@ -196,29 +196,32 @@ library(gridExtra)
 grid.arrange(plotA,plotB,ncol=2) #plot both together
 ```
  
-Vi kan se, at kvinder i gennemsnit var lidt yngre end mænd og havde en højere sandsynlighed for at være i første klasse. Et interessant spørgsmål er, hvordan man kan lave de ovenstående plots uden at bruge to forskellige `ggplot`-kommandoer. Med andre ord, hvordan man kan lave en automatisk løsning, hvor vi kan plotte flere summeringsstatistikker med kun én `ggplot`-kommando. Vi vil se, hvordan det kan gøres ved først at konvertere datasættet til long-form.
+Vi kan se at kvinder var i gennemsnit lidt yngre end mænd og havde en højere sandsynlighed for at være i første klasse.
+
+
+Et interessant spørgsmål er, hvordan man kan lave de ovenstående plots uden at bruge to forskellige `ggplot`-kommandoer. Med andre ord, hvordan man kan lave en automatisk løsning, hvor vi kan plotte flere summeringsstatistikker med kun én `ggplot`-kommando. Vi kommer til at se senere hvordan det kan gøres ved først at konvertere datasættet til long-formatet.
 
 ### Mere avanceret `group_by()`
 
- Lad os også beregne, hvor mange passagerer der var, efter både deres klasse og hvor de gik om bord på skibet:
+Lad os også beregne, hvor mange passagerer der var, efter deres klasse og steden hvor de gik ombord på skibet:
 
 ```{r, tidy=FALSE}
 titanic_clean %>%
    group_by(Embarked, Pclass) %>% # Grupper efter flere variable... 
-   summarise(count = n())
+   summarise(count = n(), .groups="keep")
 ```
 
-Man kan se, at størstedelen gik ombord i Southampton (S), men der var også forholdsvis mange førsteklasses-passagerer, der gik ombord i Cherbourg (C). Lad os fortsætte med vores `Survived`-eksempel og beregne proportionen af overlevende efter de tre variable `Adult`, `Sex` og `Pclass`.
+Man kan se, at størstedelen gik ombord i Southampton (S), men der var også forholdsvis mange førsteklasses-passagerer, der gik ombord i Cherbourg (C). Lad os fortsætte med vores `Survived`-eksempel og beregne proportionen af overlevende efter de tre variabler `Adult`, `Sex` og `Pclass`.
 
 ```{r}
 titanic_clean_summary_survived <- titanic_clean %>%  
   mutate(Adult = ifelse(Age>=18,"Adult","Child")) %>%
   group_by(Adult,Sex,Pclass) %>% 
-  summarise(meanSurvived = mean(Survived))
+  summarise(meanSurvived = mean(Survived), .groups="keep")
 titanic_clean_summary_survived
 ```
 
-Og så kan vi også bruge resultatet i en `ggplot`, hvor vi kombinerer de tre variable og opdeler det i tre plots efter `Pclass`:
+Vi kan også visualisere resultatet i en `ggplot` med at kombinere de tre variabler og opdeler de i tre plots efter `Pclass`:
 
 ```{r,fig.width=5,fig.height=4}
 ggplot(titanic_clean_summary_survived,aes(x=Sex,y=meanSurvived,fill=Adult)) +
@@ -228,26 +231,25 @@ ggplot(titanic_clean_summary_survived,aes(x=Sex,y=meanSurvived,fill=Adult)) +
   theme_bw()
 ```
 
-
 ### Funktionen `ungroup()`
 
-Nogle gange, når man er færdig med en proces, men gerne vil arbejde videre med et datasæt, er det nyttigt at anvende `ungroup()` på datasættet igen. Det er mest relevant i længere projekter. Som et eksempel kan vi se på følgende kode, hvor der står "Groups: Adult [2]" øverst i den nye dataramme med summeringsstatistikker:
+Nogle gange, når man er færdig med analysen, men gerne vil arbejde videre med et datasæt, er det nyttigt at anvende `ungroup()` på datasættet igen. Det er mest relevant i længere projekter. F.eks., vi kan se på følgende kode, hvor der står "Groups: Adult [2]" øverst i den nye dataframe med summeringsstatistikker:
 
 ```{r}
 titanic_clean_summary <- titanic_clean %>%  
   mutate(Adult = ifelse(Age>=18,"Adult","Child")) %>%
   group_by(Adult,Sex) %>% 
-  summarise(meanSurvived = mean(Survived))
+  summarise(meanSurvived = mean(Survived), .groups = "drop_last")
 
 titanic_clean_summary
 ```
-Bemærk, at vi først brugte `group_by()` på både `Adult` og `Sex`. Men hver gang man laver en beregning, fjernes én opdeling - i dette tilfælde opdeles der ikke længere efter `Sex`, men der opdeles stadig efter `Adult`. Det er ikke et problem, hvis vi ikke vil arbejde videre med datarammen. Men forestil dig, at vi gerne vil vide, hvad den maksimale chance for overlevelse er, ud fra de fire beregnede tal. Hvis vi ikke vil opdele efter en kategorisk variabel, dropper vi `group_by()`:
+
+Bemærk at vi først brugte `group_by()` på både `Adult` og `Sex`. Men hver gang man laver en beregning, fjernes én opdeling - i dette tilfælde opdeles der ikke længere efter `Sex`, men der opdeles stadig efter `Adult`. Det er ikke et problem, hvis vi ikke vil arbejde videre med dataframen. Men hvis vi gerne vil beregne den maksimale chance for overlevelse ud fra de fire beregnede tal (ikke opdele efter en kategorisk variabel), så dropper vi `group_by()`:
 
 ```{r}
 titanic_clean_summary %>% 
-  summarise("maxChance" = max(meanSurvived))
+  summarise(maxChance = max(meanSurvived))
 ```
-
 
 Man kan dog se, at outputtet er blevet opdelt efter variablen `Adult`. For at undgå dette skal man først anvende `ungroup()`, så effekten af `group_by()` fjernes.
 
@@ -257,12 +259,11 @@ titanic_clean_summary %>%
   summarise("maxChance" = max(meanSurvived))
 ```
 
+## `pivot_longer()`/`pivot_wider()` fra `tidyr`-pakken
 
-## `pivot_longer()`/`pivot_wider()` med Tidyr-pakken
+__Tidy data__ findes i to former: wide data og long data. Det kan være nyttigt at transformere data fra én form til en anden, f.eks. for at lave et bestemt plot med `ggplot2`-pakken. Pakken `tidyr` indeholder funktioner, der kan bruges til at lave disse transformationer.
 
-__Tidy data__ findes i to former: wide data og long data. Det kan være nyttigt at transformere datarammen fra den ene form til den anden, f.eks. for at lave et bestemt plot med `ggplot2`-pakken. Inden for pakken `tidyr` er der funktioner, der kan bruges til at lave disse transformationer.
-
-Før vi begynder at se lidt nærmere på `tidyr`, skal vi beskrive, hvad long data og wide data betyder.
+Før vi begynder at se lidt nærmere på `tidyr`, skal vi beskrive hvad `long` data og `wide` data betyder.
 
 ```{r, echo=FALSE,fig.width = 1,fig.height=1,comment=FALSE,warning=FALSE,out.width="75%",fig.cap="source: https://www.garrickadenbuie.com/project/tidyexplain/"}
 # Bigger fig.width
@@ -271,41 +272,40 @@ library(knitr)
 include_graphics("plots/original-dfs-tidy.png")
 ```
 
-
-__Wide data__: Her har man én kolonne for hver variabel og én række for hver observation. Dette gør dataene lette at forstå, og denne datatype findes ofte indenfor biologi - for eksempel, hvis man har forskellige prøver (behandlinger, kontroller, betingelser osv.) som variabler.
+__Wide data__: Her har man én kolonne for hver variabel og én række for hver observation. Dette gør dataene lette at forstå, og denne datatype findes ofte indenfor biologi - f.eks. hvis man har forskellige prøver (behandlinger, kontroller, betingelser osv.) som variabler.
 
 __Long data__: Med long data har man værdier samlet i en enkelt kolonne og en kolonne som en slags nøgle, der også angiver, hvilken variabel hver værdi hørte til i det wide format. Datasættet betragtes stadig som __tidy__, men informationen opbevares på en anden måde. Det er lidt sværere at læse, men nemmere at arbejde med, når man analyserer dataene.
 
 Når man transformerer data fra wide til long eller omvendt, kaldes det for __reshaping__.
 
+### Oversigt over `tidyr` pakken
 
-### Tidyr pakke - oversigt
-
-Her er en oversigt over de fire vigtigste funktioner fra R-pakken `tidyr`. Vi fokuserer mest på `pivot`-funktionerne, men det kan være nyttigt at bruge `separate` og `unite` en gang imellem.
+Her er en oversigt over de fire vigtigste funktioner fra R-pakken `tidyr`. Vi fokuserer mest på `pivot`-funktionerne, men det kan være nyttigt at bruge `separate` og `unite`.
 
 `tidyr` funktion | Beskrivelse
 --- | ---
-`pivot_longer()` | wide til long
-`pivot_wider()` | long til wide
+`pivot_longer()` | reshape data fra wide til long
+`pivot_wider()` | reshape data fra long til wide
 `separate()` | opdele strenge fra én kolonne til to
 `unite()` | føje strenge sammen fra to til én kolonne
 
-### Wide -> Long med `pivot_longer()`
+### Reshape data fra wide til long med `pivot_longer()`
 
-Lad os arbejde med datasættet `Iris`. Man får Iris i long format med følgende kommando. Her vil man gerne tage alle numeriske kolonner og placere deres værdier i en enkelt kolonne `value` (med en nøglekolonne `name` til at skelne imellem de forskellige variabler).
+Lad os arbejde med datasættet `iris`. Man får `iris` i long format med følgende kommando: Her vil man gerne tage alle numeriske kolonner og placere deres værdier i en enkelt kolonne `value` (med en nøglekolonne `name` til at adskille mellem de forskellige variabler).
 
-```{r,eval=T}
-iris %>% pivot_longer(cols = where(is.numeric))
+```{r,eval=TRUE}
+iris %>%
+  pivot_longer(cols = where(is.numeric))
 ```
 
-At beholde numeriske kolonner svarer i dette tilfælde til, at man ikke vil have variablen `Species` med i den enkelte kolonne: 
+At beholde numeriske kolonner svarer i dette tilfælde til at man ikke vil have variablen `Species` med i den enkelte kolonne: 
 
 ```{r,eval=T}
 iris %>%
   pivot_longer(cols = -Species)
 ```
 
-Her er et billed, der illustrerer wide- og long-form med datasættet `iris`:
+Her er et billede, der illustrerer wide- og long-formatet med datasættet `iris`:
 
 ```{r, echo=FALSE,fig.width = 1,fig.height=1,comment=FALSE,warning=FALSE,out.width="100%",fig.cap="wide til long med Iris"}
 # Bigger fig.width
@@ -314,17 +314,15 @@ library(knitr)
 include_graphics("plots/wide_to_long.png")
 ```
 
+Til venstre har vi målingerne i datasættet fordelt over fire forskellige kolonner kaldet `Sepal.Length`, `Sepal.Width`, `Petal.Length` og `Petal.Width`, samt en ekstra kolonne, der adksiller mellem de tre `Species`. Til højre har vi samlet alle målingerne i en enkelt kolonne kaldet `values`, og så bruger vi en anden 'nøgle' kolonne kaldet `name` til at fortælle om det er en måling for `Sepal.Length` eller `Sepal.Width` osv.
 
-Til venstre har vi målingerne i datasættet fordelt over fire forskellige kolonner kaldet `Sepal.Length`, `Sepal.Width`, `Petal.Length` og `Petal.Width`, samt en ekstra kolonne, der skelner mellem de tre `Species`. Til højre har vi samlet alle målingerne i en enkelt kolonne kaldet `values`, og så bruger vi en anden 'nøgle' kolonne kaldet `name` til at fortælle os, om det er en måling for `Sepal.Length` eller `Sepal.Width` osv.
-
-Jeg kan ændre kolonnenavne for målingerne og nøglen til nogle andre end standardnavnene. For eksempel, i nedenstående eksempel skal målingerne hedde `measurements` og nøglen hedde `trait`.
+Jeg kan ændre kolonnenavne for målingerne og nøglen til noget andet end standardnavnene. I den nedenstående eksempel skal målingerne hedde `measurements` og nøglen `trait`:
 
 ```{r}
 iris.long <- iris %>% pivot_longer(cols = -Species,
                                     names_to = "trait",
                                     values_to = "measurement")
 ```
-
 
 ```{r, echo=FALSE,fig.width = 1,fig.height=1,comment=FALSE,warning=FALSE,out.width="100%"}
 # Bigger fig.width
@@ -333,9 +331,7 @@ library(knitr)
 include_graphics("plots/wide_to_long_names.png")
 ```
 
-
-Man kan for eksempel bruge den long form til at visualisere samtlige mulige boxplots opdelt efter `Species` og `trait` på samme plot:
-
+F.eks. kan man bruge long formatet til at visualisere alle mulige boxplots opdelt efter `Species` og `trait` i samme plot:
 
 ```{r,fig.width=6,fig.height=4}
 ggplot(iris.long,aes(y=measurement,x=Species,fill=Species)) + 
@@ -344,10 +340,9 @@ ggplot(iris.long,aes(y=measurement,x=Species,fill=Species)) +
   theme_bw()
 ```
 
-
 ### `separate()`
 
-Funktionen `separate()` fra pakken `tidyr` kan bruges til at opdele to forskellige dele, som eksisterer i samme kolonne. For eksempel, i `iris` har vi variabler med navne `Sepal.Width`, `Sepal.Length` osv. - man kan forestille sig at opdele disse navne over to kolonner i stedet for én - fx "Sepal" og "Width" i tilfældet af `Sepal.Width`. I nedenstående kan man se, hvordan man anvender `separate()`.
+Funktionen `separate()` fra pakken `tidyr` kan bruges til at opdele to informationer, som eksisterer i samme kolonne. F.eks., datasættet `iris` har variabler med navne `Sepal.Width`, `Sepal.Length` osv. - man kan opdele disse navne over to kolonner i stedet for - f.eks. "Sepal" og "Width" i tilfældet af `Sepal.Width`. I nedenstående kode chunk kan man se, hvordan man bruger `separate()`.
 
 ```{r}
 iris %>%
@@ -356,9 +351,9 @@ iris %>%
   head()
 ```
 
-Man specificerer variablen `trait` og angiver, at den skal opdeles til to variabler `part` og `measure`. Vi angiver `sep = "\\."`, hvilket betyder, at vi gerne vil have `part` som delen af `trait` foran '.' og `measure` som delen af `trait` efter `.`. Vi bruger "\\." for at fortælle, at vi er interesseret i punktummet og ikke en "anonym karakter", som punktum normalt betyder i "streng"-sprog. Man behøver faktisk ikke at specificere `sep = "\\."` i dette tilfælde - som standard kigger funktionen efter 'non-character' tegn og bruger dem til at lave opdelingen.
+Man specificerer variablen `trait` og angiver, at den skal opdeles i de to variabler `part` og `measure`. Vi angiver `sep = "\\."`, hvilket betyder, at vi vil gerne have `part` som delen af `trait` foran '.' og `measure` som delen af `trait` efter `.`. Vi bruger "\\." for at fortælle, at vi er interesseret i punktummet og ikke en "anonym karakter", som punktum normalt betyder i "streng"-sprog. Man behøver faktisk ikke at specificere `sep = "\\."` i dette tilfælde - som standard kigger funktionen efter 'non-character' tegn og bruger dem til at lave opdelingen.
 
-Samme resultat:
+Sammenligne resultatet af den sidste kode chunk med den følgende:
 
 ```{r}
 iris %>%
@@ -367,8 +362,7 @@ iris %>%
   head()
 ```
 
-
-Bruger resultatet i et plot:
+Brug resultatet i et plot:
 
 ```{r}
 iris %>%
@@ -384,11 +378,11 @@ Se også `unite()` som gøre det modsatte til `separate()`.
 
 ## Eksempel: Titanic opsummeringsstatistikker
 
-Her er et eksempel med datasættet `titanic`, der inddrager mange af de tidyverse-koncepter, vi har lært indtil videre.
+Her er et eksempel med datasættet `titanic`, der inddrager mange af de `tidyverse`-koncepter, vi har lært indtil videre.
 
 * `group_by()` og `summarise()`
 
-Vi laver vores opsummeringsstatistikker som i ovenstående.
+Vi producerer vores opsummeringsstatistikker som tidliger.
 
 ```{r}
 titanic_clean_summary_by_sex <- titanic_clean %>%
@@ -402,13 +396,14 @@ titanic_clean_summary_by_sex
 
 * `pivot_longer()`
 
-Vi transformerer eller __reshaper__ datarammen fra wide data til long data. Vi vil samle kun de numeriske opsummeringsstatistikker i en enkelt kolonne, så variablen `Sex` skal ikke indgå i den enkelte kolonne.
+Vi transformerer eller __reshape__ dataframen fra wide data til long data. Vi vil samle kun de numeriske opsummeringsstatistikker i en enkelt kolonne, så variablen `Sex` skal ikke inddrages.
 
 ```{r}
-titanic_clean_summary_by_sex %>% pivot_longer(cols=-Sex)
+titanic_clean_summary_by_sex %>%
+  pivot_longer(cols=-Sex)
 ```
 
-* `ggplot()` med `facet_grid()`
+* `ggplot()` med `facet_wrap()`
 
 Vi kombinerer `pivot_longer()` med et plot af vores opsummeringsstatistikker og benytter `facet_grid()` til at adskille de forskellige statistikker.
 
@@ -418,12 +413,13 @@ titanic_clean_summary_by_sex %>%
   ggplot(aes(x = Sex, y = value, fill = Sex)) + 
   geom_bar(stat = "identity") + 
   facet_grid(~name) +
-  theme_bw()
+  theme_bw() +
+  theme(aspect.ratio = 1)
 ```
 
 * `facet_wrap()`
 
-Vi laver det samme som ovenstående, men specificerer `facet_wrap()` i stedet for `facet_grid()`. Indenfor `facet_wrap()` kan man bruge indstillingen `scales="free"`, som gør, at de fire plots får hver deres egne aksegrænser.
+Vi laver det samme som før, men specificerer `facet_wrap()` i stedet for `facet_grid()`. Indenfor `facet_wrap()` kan man bruge indstillingen `scales="free"`, som gør, at de fire plots får hver deres egne aksegrænser.
 
 ```{r}
 titanic_clean_summary_by_sex %>% 
@@ -431,13 +427,13 @@ titanic_clean_summary_by_sex %>%
   ggplot(aes(x=Sex,y=value,fill=Sex)) + 
   geom_bar(stat="identity") + 
   facet_wrap(~name,scales="free",ncol=4) +  
-  theme_bw()
+  theme_bw() +
+  theme(aspect.ratio = 1)
 ```
 
+### `pivot_wider()`
 
-### Demonstration af `pivot_wider()`
-
-Det er også brugbart at kende måden at man skifter fra long form til wide form.
+Hvordån skifter man fra long til wide formatet?
 
 * Wide -> Long
 
@@ -453,11 +449,10 @@ titanic_summary_long %>%
   pivot_wider(names_from = "name",values_from = "value")
 ```
 
-Parametre er:
+Parametrene er:
 
-* `names_from` - nøglekolonne, som skal udgøre flere kolonner i den nye dataframe
-* `values_from` - selve værdier, som skal være i de nye kolonner i den wide form
-
+* `names_from` - nøglekolonne, som vil blive opdelt i flere kolonner i den nye dataframe
+* `values_from` - værdikolonne, som vil blive fordelt på tværs af de nye kolonner
 
 ## `left_join()`: forbinde dataframes
 
@@ -474,26 +469,26 @@ Lad os først kigge på datasættet `gene_table`, som viser genekspressionsmåli
 gene_table
 ```
 
-Man kan se, at der er 22 kolonner i datasættet - én der refererer til et gen-navn og 21, der er forskellige prøver fra eksperimentet. Men det er ikke klart, hvad den enkelte prøve egentlig er. Lad os derfor kigge på de prøveoplysninger, som kan være nyttige at inddrage i vores analyse/plots for at undersøge eventuelle batcheffekter osv.
+Man kan se, at der er 22 kolonner i datasættet - én der refererer til gener og 21 som indikerer forskellige prøver fra eksperimentet. Men det er ikke klart, hvad den enkelte prøve egentlig er. Lad os derfor kigge på de prøveoplysninger, som kan være nyttige at inddrage i vores analyse/plots for at undersøge eventuelle batcheffekter osv.
 
 ```{r}
 coldata
 ```
 
-Man kan se forskellige oplysninger om de 21 prøver, blandt andet den stamme af mus, hver prøve stammer fra, og den batch. Her refererer `batch` til de forskellige omstændigheder eller tidspunkter, hvor prøverne blev samlet. Hvis man er interesseret i, om der er en forskel i ekspressionsniveau mellem de to stammer (strains), kan det være nødvendigt at kontrollere efter batch for at sikre, at forskellen skyldes `strain` og ikke tekniske effekter på grund af `batch`.
+Man kan se detaljerede oplysninger om de 21 prøver, blandt andet den stamme af mus prøven stammer fra og dens batch. Her refererer `batch` til de forskellige omstændigheder eller tidspunkter, hvor prøverne blev samlet. Hvis man er interesseret i, om der er en forskel i ekspressionsniveau mellem de to stammer (strains), kan det være nødvendigt at kontrollere efter batch for at sikre, at forskellen skyldes `strain` og ikke tekniske effekter på grund af `batch`.
 
-### Funktionen `left_join()` fra dplyr-pakken
+### `left_join()` fra dplyr-pakken
 
 Funktionen `left_join()` er en del af pakken `dplyr`, som vi har arbejdet meget med indtil videre i kurset.
 
 funktion | Beskrivelse (kopieret)
 --- | ---
-`left_join()` | Tilføj matchende rækker fra den anden tabel til den første
+`left_join()` | Tilføj matchende rækker fra en anden tabel til den første
 `right_join()` | Tilføj matchende rækker fra den første tabel til den anden
 `inner_join()` | Sammenføj to tabeller og returner alle rækker, der er til stede i begge
-`full_join()` | Sammenføj data med alle mulige rækker til stede
+`full_join()` | Sammenføj data med alle rækker til stede
 
-Vi fokuserer her på funktionen `left_join()` fordi den er mest brugbar i biologiske dataanalyser, men vi kigger også på de øvrige funktioner gennem problemstillingerne nedenfor. Her er en grafisk demonstration af `left_join()` (kilde: https://mgimond.github.io/ES218/Week03c.html):
+Vi fokuserer her på funktionen `left_join()`, men vi kigger også på de øvrige funktioner i problemstillingerne nedenfor. Her er en grafisk demonstration af `left_join()` (kilde: https://mgimond.github.io/ES218/Week03c.html):
 
 ```{r, echo=FALSE, comment=FALSE, warning=FALSE, out.width="60%"}
 # Bigger fig.width
@@ -502,11 +497,11 @@ library(knitr)
 include_graphics("plots/left_join.png")
 ```
 
-Det særlige ved `left_join` i forhold til de andre funktioner er, at `left_join` bevarer samtlige data i dataframen, man tager udgangspunkt i - det vil sige `df` i ovenstående billede, selvom `d` ikke matcher med en frugt i `dj`. I ovenstående genekspressionseksempel betyder det, at man bevarer alle målinger i `gene_table`, uanset om der er oplysninger om deres pågældende prøver.
+Det særlige ved `left_join` i forhold til de andre funktioner er, at `left_join` bevarer samtlige data i den første dataframe - det vil sige `df` i ovenstående billede. Det gælder også selvom `d` ikke matcher med en frugt i `dj`. I ovenstående genekspressionseksempel betyder det, at man bevarer alle målinger i `gene_table`, uanset om der er oplysninger om deres pågældende prøver.
 
-### Anvend `left_join()` for vores datasæt.
+### Anvend `left_join()` på vores datasæt.
 
-Ligesom man matcher kolonnen `y` i `df` og `dj` i ovenstående eksempel, skal vi også have en kolonne, vi kan matche. Vi vil gerne bruge kolonnen `sample` fra `sample_info` til at sammenligne med de forskellige prøvenavne i `gene_table`, men først er vi nødt til at lave `gene_table` om til long-form, således at prøvenavne fremgår i en enkelt kolonne, `sample` (der kan bruges i `left_join`).
+Ligesom man matcher kolonnen `y` i `df` og `dj` i ovenstående eksempel, skal vi også have en kolonne, vi kan matche. Vi vil gerne bruge kolonnen `sample` fra `sample_info` til at sammenligne med de forskellige prøvenavne i `gene_table`. Men først er vi nødt til at lave `gene_table` om til long-formatet, således at prøvenavne fremgår i en enkelt kolonne, `sample` (der kan bruges i `left_join`).
 
 ```{r}
 gene_table_long <- gene_table %>% 
@@ -516,14 +511,14 @@ gene_table_long <- gene_table %>%
 gene_table_long
 ```
 
-Dernæst kan vi tilføje oplysningsdata fra `sample_info`. Her angiver vi `by = "sample"` fordi det er navnet på kolonnen, som vi gerne vil bruge til at forbinde de to datarammer - altså, det er med i begge datarammer, så `left_join()` kan bruge det som en slags nøgle til at vide, hvor alle de forskellige oplysninger skal tilføjes.
+Derefter kan vi tilføje oplysningsdata fra `sample_info`. Her angiver vi `by = "sample"` fordi det er navnet af kolonnen vi vil gerne bruge til at forbinde de to dataframes og fordi det er med i begge dataframes.
 
 ```{r}
-data_join <- gene_table_long  %>% left_join(coldata, by="sample")
+data_join <- gene_table_long  %>%
+  left_join(coldata, by="sample")
 ```
 
-Nu, hvor vi har fået forbundet de to datarammer, kan man inddrage de ekstra oplysninger vi har fået i et plot. Her laver vi et plot med en farve til hver stamme og et plot med en farve til hver batch.
-
+Efter vi forenede de to dataframes, kan man inddrage de ekstra oplysninger vi tilføjede i et plot. Her laver vi et plot med en farve til hver stamme og et plot med en farve til hver batch.
 
 ```{r,fig.width=6,fig.height=4}
 gg2 <- data_join %>% 
@@ -549,38 +544,36 @@ gg1 <- data_join %>%
 gg1
 ```
 
-
-
-
-
 ## Problemstillinger
 
-__Problem 1__ Lav quizzen - "Quiz - tidyverse - part 2".
+__Problem 1__) Lav quizzen - "Quiz - tidyverse dag 2".
 
 ---
 
-*Vi øver os videre med datasættet Titanic. Indlæs datasættet og udfør oprydning med følgende kode:*
+*Vi øver os videre med datasættet `titanic`. Indlæs datasættet og udfør oprydning med følgende kode:*
 
 ```{r,echo=TRUE,eval=FALSE,comment=FALSE,message=FALSE,warning=FALSE}
 library(tidyverse)
 library(titanic)
 titanic <- as_tibble(titanic_train)
 
-titanic_clean <- titanic %>% 
-    select(-Cabin) %>% 
+titanic_clean <- titanic %>%
+    select(-Cabin) %>%
     drop_na()
 ```
 
 ---
 
-__Problem 2__ Fra `titanic_clean` datasættet, beregn den gennemsnitlige alder af alle passagerer ombord på skibet.
+__Problem 2__)
+
+Baseret på `titanic_clean` datasættet, beregn den gennemsnitlige alder af alle passagerer ombord på skibet.
 
 ```{r,eval=FALSE,echo=TRUE}
 titanic_clean %>%
     summarise(....) #rediger her
 ```
 
-* I samme kommando, beregn også den maksimale alder og den minimale alder, samt proportionen af passagerer, der er under 18 (for den sidste, se mit eksempel med `Pclass` tidligere i sektion **6.2.2**). Dataframen skal se sådan ud:
+* I samme kommando, beregn også den maksimale alder og den minimale alder, samt proportionen af passagerer, der er under 18 (for den sidste, se eksempeln med `Pclass` tidligere i sektion **6.2.2**). Dataframen skal se sådan ud:
 
 ```{r,eval=TRUE,echo=FALSE}
 titanic_clean %>%
@@ -592,9 +585,9 @@ titanic_clean %>%
 
 ---
 
-__Problem 3__ 
+__Problem 3__) 
 
-__a)__ Beregn samme opsummeringsstatistikker som i sidste problem, men brug `group_by()` til først at opdele efter variablen `Pclass`.
+__a)__ Beregn samme opsummeringsstatistikker som i sidste problemstilling, men brug `group_by()` for at opdele efter variablen `Pclass`.
 
 ```{r,echo=FALSE,eval=FALSE}
 titanic_clean %>%
@@ -605,7 +598,7 @@ titanic_clean %>%
             under_18p=sum(Age<18)/n())
 ```
 
-__b)__ Brug din nye dataframe med dine opsummeringsstatistikker til at lave et søjlediagram med `stat="identity"` (i stedet for `stat="count"` som er standarden), der viser den gennemsnitlige alder på y-aksen og er opdelt efter `Pclass` på x-aksen (vær opmærksom på datatypen for `Pclass` med hensyn til farverne/x-aksen).
+__b)__ Brug din nye dataframe med opsummeringsstatistikker til at lave et søjlediagram med `stat="identity"` (i stedet for `stat="count"` som er standarden), der viser den gennemsnitlige alder på y-aksen og er opdelt efter `Pclass` på x-aksen (vær opmærksom på datatypen for `Pclass` med hensyn til farverne/x-aksen).
 
 ```{r,echo=FALSE,eval=FALSE}
 titanic_clean %>%
@@ -618,9 +611,9 @@ titanic_clean %>%
   geom_bar(stat="identity") 
 ```
 
-__c)__ Anvend `pivot_longer()` på din dataframe med dine opsummeringsstatistikker (brug indstillingen `cols = -Pclass` i funktionen).
+__c)__ Anvend `pivot_longer()` på din dataframe med opsummeringsstatistikker (brug indstillingen `cols = -Pclass` i funktionen).
 
-__d)__ Brug din long-form dataframe af dine opsummeringsstatistikker til at lave plots af alle opsummeringsstatistikker med én `ggplot` kommando (adskil dem ved at benytte `facet_wrap` så du har et plot til hvert opsummeringsstatistik og opdele efter `Pclass` indenfor hvert plot, ligesom i følgende).
+__d)__ Brug din long-format dataframe med opsummeringsstatistikker til at lave plots af alle opsummeringsstatistikker med én `ggplot` kommando (adskil dem ved at benytte `facet_wrap` så du har et plot til hvert opsummeringsstatistik og opdele efter `Pclass` indenfor hvert plot, ligesom i følgende).
 
 ```{r,eval=T,echo=F,fig.width=5,fig.height=4}
 titanic_clean %>%
@@ -633,17 +626,18 @@ titanic_clean %>%
   ggplot(aes(x=as.factor(Pclass),y=value,fill=as.factor(Pclass))) +
   geom_bar(stat="identity",show.legend = F) +
   facet_wrap(~name,scales="free",ncol=4) + 
-  theme_bw()
+  theme_bw() +
+  theme(aspect.ratio = 1)
 ```
 
 
 ---
 
-__Problem 4__ 
+__Problem 4__)
 
-__a)__ Beregn de samme opsummeringsstatistikker som i __2__), men anvend `group_by()` for først at opdele efter **både** variablerne `Pclass` og `Sex`.
+__a)__ Beregn de samme opsummeringsstatistikker som i __2__), men brug `group_by()` for at opdele efter **både** variablerne `Pclass` og `Sex` først.
 
-  * OBS: Du får en advarsel "`summarise()` has grouped output by 'Pclass' ...", fordi din dataframe stadig betragtes som opdelt efter `Pclass`. Dette skal tages i betragtning, hvis du foretager yderligere beregninger på den.
+  * OBS! Du får advarseln at "`summarise()` has grouped output by 'Pclass' ...", fordi din dataframe stadig betragtes som opdelt efter `Pclass`. Dette skal tages i betragtning, hvis du foretager yderligere beregninger på den.
   * Brug til sidst `ungroup()` på din nye dataframe for at sikre, at den ikke længere er opdelt efter nogen variabel.
 
 
@@ -657,7 +651,7 @@ titanic_clean %>%
   ungroup()
 ```
 
-__b)__ Brug `pivot_longer()`-funktionen til at omdanne datasættet til long-form med dine opsummeringsstatistikker i en enkelt kolonne. Nøglekolonnen skal hedde `stat`, og kolonnen med værdierne skal hedde `values`.
+__b)__ Brug `pivot_longer()`-funktionen til at omdanne datasættet til long-formatet med opsummeringsstatistikker i en enkelt kolonne. Nøglekolonnen skal hedde `stat`, og kolonnen med værdierne skal hedde `values`.
 
 ```{r,echo=F,eval=T}
 summary_long <- titanic_clean %>%
@@ -670,20 +664,22 @@ summary_long <- titanic_clean %>%
     pivot_longer(-c(Pclass,Sex))
 ```
 
-__c)__ Lav et plot af alle opsummeringsstatistikker, som er i long-format og ligner følgende plot.
+__c)__ Lav et plot af alle opsummeringsstatistikker, som er i long-formatet.
 
 ```{r,eval=T,echo=F}
 summary_long %>% 
   ggplot(aes(x=as.factor(Pclass),y=value,fill=Sex)) +
   geom_bar(stat="identity",position="dodge") +
   facet_wrap(~name,ncol=4,scales = "free") +
-  theme_bw()
+  theme_bw() +
+  theme(aspect.ratio = 1)
 ```
 
 ---
 
+__Problem 5__) *`group_by()` med tre variabler og `summarise()`*.
 
-__Problem 5__ *`group_by()` med tre variabler og `summarise()`*. Prøv en kombination med tre forskellige variabler (vælg selv) indenfor `group_by()` og brug `summarise()` til at beregne middelværdien for variablen `Fare`.
+Prøv en kombination med tre forskellige variabler (vælg selv) indenfor `group_by()` og brug `summarise()` til at beregne gennemsnittet af variablen `Fare`.
 
 * Anvend `ungroup()` når du er færdig med at opsummere
 * Lav et plot for at visualisere `meanFare`. Idé: som en mulighed, kan man tilføje variabler til `facet_grid()` - for eksempel `facet_grid(~Var1 + Var2)`.
@@ -702,9 +698,9 @@ titanic_clean %>%
 
 ---
 
+__Problem 6__) *`pivot_longer()`*
 
-__Problem 6__ *`pivot_longer()`* Først skal du lave to nye variabler ud fra `SibSp` og `Parch`, hvor der står "yes", hvis værdien er større end 0. Anvend derefter `select()` på `Fare`, `Age` og dine to nye variabler. Lav derefter følgende plot:
-
+Først skal du lave to nye variabler baseret på `SibSp` og `Parch` med "yes"-resultatet hvis værdien er større end 0. Brug derefter `select()` på `Fare`, `Age` og dine to nye variabler. Lav derefter følgende plot:
 
 ```{r,eval=T,echo=F}
 titanic_clean %>% 
@@ -718,10 +714,11 @@ titanic_clean %>%
   theme_bw()
 ```
 
-
 ---
 
-__Problem 7__ *`Pivot_wider()`* Vi har en `tribble`, som jeg har kopieret fra https://r4ds.had.co.nz/index.html.
+__Problem 7__) *`Pivot_wider()`*
+
+Vi bil gerne anvender en `tribble`, som vi kopierer fra https://r4ds.had.co.nz/index.html.
 
 ```{r}
 people <- tribble(
@@ -736,15 +733,18 @@ people <- tribble(
 )
 ```
 
-Brug `pivot_wider()` på `people` for at får datasættet i wide-form således at `age` og `height` hver har deres egne kolonner.
+Brug `pivot_wider()` på `people` for at får datasættet i wide-formatet så at `age` og `height` hver har deres egne kolonner.
 
 ```{r,echo=FALSE,eval=FALSE}
-pivot_wider(people, names_from = "names", values_from = "values")
+people %>% 
+  pivot_wider(names_from = "names", values_from = "values")
 ```
 
 ---
 
-__Problem 8__ *`left_join()` øvelse*. Kør følgende kode med to tribbles:
+__Problem 8__) *`left_join()` øvelse*.
+
+Kør følgende kode med to tribbles:
 
 ```{r}
 superheroes <- tribble(
@@ -766,27 +766,32 @@ publishers <- tribble(
   )
 ```
 
-Vi har to dataframes - `superheroes` og `publishers`. Hvilken kolon kan man bruge til at forbinde de to dataframes? Brug `left_join()` til at tilføje oplysninger __fra__ `publishers` __til__ datarammen `superheroes`.
+Vi har to dataframes - `superheroes` og `publishers`. Hvilken kolonne kan man bruge til at forbinde de to? Brug `left_join()` til at tilføje oplysninger __fra__ `publishers` __til__ dataframen `superheroes`.
 
 ```{r,echo=FALSE,eval=FALSE}
-superheroes %>% left_join(publishers,by="publisher") 
+superheroes %>%
+  left_join(publishers, by="publisher") 
 ```
 
 * Får man alle observationerne fra dataframen `superheroes` med i din nye dataframe?
-* Benyt `inner_join()` til at forbinde `publishers` til `superheroes` - få man så nu alle observationer med denne gang?
-* Benyt  `full_join()` til at forbinde `publishers` til `superheroes` - hvor mange observationer få man med nu? Hvorfor?
+* Brug `inner_join()` til at forbinde `publishers` med `superheroes` - få man så nu alle observationer med denne gang?
+* Brug `full_join()` til at forbinde `publishers` med `superheroes` - hvor mange observationer få man med nu? Hvorfor?
 
 ```{r,echo=FALSE,eval=FALSE}
-superheroes %>% inner_join(publishers)
+superheroes %>%
+  inner_join(publishers)
 ```
 
 ```{r,echo=FALSE,eval=FALSE}
-superheroes %>% full_join(publishers)
+superheroes %>%
+  full_join(publishers)
 ```
 
 ---
 
-__Problem 9__ *`left_join()` øvelse*. Kør nedenstående kode, hvor der er to dataframes - `iris2` og `sample_table`. Dataframen `iris2` er ikke særlig informativ med hensyn til, hvad de forskellige prøver egentlig er, men oplysningerne om dem findes i `sample_table`. Brug `left_join()` til at tilføje `sample_table` til `iris2` for at få en dataramme, som indeholder både data og oplysninger om prøverne.
+__Problem 9__) *`left_join()` øvelse*.
+
+Kør nedenstående kode, hvor der er to dataframes - `iris2` og `sample_table`. Dataframen `iris2` er ikke særlig informativ med hensyn til kilden af de forskellige prøver. Men mere oplysningerne findes i `sample_table`. Brug `left_join()` til at tilføje `sample_table` til `iris2` for at få en dataframe, som indeholder både data og oplysninger om prøverne.
 
 ```{r}
 data(iris)
@@ -802,26 +807,27 @@ samp_table <- tribble(
                       "sample4", "Sepal", "Width"
                      )
 
-
-iris2 %>% glimpse()
-samp_table %>% glimpse()
+iris2 %>%
+  glimpse()
+samp_table %>%
+  glimpse()
 ```
-
 
 ```{r,echo=FALSE,eval=FALSE}
 iris2 %>% 
   pivot_longer(-Species,names_to="sample") %>%
-  left_join(samp_table,by = "sample") %>% head()
+  left_join(samp_table,by = "sample") %>%
+  head()
 ```
 
 ---
 
-__Problem 10__ *`Separate()` øvelse* 
+__Problem 10__) *`Separate()` øvelse* 
 
-* Tag udgangspunkt i datasættet `titanic_clean` og benyt funktionen `separate()` til at opdele variablen `Name` i to variabler, "Surname" og "Rest" (Godt råd: brug `sep=", "` for at undgå, at man får et unødvendigt mellemrum lige før "Rest").
-* Anvend `separate()` en gang til, men for at opdele variablen `Rest` i to variabler, "Titel" og "Names". Hvad bruger man som `sep`? (Hint: brug "\\\\" foran en punktum).
-* Beregn opsummeringsstatistikker for hver "Titel" - antal passagerer, gennemsnitsalder, andelen der overlevede og andelen der rejste i første klasse.
-* Arrangér din nye dataframe efter, hvor mange personer der er for hver "Titel" - flest øverst og færrest nederst.
+* Tag udgangspunkt i datasættet `titanic_clean` og brug `separate()` til at opdele variablen `Name` i to variabler, `Surname` og `Rest` (Godt råd: brug `sep=", "` for at undgå, at man får et unødvendigt mellemrum lige før `Rest`).
+* Anvend `separate()` en gang til, men for at opdele variablen `Rest` i to variabler, `Titel` og `Names`. Hvad bruger man som `sep`? (Hint: brug "\\\\" foran en punktum).
+* Beregn opsummeringsstatistikker for hver `Titel` - antal passagerer, gennemsnitsalder, andelen der overlevede og andelen der rejste i første klasse.
+* Arrangere din nye dataframe efter, hvor mange personer der er for hver `Titel` - flest øverst og færrest nederst.
 
 ```{r,eval=FALSE,echo=FALSE}
 titanic_clean %>% 
@@ -837,15 +843,19 @@ titanic_clean %>%
 
 ---
 
-__Problem 11__ *Ekstra pivot_longer() øvelse* Åbn datasættet `airquality` (`data(airquality)`) og lav følgende plot: 
+__Problem 11__) *Ekstra pivot_longer() øvelse*
 
+Åbn datasættet `airquality` (`data(airquality)`) og lav følgende plot: 
 
 ```{r,eval=T,echo=F}
 # Lav et "long" format af airquality datasættet
 airquality_long <- airquality %>%
-  pivot_longer(cols = c("Ozone", "Solar.R", "Wind", "Temp"), names_to = "variable", values_to = "value")
+  pivot_longer(
+      cols = c("Ozone", "Solar.R", "Wind", "Temp"),
+      names_to = "variable",
+      values_to = "value"
+    )
 ```
-
 
 ```{r,eval=T,echo=F}
 # Beregn gennemsnitstemperaturen for hver måned
@@ -853,7 +863,6 @@ monthly_avg_temp <- airquality_long %>%
   group_by(Month,variable) %>%
   summarise(mean_temp = mean(value, na.rm = TRUE))
 ```
-
 
 ```{r,eval=T,echo=F}
 # Plot gennemsnitstemperaturen for hver måned
@@ -868,17 +877,24 @@ ggplot(monthly_avg_temp, aes(x = Month, y = mean_temp,colour=variable,fill=varia
 
 --------
 
-__Problem 12__ Åbn `table2` (data(table2)) og gør den til at ser sådan ud:
+__Problem 12__)
 
+Åbn `table2` (`data(table2)`) og reshape den til:
 
 ```{r,echo=F,eval=T}
-table2 %>% pivot_wider(names_from=type,values_from=count,id_cols=c("country","year"))
+table2 %>%
+  pivot_wider(
+      names_from = type,
+      values_from = count,
+      id_cols = c("country","year")
+    )
 ```
-
 
 --------
 
-__Problem 13__ Tag udgangspunkt i `my_tibble`
+__Problem 13__)
+
+Tag udgangspunkt i `my_tibble`:
 
 ```{r}
 cause <- rep(c("Communicable diseases","Injuries","Non-communicable diseases"),each=4)
@@ -889,14 +905,15 @@ deaths_millions <- c(7.30,4.91,8.06,5.47,1.41,1.42,2.84,3.05,12.80,19.15,13.91,2
 my_tibble <- tibble(cause,year,sex,deaths_millions)
 ```
 
-Og gør den til at ser sådan ud (tip: Google efter `unite()` for at se, hvordan man bruger den)
+Og reshape den til (tip: Google efter `unite()` for at se den forbundene syntax):
 
 ```{r,echo=FALSE,eval=TRUE}
 my_tibble %>% unite("sex_year",sex:year,sep="_") %>% pivot_wider(names_from=sex_year,values_from=deaths_millions)
 ```
 
+__Problem 14__)
 
-__Problem 14__ Valgfri ekstra: lav en ny dataramme med alle passagerer, der hedder "Alice" eller "Elizabeth" (brug Google her).
+Valgfri ekstra: lav en ny dataframe med alle passagerer, der hedder "Alice" eller "Elizabeth" (brug Google her).
 
 ```{r,eval=FALSE,echo=FALSE}
 titanic_clean %>% 
@@ -908,5 +925,3 @@ titanic_clean %>%
 ## Ekstra links
 
 Cheatsheet: https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf
-
-
