@@ -74,19 +74,22 @@ Du skal være i stand til at:
 
 ## Iterative processer med `map()` funktioner
 
-Når man udfører en iterativ proces, vil man ofte gentage den samme handling flere gange. Det kan for eksempel være, at vi har ti variabler, og vi ønsker at beregne middelværdien for hver variabel. Vi arbejder med datasættet `eukaryotes`, som indeholder oplysninger om forskellige organismer, der tilhører eukaryoter - for eksempel deres navne, grupper, undergrupper, antal proteiner/gener, genomstørrelse, og så videre. Du kan indlæse dataene med følgende kommando og se en liste over de forskellige kolonnenavne nedenfor.
+Når man udfører en iterativ proces, gentager man typisk den samme handling flere gange. Forestil dig for eksempel, at vi har ti variabler og ønsker at beregne middelværdien for hver af dem. I dette eksempel arbejder vi med datasættet `eukaryotes`, der indeholder oplysninger om forskellige eukaryote organismer – blandt andet deres navne, grupper, undergrupper, antal proteiner/gener og genomstørrelse. Du kan indlæse dataene med kommandoen nedenfor og bagefter se en liste over alle kolonnenavnene.
 
 
 ``` r
 eukaryotes <- read_tsv("https://www.dropbox.com/s/3u4nuj039itzg8l/eukaryotes.tsv?dl=1")
 ```
 
-Vi tager udgangspunkt i kun fire variabler. For at gøre tingene mere overskuelige har jeg brugt `select()` til kun at få de fire variabler `organism_name`, `center`, `group` og `subgroup` ind i en dataframe.
+
+For at gøre eksemplet mere overskueligt fokuserer vi på fire variabler. Med `select()` udtrækker vi kun kolonnerne `organism_name`, `center`, `group` og `subgroup` og gemmer dem i en ny data frame.
 
 
 ``` r
 #eukaryotes_full <- eukaryotes
-eukaryotes_subset <- eukaryotes %>% select(organism_name, center, group, subgroup)
+eukaryotes_subset <- eukaryotes %>% 
+  select(organism_name, center, group, subgroup)
+
 eukaryotes_subset %>% glimpse()
 ```
 
@@ -99,7 +102,7 @@ eukaryotes_subset %>% glimpse()
 #> $ subgroup      <chr> "Other", "Other Protists", "Land Plants", "Land Plants",…
 ```
 
-Lad os antage, at vi gerne vil beregne antallet af unikke organismer (variablen `organism_name`). Der er en funktion, der hedder `n_distinct()`, som beregner antallet af unikke værdier i en vektor/variabel. Her vælger vi variablen `organism_name`, og tilføjer så `n_distinct()`-funktionen.
+Lad os derefter beregne antallet af unikke organismer (`organism_name`). Funktionen `n_distinct()` tæller, hvor mange unikke værdier der findes i en vektor. Vi vælger først kolonnen organism_name og anvender derefter `n_distinct()`:
 
 
 ``` r
@@ -113,9 +116,9 @@ eukaryotes_subset %>%
 ```
 
 
-Lad os forestille os, at vi også er interesseret i antallet af unikke værdier i variablerne `center`, `group` og `subgroup` - som er de tre andre kolonner i datasættet. Vi har forskellige muligheder:
+Lad os forestille os, at vi også vil finde antallet af unikke værdier i variablerne `center`, `group` og `subgroup` – altså de tre øvrige kolonner i datasættet. Vi har flere muligheder:
 
-* Vi kan skrive dem ud - men hvad nu hvis vi havde 100 variabler at håndtere?
+* **Den manuelle tilgang**: vi kan skrive dem ud - men hvad nu hvis der er 100 variabler at håndtere?
 
 
 ``` r
@@ -132,7 +135,7 @@ eukaryotes_subset %>% select(subgroup) %>% n_distinct()
 #> [1] 19
 ```
 
-* Vi har brug for en mere automatiseret løsning på dette. Vi bruger ikke tid på det her, men der er den traditionelle programmeringsløsning: en for-løkke, som også fungerer i R:
+* **En mere automatiseret løsning**: der er den traditionelle programmeringsløsning: en for-løkke, som også fungerer i R:
 
 
 ``` r
@@ -153,18 +156,14 @@ for(column_name in col_names)
 #> [1] 19
 ```
 
-
-Man kan i teorien nøjes med for-løkker, men jeg vil gerne præsentere `tidyverse`-løsningen, som bliver mere intuitiv og lettere at læse, når man først er blevet vant til den (den integrerer også bedre med de andre `tidyverse`-pakker).
+* **Den tidyverse tilgang**. Når man først har vænnet sig til den, er den ofte mere intuitiv og læsevenlig – og den spiller bedre sammen med resten af `tidyverse`. Den løsning viser jeg i næste afsnit.
 
 ### Introduktion til `map()` funktioner
 
 
-<!-- Den mest centrale funktion i purrr er map(), som tager en input (liste eller vektor) og en funktion .f og returnerer en liste af resultater, ét for hvert element. Syntaxen er: map(.x, .f, ...), hvor .x er fx en liste, og .f er funktionen (samt eventuelle ekstra argumenter til den funktion). -->
-
-
 `Tidyverse`-løsningen er de såkaldte `map()`-funktioner, som er en del af `purrr`-pakken. Jeg introducerer dem her frem for base-R-løsningerne, ikke kun fordi de er en del af `tidyverse`, men også fordi de er en meget fleksibel og letforståelig tilgang, når man først er blevet vant til dem.
 
-Jeg vil vise, hvordan de fungerer ved hjælp af `eukaryotes`-datasættet, og derefter introducere dem i konteksten af brugerdefinerede funktioner og `nest()`, som kan bruges til at opdele datasættet i forskellige dele (oveni hvilke man kan gentage den samme proces).
+Nedenfor demonstrerer jeg først, hvordan `map()` anvendes på datasættet `eukaryotes`; derefter viser jeg, hvordan samme idé kan kombineres med brugerdefinerede funktioner og `nest()` for at opdele datasættet og gentage processen på hver del.
 
 Man anvender `map()` ved at angive funktionsnavnet `n_distinct` inden i `map()`, og `map()` beregner så `n_distinct()` for hver kolonne i datasættet.
 
@@ -263,14 +262,23 @@ eukaryotes_subset %>%
 
 Dette er en kort oversigt over de forskellige `map`-funktioner i R og hvilken type data, de returnerer.
 
-Funktion    | Beskrivelse
------------ | -----------------
-`map_lgl()` | returnerer en logisk vektor
-`map_int()` | returnerer en integervektor
-`map_dbl()` | returnerer en doublevektor
-`map_chr()` | returnerer en karaktervektor
-`map_df()`  | returnerer en dataramme
+| Funktion    | Returnerer             | Typisk brug                                                                    |
+|-------------|------------------------|--------------------------------------------------------------------------------|
+| `map()`     | **list**               | Standardvalg, når elementerne kan have forskellig type/længde.                 |
+| `map_lgl()` | **logisk vektor**      | Ja/nej-tests, fx `is.na`, `grepl`.                                             |
+| `map_int()` | **integer-vektor**     | Heltal, fx antal karakterer pr. streng.                                        |
+| `map_dbl()` | **double-vektor**      | Numeriske resultater med decimaler (gennemsnit, sum, SD).                      |
+| `map_chr()` | **karaktervektor**     | Tekstoutput, fx udtræk af navne eller labels.                                  |
+| `map_df()`  | **data frame / tibble**| Binder liste-output sammen kolonne for kolonne (som `dplyr::bind_rows()`).     |
 
+
+:::tip
+**Tip 1**: Hvis du arbejder med flere input-vektorer samtidig, findes søsterfunktionerne `map2()` (to input-objekter) og `pmap()` (liste af input-objekter).
+:::
+
+:::tip
+**Tip 2 (valgfri)**: Når du blot vil klistre resultaterne sammen på tværs af rækker eller kolonner, kan du bruge de praktiske alias-varianter `map_dfr()` (row-bind) og `map_dfc()` (column-bind).
+:::
 
 ## Brugerdefinerede funktioner
 
@@ -309,7 +317,7 @@ mean(iris$Sepal.Length)
 ```
 
 
-### Brugerdefinerede funktioner med mapping
+### Brugerdefinerede funktioner med map
 
 Inden for `tidyverse` skriver man funktioner på en lidt anden måde. Her er et eksempel på, hvordan den samme funktion kan skrives.
 
@@ -507,11 +515,11 @@ map_df(\(x) mean(x, na.rm = TRUE))
 
 
 
-### Effekten af `map` på andre datatyper
+## Effekten af `map()` på vektorer, dataframe eller liste
 
 I det ovenstående fokuserede jeg på `map` i forhold til dataframes. I `group_by` + `nest` anvender man `map()` på en liste af dataframes, kaldet `data`, hvilket tillader os at arbejde med hvert datasæt individuelt. Det er derfor værd at bruge lidt tid på at se, hvordan `map()` håndterer forskellige datatyper.
 
-__Input: vektor__
+### __Input: vektor__
 
 * `.x` refererer til en værdi i vektoren. Hvis man tager heltallet `1:10` og anvender `map`, så tager man hvert tal for sig og beregner en funktion med det - i det følgende simulerer man et tal fra den normale fordeling med parameteren `mean=.x`:
 
@@ -525,7 +533,7 @@ c(1:10) %>% map_dbl(~rnorm(1,mean=.x))
 #>  [8] 6.7940627 9.1558446 9.0269244
 ```
 
-__Input: dataframe__
+### __Input: dataframe__
 
 * `.x` refererer til en variabel fra dataframe. I det ovenstående er den første variabel `int1`, og i `map` tager man det første element med funktionen `pluck(1)`. 
 
@@ -544,7 +552,7 @@ tibble("int1"=1:10,"int2"=21:30) %>% map(~.x %>% pluck(1))
 
 Med `nest` ser vi på muligheden for at lave `map` over en liste, der er skabt med funktionen `nest()`. 
 
-__Input: liste__
+### __Input: liste__
 
 * `.x` refererer til et element i listen - i det nedenstående er det første element `c(1,2)`, så hvis man anvender funktionen `max`, så finder man den højeste værdi (`2` i dette tilfælde).
 
@@ -575,7 +583,7 @@ list(c(1,2),c(2,3),c(3,4)) %>% map_dbl(~max(.x))
 #> [1] 2 3 4
 ```
 
-__Liste af dataframes__
+### __Liste af dataframes__
 
 * `.x` refererer til et datasæt - så kan man referere til de forskellige variabler i `.x`, som man plejer i tidyverse.
 
@@ -593,12 +601,19 @@ list(tibble("int"=1:10),tibble("int"=1:10),tibble("int"=1:10)) %>%
 
 ## Nesting med `nest()`
 
-Vi vil i den næste lektion se, at det er meget nyttigt at bruge funktionen `nest()` til at besvare en række statistiske spørgsmål. Det kan for eksempel være:
+I den næste lektion skal vi se, hvor nyttigt det kan være at bruge funktionen `nest()` til at besvare en række statistiske spørgsmål. Eksempelvis:
 
-* Vi har udført 10 eksperimenter under lidt forskellige betingelser og ønsker at udføre nøjagtig den samme analyse på alle 10.
-* Vi har 5 forskellige typer bakterier med 3 replikater hver, og vi ønsker at transformere data på samme måde for hver type bakterie og replikat.
+* Vi har udført 10 eksperimenter under lidt forskellige betingelser og ønsker at køre præcis den samme analyse på dem alle.
+* Vi har 5 bakterietyper med 3 replikater hver og vil transformere dataene ens for hver kombination af bakterietype og replikat.
 
-Funktionen `nest()` kan virke lidt abstrakt i starten, men konceptet er faktisk ret simpelt. Vi kan opdele vores datasæt (som indeholder vores forskellige betingelser/replikater osv.) med `group_by()` og derefter bruge `nest()` til at gemme de opdelte "underdatasæt" i en liste. Disse gemmes indenfor en kolonne i en `tibble`, hvilket gør det bekvemt at arbejde med de forskellige datasæt på samme tid (med hjælp fra `map()`).
+<!-- Funktionen `nest()` kan virke lidt abstrakt i starten, men konceptet er faktisk ret simpelt. Vi kan opdele vores datasæt (som indeholder vores forskellige betingelser/replikater osv.) med `group_by()` og derefter bruge `nest()` til at gemme de opdelte "underdatasæt" i en liste. Disse gemmes indenfor en kolonne i en `tibble`, hvilket gør det bekvemt at arbejde med de forskellige datasæt på samme tid (med hjælp fra `map()`). -->
+
+`nest()` kan virke abstrakt ved første øjekast, men konceptet er faktisk ret enkelt:
+	1.	Del først datasættet op i de ønskede grupper med `group_by()`.
+	2.	Brug derefter `nest()` til at pakke hver gruppe ned i sit eget "mini-datasæt", som gemmes i en listekolonne i en tibble.
+
+Resultatet er en kompakt tabel, hvor hver række indeholder et underdatasæt (f.eks. ét eksperiment eller én bakterietype). Det gør det nemt at køre den samme analyse eller transformation på tværs af alle underdatasæt ved hjælp af `map()`-funktionerne fra __purrr__ – og bagefter kan du folde resultaterne ud igen med `unnest()`, hvis det er nødvendigt.
+
 
 <img src="plots/tidyr-nest.png" width="100%" style="display: block; margin: auto;" />
 
@@ -607,8 +622,8 @@ Lad os opdele `eukaryotes_subset` efter variablen 'group' og anvende `nest()`:
 
 ``` r
 eukaryotes_subset_nested <- eukaryotes_subset %>% 
-  group_by(group) %>% 
-  nest()
+  group_by(group) %>%     # del data i grupper
+  nest()                  # gem hver gruppe som en tibble i kolonnen `data`
 
 eukaryotes_subset_nested
 ```
@@ -631,8 +646,12 @@ Vi kan kontrollere dette ved at kigge på det første datasæt. Her er to måder
 
 
 ``` r
-first_dataset <- eukaryotes_subset_nested$data[[1]] 
-first_dataset <- eukaryotes_subset_nested %>% pluck("data",1)
+# Direkte via liste-indeks
+first_dataset <- eukaryotes_subset_nested$data[[1]]
+
+# Eller med purrr::pluck()
+first_dataset <- eukaryotes_subset_nested %>% pluck("data", 1)
+
 first_dataset %>% head()
 ```
 
@@ -850,31 +869,42 @@ eukaryotes_stats %>%
 
 ## Andre brugbar purrr
 
-### `map2()` funktion for flere inputs
+### `map2()` funktion for to input-vektorer
 
-Funktionen `map2()` kan bruges ligesom `map()`, men tager to "inputs" i stedet for kun én. 
+`map2()` fungerer på samme måde som `map()`, men den tager to parallelle input-objekter (typisk to vektorer, listekolonner eller andre sekventielle strukturer) og anvender en funktion på hvert "par" af elementer. Det er særligt nyttigt, når:
 
-
-
-``` r
-arter <- c("mus", "rotte", "spætte")
-antal <- c(5, 2, 1)
-beskeder <- map2_chr(arter, antal, function(a, n) {
-  paste("Der er", n, a, ifelse(n==1, "", "r"))
-})
-print(beskeder)
-```
-
-```
-#> [1] "Der er 5 mus r"   "Der er 2 rotte r" "Der er 1 spætte "
-```
-
-
-I det følgende eksempel angiver jeg to kolonner fra datasættet `eukaryotes_stats`, `mean_genes` og `proteins`, og beregner `sum()`, som bliver gemt takket være funktionen `mutate` i kolonnen `colstat`. 
+* du skal iterere over to kolonner i et datasæt – f.eks. for at beregne noget ud fra værdierne i begge kolonner
+* du har to matchende lister (fx filstier og ark-navne) og vil kalde en funktion på hver kombination
+* du vil sammenligne eller kombinere observationer to-og-to (fx korrelationer eller forskelle)
 
 
 ``` r
-eukaryotes_stats %>% mutate(colstat = map2_dbl(mean_genes,proteins,sum))
+eukaryotes_subset %>% 
+  mutate(
+    combined = map2_chr(organism_name, center, ~ paste(.x, .y, sep = " - "))
+  ) %>% 
+  select(organism_name, center, combined) %>% 
+  head()
+```
+
+```
+#> # A tibble: 6 × 3
+#>   organism_name              center                                     combined
+#>   <chr>                      <chr>                                      <chr>   
+#> 1 Pyropia yezoensis          Ocean University                           Pyropia…
+#> 2 Emiliania huxleyi CCMP1516 JGI                                        Emilian…
+#> 3 Arabidopsis thaliana       The Arabidopsis Information Resource (TAI… Arabido…
+#> 4 Glycine max                US DOE Joint Genome Institute (JGI-PGF)    Glycine…
+#> 5 Medicago truncatula        International Medicago Genome Annotation … Medicag…
+#> 6 Solanum lycopersicum       Solanaceae Genomics Project                Solanum…
+```
+
+I eksemplet herunder tager vi to numeriske kolonner i eukaryotes_stats, `mean_genes` og `proteins`, og lægger dem sammen med `sum()`. Resultatet gemmes i den nye kolonne colstat (vi bruger `map2_dbl()` for at få en numeric vektor tilbage):
+
+
+``` r
+eukaryotes_stats %>% 
+  mutate(colstat = map2_dbl(mean_genes, proteins, sum))
 ```
 
 ```
@@ -889,7 +919,7 @@ eukaryotes_stats %>% mutate(colstat = map2_dbl(mean_genes,proteins,sum))
 #> 5 Animals  <tibble [3,201 × 18]>     20733    25161         692.   45894
 ```
 
-Bemærk, at præcis det samme resultat kan opnås ved blot at lægge de to kolonner sammen:
+Den helt samme værdi kunne opnås endnu kortere ved blot at lægge kolonnerne sammen:
 
 
 ``` r
@@ -908,62 +938,39 @@ eukaryotes_stats %>% mutate(colstat2 = mean_genes + proteins)
 #> 5 Animals  <tibble [3,201 × 18]>     20733    25161         692.    45894
 ```
 
-Der er dog mange indviklet situationer hvor man ikke kan gå udenom `map2`: 
-
-<!-- Når inputkolonnerne er lister eller kræver en mere kompleks transformering pr. række, er map2() (eller pmap()) ofte den eneste enkle løsning  -->
-<!-- RDocumentation -->
-<!-- Tidyverse -->
-<!-- . Eksemplet herunder viser, hvordan man kombinerer: -->
-
-<!-- Beregning af en log-transformation for hver mini-tibble i kolonnen data (én pr. “gruppe”). -->
-
-<!-- Oprettelse af et tætpakket ggplot-objekt pr. gruppe med map2(), hvor både gruppenavnet og den transformerede vektor indgår. -->
+Der findes dog mange situationer, hvor en simpel "+" ikke rækker, og hvor `map2()` (eller de beslægtede `map2_*()`-varianter) fungerer virkelig godt — fx når du genererer grafer eller kalder mere komplekse funktioner:
 
 
 ``` r
 eukaryotes_stats_with_plots <- eukaryotes_stats %>% 
-  mutate(log10_genes = map(data,~log10(.x %>% pull(genes)))) %>% 
-  mutate(myplots = map2(group,log10_genes,
-                        ~ tibble("log10_genes"=.y) %>% 
-                          ggplot(aes(x=log10_genes)) +
-                          geom_density(colour="red",alpha=0.3) + 
-                          theme_bw() + ggtitle(paste("Density plot of log10(genes) in",.x))))
+  mutate(
+    # log10-transformer hver mini-tibble i kolonnen `data`
+    log10_genes = map(data, ~ .x %>% pull(genes) %>% log10()),
+    
+    # opret én density-plot pr. gruppe
+    myplots = map2(
+      group,
+      log10_genes,
+      ~ tibble(log10_genes = .y) %>% 
+          ggplot(aes(x = log10_genes)) +
+          geom_density(colour = "red", alpha = 0.3) +
+          theme_bw() +
+          ggtitle(paste("Density plot of log10(genes) in", .x))
+    )
+  )
 ```
 
-For at vise fx plot nummer 2 (anden gruppe) kan du gøre:
-
+For at vise fx plot nummer 2 (dvs. den anden gruppe) kan du blot plukke det frem:
 
 
 ``` r
-eukaryotes_stats_with_plots %>% pluck("myplots",2)
+eukaryotes_stats_with_plots %>% 
+  pluck("myplots", 2)
 ```
 
 <img src="07-purrr1_files/figure-html/unnamed-chunk-50-1.svg" width="384" style="display: block; margin: auto;" />
 
 Denne fremgangsmåde holder alle delresultater – de rå data, de afledte værdier og selve plot-objekterne – samlet i én overskuelig tibble. Det gør workflowet reproducérbart og skalerbart, især når man analyserer mange biologiske grupper eller prøver.
-
-
-Der er flere `map` funktion der tager flere `input` fk. `pmap` - jeg har ikke tid til at dække dem  men du kan godt læse om dem hvis du har bruge for dem: https://purrr.tidyverse.org/reference/map2.html
-
-Her summerer vi tre tal ad gangen med `pmap`:
-
-
-``` r
-a <- 1:3
-b <- 4:6
-c <- 7:9
-pmap_dbl(list(a, b, c), function(x, y, z) x + y + z)
-```
-
-```
-#> [1] 12 15 18
-```
-
-``` r
-# [1] 12 15 18
-# (beregner 1+4+7, 2+5+8, 3+6+9)
-```
-
 
 ### Transformering af numeriske variabler
 
@@ -994,6 +1001,32 @@ eukaryotes %>% map_if(is.numeric,~log2(.x)) %>% as_tibble()
 #> #   release_date <date>, modify_date <date>, status <chr>, center <chr>,
 #> #   biosample_accession <chr>
 ```
+
+
+### Andre map()-baserede funktioner
+
+Der er flere `map` funktion der tager flere `input` fk. `pmap` (du kan godt læse mere om dem hvis du har bruge for dem: https://purrr.tidyverse.org/reference/map2.html)
+
+Med `pmap_*()` kan du anvende en funktion element-for-element på flere parallelle vektorer (en generalisering af `map2_*()`). Her lægger vi tre tal sammen ad gangen:
+
+
+``` r
+a <- 1:3
+b <- 4:6
+c <- 7:9
+
+# summerer 1 + 4 + 7, 2 + 5 + 8, 3 + 6 + 9
+pmap_dbl(list(a, b, c), ~ ..1 + ..2 + ..3)
+```
+
+```
+#> [1] 12 15 18
+```
+
+``` r
+#> [1] 12 15 18
+```
+
 
 ## Problemstillinger
 
