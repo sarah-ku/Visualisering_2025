@@ -770,8 +770,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>.x</code> refererer til en værdi i vektoren. Hvis man tager heltallet <code>1:10</code> og anvender <code>map</code>, så tager man hvert tal for sig og beregner en funktion med det - i det følgende simulerer man et tal fra den normale fordeling med parameteren <code>mean=.x</code>:</li>
 </ul>
 <div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="functional-programming-med-purrr-pakken.html#cb416-1" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(<span class="sc">~</span><span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="at">mean=</span>.x))</span></code></pre></div>
-<pre><code>#&gt;  [1]  1.270694  1.012591  4.941287  4.781977  7.191315  6.579857  6.844839
-#&gt;  [8]  8.391757  9.276686 10.079541</code></pre>
+<pre><code>#&gt;  [1] 0.8557213 3.0207143 3.1436160 4.2281240 4.7701568 5.7722867 6.8394016
+#&gt;  [8] 6.7940627 9.1558446 9.0269244</code></pre>
 <p><strong>Input: dataframe</strong></p>
 <ul>
 <li><code>.x</code> refererer til en variabel fra dataframe. I det ovenstående er den første variabel <code>int1</code>, og i <code>map</code> tager man det første element med funktionen <code>pluck(1)</code>.</li>
