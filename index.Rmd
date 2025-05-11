@@ -14,7 +14,6 @@ graphics:     yes
 ---
 
 
-
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   echo = TRUE, eval = TRUE,
@@ -54,4 +53,7 @@ Sarah
 
 Jeg er adjunkt på biologiske institut. Jeg kommer oprindeligt fra Storbritannien og flyttede til Danmark i 2015. Jeg bor sammen med min mand og vores 3 børn.
 
+Robert
+
+Robert er adjunkt på biologiske institut.
 

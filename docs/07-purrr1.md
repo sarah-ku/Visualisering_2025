@@ -529,8 +529,8 @@ c(1:10) %>% map_dbl(~rnorm(1,mean=.x))
 ```
 
 ```
-#>  [1] 0.8557213 3.0207143 3.1436160 4.2281240 4.7701568 5.7722867 6.8394016
-#>  [8] 6.7940627 9.1558446 9.0269244
+#>  [1]  2.518972  2.562140  2.372321  2.902361  4.037715  6.225910  7.278709
+#>  [8]  9.582241  8.721723 11.242582
 ```
 
 ### __Input: dataframe__
@@ -972,7 +972,7 @@ eukaryotes_stats_with_plots %>%
 
 Denne fremgangsmåde holder alle delresultater – de rå data, de afledte værdier og selve plot-objekterne – samlet i én overskuelig tibble. Det gør workflowet reproducérbart og skalerbart, især når man analyserer mange biologiske grupper eller prøver.
 
-### Transformering af numeriske variabler
+### `map_if()` til transformering af numeriske variabler
 
 Som en sidste bemærkning, her er en nyttig variant af `map` - her kan man udføre en operation på kun bestemte variabler - for eksempel anvender jeg i det følgende funktionen `log2()` på alle numeriske variabler. Bemærk, at man er nødt til at anvende `as_tibble()` igen bagefter (som kun fungerer, hvis alle variabler stadig har samme længde efter `map_if()`):
 
@@ -1003,8 +1003,6 @@ eukaryotes %>% map_if(is.numeric,~log2(.x)) %>% as_tibble()
 ```
 
 
-### Andre map()-baserede funktioner
-
 Der er flere `map` funktion der tager flere `input` fk. `pmap` (du kan godt læse mere om dem hvis du har bruge for dem: https://purrr.tidyverse.org/reference/map2.html)
 
 Med `pmap_*()` kan du anvende en funktion element-for-element på flere parallelle vektorer (en generalisering af `map2_*()`). Her lægger vi tre tal sammen ad gangen:
@@ -1034,31 +1032,43 @@ __Problem 1)__ Lave Quiz på Absalon "Quiz - functional programming"
 
 ___
 
-__Problem 2)__ *Basis øvelser med `map()`* Indlæse `diamonds` med `data(diamonds)`.
+__Problem 2)__ *Basis øvelser med `map()`* 
+
+Indlæse `msleep`:
+
+
+``` r
+data(msleep)
+```
+
 
 Eksempel:
 
 
 ``` r
-diamonds %>% select(cut,color,depth) %>% map_df(n_distinct)
+msleep %>%                        # hele datasættet
+  select(vore, order, conservation) %>%   # tre kategoriske variabler
+  map(n_distinct)                 # antal unikke værdier i hver kolonne
 ```
 
 ```
-#> # A tibble: 1 × 3
-#>     cut color depth
-#>   <int> <int> <int>
-#> 1     5     7   184
+#> $vore
+#> [1] 5
+#> 
+#> $order
+#> [1] 19
+#> 
+#> $conservation
+#> [1] 7
 ```
 
-Husk også referencen med de forskellige varianter af `map()` som kan bruges for at få en anden output type.
+Brug de forskellige `map_*()`-varianter (se 7.2.2 ovenstående) til at beregne følgende:
 
-Brug `map()` funktioner til at beregne følgende:
+__a)__  Vælg variablerne `vore`, `order` og `conservation` and beregn antallet af unikke værdier i hver kolonne med `n_distinct()`. _Output skal være en **liste**._
 
-__a)__ Andvend `select` for at udvælge variabler `cut`, `color` og `clarity`, og dernæst beregn antallet af unikke værdier til hver (`n_distinct`-funktionen). Dit resultat skal være en list (`lst` - anvende standard `map()` funktion).
+__b)__ Vælg alle numeriske variabler (hint: where(is.numeric)) og beregn gennemsnittet for hver kolonne. _Output skal være en double-vektor (`dbl`)_.
 
-__b)__ Udvalg variablerne som er numeriske og dernæst beregne gennemsnittet til hver. Dit resultat skal være en double (`dbl`).
-
-__c)__ Beregne datatypen (anvend funktionen `typeof()`) til alle variabler. Resultatet skal være en dataframe.
+__c)__ Beregn datatypen (`typeof()`) for alle variabler. _Output skal være en data frame / tibble._
 
 
 
@@ -1074,27 +1084,37 @@ ___
 
 __Problem 3__) *`map()` øvelse med brugerdefinerede funktioner*  Indlæse `diamonds` med `data(diamonds)`. 
 
-Husk, at når man inddrager nogle data `.x`, for eksempel når man vil bruge en custom funktion eller specificer ikke-standard indstillinger såsom `na.rm=TRUE` (for at fjerne `NA` værdier i beregningen) i funktionen, skal man angiv `~` i starten:
+Husk: når du bruger en custom-lavede funktion eller vil gerne give ekstra argumenter (dvs. specificer ikke-standard indstillinger) til en ekisisterene funktion, skal du skrive `~` og bruge `.x` indeni:
 
 
 ``` r
-diamonds %>% map_df(n_distinct) #specificere funktion unden instillinger
-diamonds %>% map_df(~n_distinct(.x,na.rm = TRUE)) #custom funktion - skal have ~ og .x
+msleep %>% map_df(n_distinct) #specificere funktion unden instillinger
+msleep %>% map_df(~ n_distinct(.x, na.rm = TRUE))   #custom funktion - skal have ~ og .x
 ```
 
-__a__) Afprøve følgende kode linjer og beskrive hvad der sker (`nth(.x,1)` angiver den første værdi fra `.x`) :
+__a__) Kør følgende kode og forklar kort, hvad der sker i hver linje (`nth(.x,1)` henter første værdi) :
 
 
 ``` r
-diamonds %>% select(carat, depth, price) %>% map_df(~mean(.x,na.rm=T))
-diamonds %>% select(carat, depth, price) %>% map_df(~ifelse(.x>mean(.x),"big_value","small_value"))
-diamonds %>% filter(cut=="Ideal") %>% select("color","clarity") %>% map(~nth(.x,100)) 
+msleep %>% select(sleep_total, sleep_rem)      %>% map_df(~ mean(.x, na.rm = TRUE))
+msleep %>% select(sleep_total, sleep_rem)      %>% map_df(~ ifelse(.x > mean(.x, na.rm = TRUE),
+                                                                   "above", "below"))
+msleep %>% filter(order == "Primates")         %>% 
+           select(vore, conservation)          %>% map(~ nth(.x, 10))
 ```
 
-__b__) Brug brugerdefinerede funktioner inden for `map()` til at beregne følgende:
+__b__) Tag udgantspunkt i `msleep`:
 
-* Vælg variablerne `carat`, `depth`, `table` og `price`, og for hver kolonne, læg tre til værdierne og kvadrer derefter resultatet (`^2`). Det endelige resultat skal være en dataramme.
-* Vælg de numeriske variabler og returner `TRUE`, hvis den første værdi i kolonnen (angivet med `nth(.x,1)`) er større end medianværdien i samme kolonne. Hvis ikke, returner `FALSE`. Det endelige resultat skal være en logisk værdi.
+* vælg kolonnerne `sleep_total`, `sleep_rem`, `sleep_cycle` og `awake`  
+* fjern alle rækker med manglende værdier  
+* læg 2 til værdierne i hver kolonne og tager kvadratroden (`sqrt()`)  
+* return resultatet som en tibble
+
+
+__c__) Tag udgantspunkt i `msleep`:
+
+* anvend `log2()` på samtlige **numeriske** kolonner i `msleep` (7.6.2)
+* return resutat som en tibble
 
 
 
@@ -1249,7 +1269,7 @@ __Problem 8__)  *Skift mellem long og wide form* Tag udgangspunkt i datasættet 
 ``` r
 #kør denne kode
 data(iris)
-iris <- iris %>% mutate(id=1:nrow(iris)) #tilføj en id
+iris <- iris %>% mutate(id=1:nrow(iris)) #tilføj en id -- dette er vigtigt så du kan gå tilbage til wide-form igen senere
 ```
 
 __a__) Anvend `group_by()` og `nest()` til at opdele datasættet efter `Species` 

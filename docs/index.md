@@ -1,7 +1,7 @@
 ---
 title:       "Analyse og visualisering af biologiske datasæt – 2025"
 author:      "Sarah Rennie"
-date:        "2025-05-10"
+date:        "2025-05-11"
 site:        bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -12,7 +12,6 @@ cover-image: ai_cover.jpeg
 always_allow_html: true
 graphics:     yes
 ---
-
 
 
 
@@ -43,4 +42,7 @@ Sarah
 
 Jeg er adjunkt på biologiske institut. Jeg kommer oprindeligt fra Storbritannien og flyttede til Danmark i 2015. Jeg bor sammen med min mand og vores 3 børn.
 
+Robert
+
+Robert er adjunkt på biologiske institut.
 
