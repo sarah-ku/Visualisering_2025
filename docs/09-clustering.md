@@ -827,6 +827,7 @@ __g)__ Lav et plot af din clustering (adskilt efter variablen `Channel`) og få 
 
 
 
+- - -
 
 __Problem 5)__ Sammenligning af k-means og hierarchical clustering
 
@@ -851,7 +852,7 @@ __b__) Lav følgende plot (dine clusters kan variere pga. tilfældighed)
 
 <img src="09-clustering_files/figure-html/unnamed-chunk-62-1.svg" width="672" style="display: block; margin: auto;" />
 
-__c__) __Valgtfri ekstra__: brug map functions with a parameter k to vary the number of clusters, and use it to generate clusterings for k=2:5, to make a grid with different numbers of clusterings for hierarchical and k-means.
+__c__) __Valgfri udfordring__: Brug `map`-funktionerne med et argument `k`, så du kan variere antallet af klynger. Beregn kmeans og hierachical klusteringerne for `k = 2 : 5`, og lav derefter et facet grid plot, der sammenligner resultaterne for både k-means og hierarkisk clustering for hvert valgt `k`.
 
 
 
