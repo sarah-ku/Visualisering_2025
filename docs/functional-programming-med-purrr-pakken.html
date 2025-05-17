@@ -866,8 +866,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>.x</code> refererer til en værdi i vektoren. Hvis man tager heltallet <code>1:10</code> og anvender <code>map</code>, så tager man hvert tal for sig og beregner en funktion med det - i det følgende simulerer man et tal fra den normale fordeling med parameteren <code>mean=.x</code>:</li>
 </ul>
 <div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="functional-programming-med-purrr-pakken.html#cb416-1" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(<span class="sc">~</span><span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="at">mean=</span>.x))</span></code></pre></div>
-<pre><code>#&gt;  [1]  2.518972  2.562140  2.372321  2.902361  4.037715  6.225910  7.278709
-#&gt;  [8]  9.582241  8.721723 11.242582</code></pre>
+<pre><code>#&gt;  [1] -0.7013571  1.9323013  4.1074153  4.2938849  4.7295708  7.0212528
+#&gt;  [7]  6.9235562  7.2612895 11.6221353  9.8942750</code></pre>
 </div>
 <div id="input-dataframe" class="section level3 hasAnchor" number="7.4.2">
 <h3><span class="header-section-number">7.4.2</span> <strong>Input: dataframe</strong><a href="functional-programming-med-purrr-pakken.html#input-dataframe" class="anchor-section" aria-label="Anchor link to header"></a></h3>

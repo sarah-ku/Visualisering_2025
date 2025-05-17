@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='504.00pt' height='311.47pt' viewBox='0 0 504.00 311.47'>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='311.47pt' viewBox='0 0 504.00 311.47'>
+<g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
     .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
@@ -11,6 +12,10 @@
     }
     .svglite text {
       white-space: pre;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
     }
   ]]></style>
 </defs>
@@ -77,18 +82,19 @@
 <line x1='59.04' y1='163.70' x2='51.84' y2='163.70' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='128.44' x2='51.84' y2='128.44' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='93.17' x2='51.84' y2='93.17' style='stroke-width: 0.75;' />
-<text transform='translate(41.76,234.22) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>10</text>
-<text transform='translate(41.76,198.96) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>15</text>
-<text transform='translate(41.76,163.70) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>20</text>
-<text transform='translate(41.76,128.44) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>25</text>
-<text transform='translate(41.76,93.17) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='13.35px' lengthAdjust='spacingAndGlyphs'>30</text>
+<text transform='translate(41.76,234.22) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='13.34px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text transform='translate(41.76,198.96) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='13.34px' lengthAdjust='spacingAndGlyphs'>15</text>
+<text transform='translate(41.76,163.70) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='13.34px' lengthAdjust='spacingAndGlyphs'>20</text>
+<text transform='translate(41.76,128.44) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='13.34px' lengthAdjust='spacingAndGlyphs'>25</text>
+<text transform='translate(41.76,93.17) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='13.34px' lengthAdjust='spacingAndGlyphs'>30</text>
 <polygon points='59.04,238.03 473.76,238.03 473.76,59.04 59.04,59.04 ' style='stroke-width: 0.75;' />
-<text x='266.40' y='26.06' text-anchor='middle' style='font-size: 14.40px; font-weight: bold; font-family: "Arial";' textLength='104.75px' lengthAdjust='spacingAndGlyphs'>Best fit line for </text>
-<text x='266.40' y='43.34' text-anchor='middle' style='font-size: 14.40px; font-weight: bold; font-family: "Arial";' textLength='193.49px' lengthAdjust='spacingAndGlyphs'> predicting mpg from weight</text>
+<text x='266.40' y='26.03' text-anchor='middle' style='font-size: 14.40px; font-weight: bold; font-family: "Arial";' textLength='104.77px' lengthAdjust='spacingAndGlyphs'>Best fit line for </text>
+<text x='266.40' y='43.31' text-anchor='middle' style='font-size: 14.40px; font-weight: bold; font-family: "Arial";' textLength='193.53px' lengthAdjust='spacingAndGlyphs'> predicting mpg from weight</text>
 <text x='266.40' y='292.75' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='54.67px' lengthAdjust='spacingAndGlyphs'>mtcars$wt</text>
-<text transform='translate(12.96,148.54) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='66.01px' lengthAdjust='spacingAndGlyphs'>mtcars$mpg</text>
+<text transform='translate(12.96,148.54) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='66.02px' lengthAdjust='spacingAndGlyphs'>mtcars$mpg</text>
 </g>
 <g clip-path='url(#cpNTkuMDR8NDczLjc2fDU5LjA0fDIzOC4wMw==)'>
 <line x1='59.04' y1='92.93' x2='473.76' y2='252.13' style='stroke-width: 0.75;' />
+</g>
 </g>
 </svg>
