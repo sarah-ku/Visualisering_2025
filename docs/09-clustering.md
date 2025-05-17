@@ -160,27 +160,27 @@ kclust
 ```
 
 ```
-#> K-means clustering with 3 clusters of sizes 119, 70, 144
+#> K-means clustering with 3 clusters of sizes 144, 119, 70
 #> 
 #> Cluster means:
 #>   bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-#> 1      0.6537742    -1.1010497         1.1607163   1.0995561
-#> 2      0.8908006     0.7592465        -0.3044405  -0.4687119
-#> 3     -0.9732998     0.5408171        -0.8112111  -0.6808149
+#> 1     -0.9732998     0.5408171        -0.8112111  -0.6808149
+#> 2      0.6537742    -1.1010497         1.1607163   1.0995561
+#> 3      0.8908006     0.7592465        -0.3044405  -0.4687119
 #> 
 #> Clustering vector:
-#>   [1] 3 3 3 3 3 3 3 3 3 3 3 3 2 3 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-#>  [38] 3 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 3 3 3 3 3 3
-#>  [75] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 3 2 3 3 3 3 3
-#> [112] 3 3 3 3 3 3 3 3 3 3 3 3 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 1
-#> [149] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-#> [186] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-#> [223] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-#> [260] 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 3 2 2 2 2 2 2 2 3
-#> [297] 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2
+#>   [1] 1 1 1 1 1 1 1 1 1 1 1 1 3 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+#>  [38] 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 1 1 1 1 1 1
+#>  [75] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3 1 3 1 1 1 1 1
+#> [112] 1 1 1 1 1 1 1 1 1 1 1 1 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2
+#> [149] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+#> [186] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+#> [223] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+#> [260] 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3 1 3 3 3 3 3 3 3 1
+#> [297] 3 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3 3 3 3 3
 #> 
 #> Within cluster sum of squares by cluster:
-#> [1] 139.46837  78.96005 152.44363
+#> [1] 152.44363 139.46837  78.96005
 #>  (between_SS / total_SS =  72.1 %)
 #> 
 #> Available components:
@@ -217,16 +217,16 @@ kc1 %>% select(.cluster,all_of(names(penguins)))
 #> # A tibble: 333 × 9
 #>    .cluster species island    bill_length_mm bill_depth_mm flipper_length_mm
 #>    <fct>    <fct>   <fct>              <dbl>         <dbl>             <int>
-#>  1 3        Adelie  Torgersen           39.1          18.7               181
-#>  2 3        Adelie  Torgersen           39.5          17.4               186
-#>  3 3        Adelie  Torgersen           40.3          18                 195
-#>  4 3        Adelie  Torgersen           36.7          19.3               193
-#>  5 3        Adelie  Torgersen           39.3          20.6               190
-#>  6 3        Adelie  Torgersen           38.9          17.8               181
-#>  7 3        Adelie  Torgersen           39.2          19.6               195
-#>  8 3        Adelie  Torgersen           41.1          17.6               182
-#>  9 3        Adelie  Torgersen           38.6          21.2               191
-#> 10 3        Adelie  Torgersen           34.6          21.1               198
+#>  1 1        Adelie  Torgersen           39.1          18.7               181
+#>  2 1        Adelie  Torgersen           39.5          17.4               186
+#>  3 1        Adelie  Torgersen           40.3          18                 195
+#>  4 1        Adelie  Torgersen           36.7          19.3               193
+#>  5 1        Adelie  Torgersen           39.3          20.6               190
+#>  6 1        Adelie  Torgersen           38.9          17.8               181
+#>  7 1        Adelie  Torgersen           39.2          19.6               195
+#>  8 1        Adelie  Torgersen           41.1          17.6               182
+#>  9 1        Adelie  Torgersen           38.6          21.2               191
+#> 10 1        Adelie  Torgersen           34.6          21.1               198
 #> # ℹ 323 more rows
 #> # ℹ 3 more variables: body_mass_g <int>, sex <fct>, year <fct>
 ```
@@ -253,11 +253,11 @@ kc1 %>% count(.cluster, species)
 #> # A tibble: 5 × 3
 #>   .cluster species       n
 #>   <fct>    <fct>     <int>
-#> 1 1        Gentoo      119
-#> 2 2        Adelie        7
-#> 3 2        Chinstrap    63
-#> 4 3        Adelie      139
-#> 5 3        Chinstrap     5
+#> 1 1        Adelie      139
+#> 2 1        Chinstrap     5
+#> 3 2        Gentoo      119
+#> 4 3        Adelie        7
+#> 5 3        Chinstrap    63
 ```
 
 
@@ -275,9 +275,9 @@ kclust_tidy
 #> # A tibble: 3 × 7
 #>   bill_length_mm bill_depth_mm flipper_length_mm body_mass_g  size withinss
 #>            <dbl>         <dbl>             <dbl>       <dbl> <int>    <dbl>
-#> 1          0.654        -1.10              1.16        1.10    119    139. 
-#> 2          0.891         0.759            -0.304      -0.469    70     79.0
-#> 3         -0.973         0.541            -0.811      -0.681   144    152. 
+#> 1         -0.973         0.541            -0.811      -0.681   144    152. 
+#> 2          0.654        -1.10              1.16        1.10    119    139. 
+#> 3          0.891         0.759            -0.304      -0.469    70     79.0
 #> # ℹ 1 more variable: cluster <fct>
 ```
 
@@ -362,10 +362,10 @@ kclusts_glance
 #> 3     3 <kmeans> <tibble [3 × 7]> 1328.         474.  8.54e+ 2     2 <tibble> 
 #> 4     4 <kmeans> <tibble [4 × 7]> 1328.         304.  1.02e+ 3     3 <tibble> 
 #> 5     5 <kmeans> <tibble [5 × 7]> 1328.         228.  1.10e+ 3     2 <tibble> 
-#> 6     6 <kmeans> <tibble [6 × 7]> 1328.         261.  1.07e+ 3     3 <tibble> 
-#> 7     7 <kmeans> <tibble [7 × 7]> 1328.         248.  1.08e+ 3     4 <tibble> 
-#> 8     8 <kmeans> <tibble [8 × 7]> 1328.         175.  1.15e+ 3     5 <tibble> 
-#> 9     9 <kmeans> <tibble [9 × 7]> 1328.         175.  1.15e+ 3     3 <tibble>
+#> 6     6 <kmeans> <tibble [6 × 7]> 1328.         200.  1.13e+ 3     3 <tibble> 
+#> 7     7 <kmeans> <tibble [7 × 7]> 1328.         182.  1.15e+ 3     3 <tibble> 
+#> 8     8 <kmeans> <tibble [8 × 7]> 1328.         172.  1.16e+ 3     3 <tibble> 
+#> 9     9 <kmeans> <tibble [9 × 7]> 1328.         163.  1.16e+ 3     3 <tibble>
 ```
 
 Jo flere clusters, jo mindre er statistikken `tot.withinss` typisk, men vi kan se i det følgende plot, at efter 2 eller 3 clusters, er der ikke meget gevinst ved at bruge flere clusters. Derfor vælger man ofte enten 2 eller 3. Dette plot kaldes ofte for en 'elbow' plot - man vælger det antal, der ligger på 'elbuen', hvor der ikke er meget gevinst ved at inkludere flere clusters i datasættet (men det er selvfølgelig meget subjektivt, hvilket tal man vælger til sidst).

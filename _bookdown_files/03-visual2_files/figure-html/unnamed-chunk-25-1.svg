@@ -85,47 +85,48 @@
 <circle cx='218.81' cy='187.30' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
 <circle cx='133.30' cy='136.25' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
 <circle cx='249.73' cy='186.66' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<line x1='221.14' y1='200.28' x2='241.05' y2='197.09' style='stroke-width: 1.07;' />
-<line x1='234.03' y1='175.45' x2='241.45' y2='179.98' style='stroke-width: 1.07;' />
-<line x1='252.78' y1='150.48' x2='250.03' y2='158.07' style='stroke-width: 1.07;' />
-<line x1='225.88' y1='130.19' x2='190.94' y2='142.82' style='stroke-width: 1.07;' />
-<line x1='283.82' y1='172.13' x2='275.91' y2='163.79' style='stroke-width: 1.07;' />
-<line x1='265.90' y1='132.78' x2='211.08' y2='144.26' style='stroke-width: 1.07;' />
-<line x1='188.57' y1='100.47' x2='175.57' y2='125.23' style='stroke-width: 1.07;' />
-<line x1='120.14' y1='153.92' x2='135.87' y2='145.44' style='stroke-width: 1.07;' />
-<line x1='102.32' y1='125.66' x2='132.04' y2='135.82' style='stroke-width: 1.07;' />
-<text x='190.51' y='204.37' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='57.66px' lengthAdjust='spacingAndGlyphs'>Mazda RX4</text>
-<text x='213.90' y='173.65' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='83.00px' lengthAdjust='spacingAndGlyphs'>Mazda RX4 Wag</text>
-<text x='276.53' y='232.10' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='56.45px' lengthAdjust='spacingAndGlyphs'>Datsun 710</text>
-<text x='290.15' y='151.60' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='71.14px' lengthAdjust='spacingAndGlyphs'>Hornet 4 Drive</text>
-<text x='211.32' y='156.91' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='90.19px' lengthAdjust='spacingAndGlyphs'>Hornet Sportabout</text>
-<text x='244.15' y='133.54' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='32.94px' lengthAdjust='spacingAndGlyphs'>Valiant</text>
-<text x='91.53' y='144.08' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='53.98px' lengthAdjust='spacingAndGlyphs'>Duster 360</text>
-<text x='336.73' y='166.71' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='53.97px' lengthAdjust='spacingAndGlyphs'>Merc 240D</text>
-<text x='285.55' y='181.82' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='46.00px' lengthAdjust='spacingAndGlyphs'>Merc 230</text>
-<text x='290.70' y='136.48' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='46.00px' lengthAdjust='spacingAndGlyphs'>Merc 280</text>
-<text x='152.82' y='157.26' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='53.97px' lengthAdjust='spacingAndGlyphs'>Merc 280C</text>
-<text x='152.81' y='98.64' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='60.72px' lengthAdjust='spacingAndGlyphs'>Merc 450SE</text>
-<text x='220.12' y='103.29' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='59.50px' lengthAdjust='spacingAndGlyphs'>Merc 450SL</text>
-<text x='162.52' y='118.39' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='67.47px' lengthAdjust='spacingAndGlyphs'>Merc 450SLC</text>
-<text x='78.46' y='41.36' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='93.25px' lengthAdjust='spacingAndGlyphs'>Cadillac Fleetwood</text>
-<text x='101.45' y='16.98' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='93.89px' lengthAdjust='spacingAndGlyphs'>Lincoln Continental</text>
-<text x='174.06' y='35.16' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='83.39px' lengthAdjust='spacingAndGlyphs'>Chrysler Imperial</text>
-<text x='435.45' y='219.21' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='39.88px' lengthAdjust='spacingAndGlyphs'>Fiat 128</text>
-<text x='387.41' y='256.54' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='59.50px' lengthAdjust='spacingAndGlyphs'>Honda Civic</text>
-<text x='459.63' y='242.46' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='70.55px' lengthAdjust='spacingAndGlyphs'>Toyota Corolla</text>
-<text x='262.31' y='216.97' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='71.78px' lengthAdjust='spacingAndGlyphs'>Toyota Corona</text>
-<text x='182.95' y='138.48' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='88.98px' lengthAdjust='spacingAndGlyphs'>Dodge Challenger</text>
-<text x='87.37' y='159.25' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='61.94px' lengthAdjust='spacingAndGlyphs'>AMC Javelin</text>
-<text x='90.92' y='113.85' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='61.33px' lengthAdjust='spacingAndGlyphs'>Camaro Z28</text>
-<text x='253.34' y='118.42' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='77.28px' lengthAdjust='spacingAndGlyphs'>Pontiac Firebird</text>
-<text x='328.14' y='247.20' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='44.77px' lengthAdjust='spacingAndGlyphs'>Fiat X1-9</text>
-<text x='347.80' y='223.05' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='71.78px' lengthAdjust='spacingAndGlyphs'>Porsche 914-2</text>
-<text x='451.25' y='276.37' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='65.66px' lengthAdjust='spacingAndGlyphs'>Lotus Europa</text>
-<text x='128.39' y='174.30' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='73.61px' lengthAdjust='spacingAndGlyphs'>Ford Pantera L</text>
-<text x='184.65' y='189.23' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='58.25px' lengthAdjust='spacingAndGlyphs'>Ferrari Dino</text>
-<text x='66.18' y='128.97' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='68.69px' lengthAdjust='spacingAndGlyphs'>Maserati Bora</text>
-<text x='275.50' y='199.01' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='55.84px' lengthAdjust='spacingAndGlyphs'>Volvo 142E</text>
+<line x1='213.05' y1='122.22' x2='190.49' y2='142.56' style='stroke-width: 1.07;' />
+<line x1='95.25' y1='142.14' x2='119.21' y2='136.57' style='stroke-width: 1.07;' />
+<line x1='225.24' y1='137.64' x2='210.87' y2='144.03' style='stroke-width: 1.07;' />
+<line x1='156.73' y1='152.74' x2='182.94' y2='144.93' style='stroke-width: 1.07;' />
+<line x1='127.23' y1='116.39' x2='135.98' y2='122.21' style='stroke-width: 1.07;' />
+<line x1='95.57' y1='157.29' x2='135.64' y2='145.25' style='stroke-width: 1.07;' />
+<line x1='95.15' y1='96.99' x2='102.10' y2='118.19' style='stroke-width: 1.07;' />
+<line x1='210.07' y1='108.65' x2='209.74' y2='117.86' style='stroke-width: 1.07;' />
+<line x1='139.48' y1='166.94' x2='146.85' y2='162.39' style='stroke-width: 1.07;' />
+<line x1='125.63' y1='130.09' x2='132.44' y2='135.56' style='stroke-width: 1.07;' />
+<text x='206.32' y='206.61' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='57.66px' lengthAdjust='spacingAndGlyphs'>Mazda RX4</text>
+<text x='207.34' y='176.13' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='83.00px' lengthAdjust='spacingAndGlyphs'>Mazda RX4 Wag</text>
+<text x='276.42' y='232.19' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='56.45px' lengthAdjust='spacingAndGlyphs'>Datsun 710</text>
+<text x='290.33' y='155.37' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='71.14px' lengthAdjust='spacingAndGlyphs'>Hornet 4 Drive</text>
+<text x='202.43' y='156.99' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='90.19px' lengthAdjust='spacingAndGlyphs'>Hornet Sportabout</text>
+<text x='231.32' y='125.13' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='32.94px' lengthAdjust='spacingAndGlyphs'>Valiant</text>
+<text x='66.46' y='146.55' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='53.98px' lengthAdjust='spacingAndGlyphs'>Duster 360</text>
+<text x='336.33' y='170.50' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='53.97px' lengthAdjust='spacingAndGlyphs'>Merc 240D</text>
+<text x='279.08' y='175.46' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='46.00px' lengthAdjust='spacingAndGlyphs'>Merc 230</text>
+<text x='250.04' y='140.25' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='46.00px' lengthAdjust='spacingAndGlyphs'>Merc 280</text>
+<text x='127.95' y='157.31' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='53.97px' lengthAdjust='spacingAndGlyphs'>Merc 280C</text>
+<text x='174.06' y='99.49' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='60.72px' lengthAdjust='spacingAndGlyphs'>Merc 450SE</text>
+<text x='174.91' y='116.73' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='59.50px' lengthAdjust='spacingAndGlyphs'>Merc 450SL</text>
+<text x='116.77' y='114.59' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='67.47px' lengthAdjust='spacingAndGlyphs'>Merc 450SLC</text>
+<text x='78.46' y='41.37' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='93.25px' lengthAdjust='spacingAndGlyphs'>Cadillac Fleetwood</text>
+<text x='101.63' y='16.98' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='93.89px' lengthAdjust='spacingAndGlyphs'>Lincoln Continental</text>
+<text x='174.04' y='35.15' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='83.39px' lengthAdjust='spacingAndGlyphs'>Chrysler Imperial</text>
+<text x='464.27' y='219.22' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='39.88px' lengthAdjust='spacingAndGlyphs'>Fiat 128</text>
+<text x='387.43' y='256.55' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='59.50px' lengthAdjust='spacingAndGlyphs'>Honda Civic</text>
+<text x='459.65' y='242.47' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='70.55px' lengthAdjust='spacingAndGlyphs'>Toyota Corolla</text>
+<text x='262.48' y='217.04' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='71.78px' lengthAdjust='spacingAndGlyphs'>Toyota Corona</text>
+<text x='175.44' y='138.81' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='88.98px' lengthAdjust='spacingAndGlyphs'>Dodge Challenger</text>
+<text x='62.81' y='161.70' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='61.94px' lengthAdjust='spacingAndGlyphs'>AMC Javelin</text>
+<text x='62.68' y='99.57' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='61.33px' lengthAdjust='spacingAndGlyphs'>Camaro Z28</text>
+<text x='250.51' y='109.99' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='77.28px' lengthAdjust='spacingAndGlyphs'>Pontiac Firebird</text>
+<text x='328.10' y='247.29' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='44.77px' lengthAdjust='spacingAndGlyphs'>Fiat X1-9</text>
+<text x='347.86' y='223.04' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='71.78px' lengthAdjust='spacingAndGlyphs'>Porsche 914-2</text>
+<text x='451.23' y='276.37' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='65.66px' lengthAdjust='spacingAndGlyphs'>Lotus Europa</text>
+<text x='121.85' y='176.64' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='73.61px' lengthAdjust='spacingAndGlyphs'>Ford Pantera L</text>
+<text x='180.43' y='191.50' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='58.25px' lengthAdjust='spacingAndGlyphs'>Ferrari Dino</text>
+<text x='89.49' y='131.44' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='68.69px' lengthAdjust='spacingAndGlyphs'>Maserati Bora</text>
+<text x='275.39' y='198.99' text-anchor='middle' style='font-size: 11.04px; font-family: "Arial";' textLength='55.84px' lengthAdjust='spacingAndGlyphs'>Volvo 142E</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwzMTEuNDc=)'>
 <text x='23.31' y='239.58' text-anchor='end' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='4.89px' lengthAdjust='spacingAndGlyphs'>2</text>
