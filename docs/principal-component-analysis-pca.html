@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Kapitel 10 Principal component analysis (PCA) | Analyse og visualisering af biologiske datasæt – 2025</title>
+  <meta name="description" content="Course materials for Analyse og visualisering af biologiske datasæt 2025" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Kapitel 10 Principal component analysis (PCA) | Analyse og visualisering af biologiske datasæt – 2025" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/ai_cover.jpeg" />
+  <meta property="og:description" content="Course materials for Analyse og visualisering af biologiske datasæt 2025" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Kapitel 10 Principal component analysis (PCA) | Analyse og visualisering af biologiske datasæt – 2025" />
+  
+  <meta name="twitter:description" content="Course materials for Analyse og visualisering af biologiske datasæt 2025" />
+  <meta name="twitter:image" content="/ai_cover.jpeg" />
+
+<meta name="author" content="Sarah Rennie" />
+
+
+<meta name="date" content="2025-05-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="clustering.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/vembedr-0.1.5/css/vembedr.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Visualisering_2025</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Lidt om kurset</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#outline"><i class="fa fa-check"></i>Outline</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bedømmelse"><i class="fa fa-check"></i>Bedømmelse</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bare-lidt-om-underviserne"><i class="fa fa-check"></i>Bare lidt om underviserne</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="baser.html"><a href="baser.html"><i class="fa fa-check"></i><b>1</b> Grundlæggende R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="baser.html"><a href="baser.html#inledning-til-kapitel"><i class="fa fa-check"></i><b>1.1</b> Inledning til kapitel</a></li>
+<li class="chapter" data-level="1.2" data-path="baser.html"><a href="baser.html#rstudio"><i class="fa fa-check"></i><b>1.2</b> RStudio</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="baser.html"><a href="baser.html#de-forskellige-vinduer-i-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> De forskellige vinduer i RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="baser.html"><a href="baser.html#working-directory"><i class="fa fa-check"></i><b>1.3</b> Working directory</a></li>
+<li class="chapter" data-level="1.4" data-path="baser.html"><a href="baser.html#r-pakker"><i class="fa fa-check"></i><b>1.4</b> R pakker</a></li>
+<li class="chapter" data-level="1.5" data-path="baser.html"><a href="baser.html#hvor-kommer-vores-data-fra"><i class="fa fa-check"></i><b>1.5</b> Hvor kommer vores data fra?</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="baser.html"><a href="baser.html#indbyggede-datasæt"><i class="fa fa-check"></i><b>1.5.1</b> Indbyggede datasæt</a></li>
+<li class="chapter" data-level="1.5.2" data-path="baser.html"><a href="baser.html#importering-af-data-fra-.txt-fil"><i class="fa fa-check"></i><b>1.5.2</b> Importering af data fra .txt fil</a></li>
+<li class="chapter" data-level="1.5.3" data-path="baser.html"><a href="baser.html#importering-af-data-fra-excel"><i class="fa fa-check"></i><b>1.5.3</b> Importering af data fra Excel</a></li>
+<li class="chapter" data-level="1.5.4" data-path="baser.html"><a href="baser.html#kaggle"><i class="fa fa-check"></i><b>1.5.4</b> Kaggle</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="baser.html"><a href="baser.html#beregninger-i-r"><i class="fa fa-check"></i><b>1.6</b> Beregninger i R</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="baser.html"><a href="baser.html#objektor"><i class="fa fa-check"></i><b>1.6.1</b> Objektor</a></li>
+<li class="chapter" data-level="1.6.2" data-path="baser.html"><a href="baser.html#vectorer"><i class="fa fa-check"></i><b>1.6.2</b> Vectorer</a></li>
+<li class="chapter" data-level="1.6.3" data-path="baser.html"><a href="baser.html#datatyper"><i class="fa fa-check"></i><b>1.6.3</b> datatyper</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="baser.html"><a href="baser.html#dataframes"><i class="fa fa-check"></i><b>1.7</b> Dataframes</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="baser.html"><a href="baser.html#delmængder-af-dataframes"><i class="fa fa-check"></i><b>1.7.1</b> Delmængder af dataframes</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="baser.html"><a href="baser.html#ifelse"><i class="fa fa-check"></i><b>1.8</b> If/else</a></li>
+<li class="chapter" data-level="1.9" data-path="baser.html"><a href="baser.html#loops"><i class="fa fa-check"></i><b>1.9</b> Loops</a></li>
+<li class="chapter" data-level="1.10" data-path="baser.html"><a href="baser.html#descriptive-statistics"><i class="fa fa-check"></i><b>1.10</b> Descriptive statistics</a>
+<ul>
+<li class="chapter" data-level="1.10.1" data-path="baser.html"><a href="baser.html#simulere-data-fra-den-normale-fordeling"><i class="fa fa-check"></i><b>1.10.1</b> Simulere data fra den normale fordeling</a></li>
+<li class="chapter" data-level="1.10.2" data-path="baser.html"><a href="baser.html#measures-of-central-tendency"><i class="fa fa-check"></i><b>1.10.2</b> Measures of central tendency</a></li>
+<li class="chapter" data-level="1.10.3" data-path="baser.html"><a href="baser.html#tapply"><i class="fa fa-check"></i><b>1.10.3</b> <code>tapply()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="1.11" data-path="baser.html"><a href="baser.html#statistike-tester"><i class="fa fa-check"></i><b>1.11</b> Statistike tester</a>
+<ul>
+<li class="chapter" data-level="1.11.1" data-path="baser.html"><a href="baser.html#p-værdien"><i class="fa fa-check"></i><b>1.11.1</b> P-værdien</a></li>
+<li class="chapter" data-level="1.11.2" data-path="baser.html"><a href="baser.html#korrelation"><i class="fa fa-check"></i><b>1.11.2</b> Korrelation</a></li>
+<li class="chapter" data-level="1.11.3" data-path="baser.html"><a href="baser.html#test-for-uafhængighed-chi-sq-test"><i class="fa fa-check"></i><b>1.11.3</b> Test for uafhængighed (chi-sq test)</a></li>
+<li class="chapter" data-level="1.11.4" data-path="baser.html"><a href="baser.html#sample-t-test"><i class="fa fa-check"></i><b>1.11.4</b> 1 sample t-test</a></li>
+<li class="chapter" data-level="1.11.5" data-path="baser.html"><a href="baser.html#sample-t-test-1"><i class="fa fa-check"></i><b>1.11.5</b> 2-sample t-test</a></li>
+<li class="chapter" data-level="1.11.6" data-path="baser.html"><a href="baser.html#paired-t-test"><i class="fa fa-check"></i><b>1.11.6</b> Paired t-test</a></li>
+<li class="chapter" data-level="1.11.7" data-path="baser.html"><a href="baser.html#anova-variansanalyse"><i class="fa fa-check"></i><b>1.11.7</b> ANOVA (variansanalyse)</a></li>
+<li class="chapter" data-level="1.11.8" data-path="baser.html"><a href="baser.html#lineær-regression"><i class="fa fa-check"></i><b>1.11.8</b> Lineær regression</a></li>
+<li class="chapter" data-level="1.11.9" data-path="baser.html"><a href="baser.html#r-squared-coefficient-of-determination"><i class="fa fa-check"></i><b>1.11.9</b> R-squared coefficient of determination</a></li>
+<li class="chapter" data-level="1.11.10" data-path="baser.html"><a href="baser.html#antagelser---lineær-regression"><i class="fa fa-check"></i><b>1.11.10</b> Antagelser - lineær regression</a></li>
+<li class="chapter" data-level="1.11.11" data-path="baser.html"><a href="baser.html#multiple-lineær-regression"><i class="fa fa-check"></i><b>1.11.11</b> Multiple lineær regression</a></li>
+</ul></li>
+<li class="chapter" data-level="1.12" data-path="baser.html"><a href="baser.html#problemstillinger"><i class="fa fa-check"></i><b>1.12</b> Problemstillinger</a>
+<ul>
+<li class="chapter" data-level="1.12.1" data-path="baser.html"><a href="baser.html#quiz---basics"><i class="fa fa-check"></i><b>1.12.1</b> Quiz - Basics</a></li>
+<li class="chapter" data-level="1.12.2" data-path="baser.html"><a href="baser.html#grundlæggende-r"><i class="fa fa-check"></i><b>1.12.2</b> Grundlæggende R</a></li>
+<li class="chapter" data-level="1.12.3" data-path="baser.html"><a href="baser.html#kort-analyse-med-reaktionstider"><i class="fa fa-check"></i><b>1.12.3</b> Kort analyse med reaktionstider</a></li>
+<li class="chapter" data-level="1.12.4" data-path="baser.html"><a href="baser.html#øvelse-med-co2"><i class="fa fa-check"></i><b>1.12.4</b> Øvelse med CO2</a></li>
+<li class="chapter" data-level="1.12.5" data-path="baser.html"><a href="baser.html#ekstra-øvelser-med-statistik-tests"><i class="fa fa-check"></i><b>1.12.5</b> Ekstra øvelser med statistik tests</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i><b>2</b> Introduktion til R Markdown</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rmarkdown.html"><a href="rmarkdown.html#inledning-til-kapital"><i class="fa fa-check"></i><b>2.1</b> Inledning til kapital</a></li>
+<li class="chapter" data-level="2.2" data-path="rmarkdown.html"><a href="rmarkdown.html#hvad-er-r-markdown"><i class="fa fa-check"></i><b>2.2</b> Hvad er R Markdown?</a></li>
+<li class="chapter" data-level="2.3" data-path="rmarkdown.html"><a href="rmarkdown.html#installere-r-markdown"><i class="fa fa-check"></i><b>2.3</b> Installere R Markdown</a></li>
+<li class="chapter" data-level="2.4" data-path="rmarkdown.html"><a href="rmarkdown.html#videodemonstrationer"><i class="fa fa-check"></i><b>2.4</b> Videodemonstrationer</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="rmarkdown.html"><a href="rmarkdown.html#video-1"><i class="fa fa-check"></i><b>2.4.1</b> Video 1</a></li>
+<li class="chapter" data-level="2.4.2" data-path="rmarkdown.html"><a href="rmarkdown.html#video-2"><i class="fa fa-check"></i><b>2.4.2</b> Video 2</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="rmarkdown.html"><a href="rmarkdown.html#oprette-et-nyt-dokument-i-r-markdown"><i class="fa fa-check"></i><b>2.5</b> Oprette et nyt dokument i R Markdown</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="rmarkdown.html"><a href="rmarkdown.html#yaml"><i class="fa fa-check"></i><b>2.5.1</b> YAML</a></li>
+<li class="chapter" data-level="2.5.2" data-path="rmarkdown.html"><a href="rmarkdown.html#globale-options"><i class="fa fa-check"></i><b>2.5.2</b> Globale options</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="rmarkdown.html"><a href="rmarkdown.html#skrive-baseret-tekst"><i class="fa fa-check"></i><b>2.6</b> Skrive baseret tekst</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="rmarkdown.html"><a href="rmarkdown.html#headers"><i class="fa fa-check"></i><b>2.6.1</b> Headers</a></li>
+<li class="chapter" data-level="2.6.2" data-path="rmarkdown.html"><a href="rmarkdown.html#liste"><i class="fa fa-check"></i><b>2.6.2</b> liste</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="rmarkdown.html"><a href="rmarkdown.html#knitte-kode"><i class="fa fa-check"></i><b>2.7</b> Knitte kode</a></li>
+<li class="chapter" data-level="2.8" data-path="rmarkdown.html"><a href="rmarkdown.html#kode-chunks"><i class="fa fa-check"></i><b>2.8</b> Kode chunks</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="rmarkdown.html"><a href="rmarkdown.html#et-godt-råd-når-man-arbejder-med-chunks"><i class="fa fa-check"></i><b>2.8.1</b> Et godt råd når man arbejder med chunks</a></li>
+<li class="chapter" data-level="2.8.2" data-path="rmarkdown.html"><a href="rmarkdown.html#chunk-indstillinger"><i class="fa fa-check"></i><b>2.8.2</b> Chunk indstillinger</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="rmarkdown.html"><a href="rmarkdown.html#r-beregninger-inden-for-teksten-i-dokumentet-inline-code"><i class="fa fa-check"></i><b>2.9</b> R beregninger inden for teksten i dokumentet (‘inline code’)</a></li>
+<li class="chapter" data-level="2.10" data-path="rmarkdown.html"><a href="rmarkdown.html#working-directory-1"><i class="fa fa-check"></i><b>2.10</b> Working directory</a></li>
+<li class="chapter" data-level="2.11" data-path="rmarkdown.html"><a href="rmarkdown.html#matematik"><i class="fa fa-check"></i><b>2.11</b> Matematik</a></li>
+<li class="chapter" data-level="2.12" data-path="rmarkdown.html"><a href="rmarkdown.html#ofte-set-fejl"><i class="fa fa-check"></i><b>2.12</b> Ofte set fejl</a></li>
+<li class="chapter" data-level="2.13" data-path="rmarkdown.html"><a href="rmarkdown.html#problemstillinger-1"><i class="fa fa-check"></i><b>2.13</b> Problemstillinger</a></li>
+<li class="chapter" data-level="2.14" data-path="rmarkdown.html"><a href="rmarkdown.html#færdig-for-i-dag-og-næste-gang"><i class="fa fa-check"></i><b>2.14</b> Færdig for i dag og næste gang</a></li>
+<li class="chapter" data-level="2.15" data-path="rmarkdown.html"><a href="rmarkdown.html#ekstra-links"><i class="fa fa-check"></i><b>2.15</b> Ekstra links</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="visual1.html"><a href="visual1.html"><i class="fa fa-check"></i><b>3</b> Visualisering - ggplot2 dag 1</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="visual1.html"><a href="visual1.html#læringsmålene-og-videoer"><i class="fa fa-check"></i><b>3.1</b> Læringsmålene og videoer</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="visual1.html"><a href="visual1.html#hvad-er-ggplot2"><i class="fa fa-check"></i><b>3.1.1</b> Hvad er <strong>ggplot2</strong>?</a></li>
+<li class="chapter" data-level="3.1.2" data-path="visual1.html"><a href="visual1.html#brugen-af-materialerne"><i class="fa fa-check"></i><b>3.1.2</b> Brugen af materialerne</a></li>
+<li class="chapter" data-level="3.1.3" data-path="visual1.html"><a href="visual1.html#video-ressourcer"><i class="fa fa-check"></i><b>3.1.3</b> Video ressourcer</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="visual1.html"><a href="visual1.html#transition-fra-base-r-til-ggplot2"><i class="fa fa-check"></i><b>3.2</b> Transition fra base R til ggplot2</a></li>
+<li class="chapter" data-level="3.3" data-path="visual1.html"><a href="visual1.html#vores-første-ggplot"><i class="fa fa-check"></i><b>3.3</b> Vores første ggplot</a></li>
+<li class="chapter" data-level="3.4" data-path="visual1.html"><a href="visual1.html#lidt-om-ggplot2"><i class="fa fa-check"></i><b>3.4</b> Lidt om ggplot2</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="visual1.html"><a href="visual1.html#syntax"><i class="fa fa-check"></i><b>3.4.1</b> Syntax</a></li>
+<li class="chapter" data-level="3.4.2" data-path="visual1.html"><a href="visual1.html#hvad-betyder-egentlig-grammar-of-graphics"><i class="fa fa-check"></i><b>3.4.2</b> Hvad betyder egentlig grammar of graphics?</a></li>
+<li class="chapter" data-level="3.4.3" data-path="visual1.html"><a href="visual1.html#global-versus-lokal-æstetik"><i class="fa fa-check"></i><b>3.4.3</b> Global versus lokal æstetik</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="visual1.html"><a href="visual1.html#specificere-etiketter-og-titel"><i class="fa fa-check"></i><b>3.5</b> Specificere etiketter og titel</a></li>
+<li class="chapter" data-level="3.6" data-path="visual1.html"><a href="visual1.html#ændre-farver"><i class="fa fa-check"></i><b>3.6</b> Ændre farver</a></li>
+<li class="chapter" data-level="3.7" data-path="visual1.html"><a href="visual1.html#ændre-tema"><i class="fa fa-check"></i><b>3.7</b> Ændre tema</a></li>
+<li class="chapter" data-level="3.8" data-path="visual1.html"><a href="visual1.html#forskellige-geoms"><i class="fa fa-check"></i><b>3.8</b> Forskellige geoms</a>
+<ul>
+<li class="chapter" data-level="3.8.1" data-path="visual1.html"><a href="visual1.html#boxplot-geom_box"><i class="fa fa-check"></i><b>3.8.1</b> Boxplot (<code>geom_box</code>)</a></li>
+<li class="chapter" data-level="3.8.2" data-path="visual1.html"><a href="visual1.html#barplot-geom_bar"><i class="fa fa-check"></i><b>3.8.2</b> Barplot (<code>geom_bar</code>)</a></li>
+<li class="chapter" data-level="3.8.3" data-path="visual1.html"><a href="visual1.html#histogram-geom_histogram"><i class="fa fa-check"></i><b>3.8.3</b> Histogram (<code>geom_histogram</code>)</a></li>
+<li class="chapter" data-level="3.8.4" data-path="visual1.html"><a href="visual1.html#density-geom_density"><i class="fa fa-check"></i><b>3.8.4</b> Density (<code>geom_density</code>)</a></li>
+<li class="chapter" data-level="3.8.5" data-path="visual1.html"><a href="visual1.html#line-plot-geom_line"><i class="fa fa-check"></i><b>3.8.5</b> Line plot (<code>geom_line()</code>)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="visual1.html"><a href="visual1.html#troubleshooting"><i class="fa fa-check"></i><b>3.9</b> Troubleshooting</a></li>
+<li class="chapter" data-level="3.10" data-path="visual1.html"><a href="visual1.html#problemstillinger-2"><i class="fa fa-check"></i><b>3.10</b> Problemstillinger</a></li>
+<li class="chapter" data-level="3.11" data-path="visual1.html"><a href="visual1.html#næste-gang"><i class="fa fa-check"></i><b>3.11</b> Næste gang</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visual2.html"><a href="visual2.html"><i class="fa fa-check"></i><b>4</b> Visualisering - ggplot2 dag 2</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="visual2.html"><a href="visual2.html#læringsmål-og-videoer"><i class="fa fa-check"></i><b>4.1</b> Læringsmål og videoer</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="visual2.html"><a href="visual2.html#video-ressourcer-1"><i class="fa fa-check"></i><b>4.1.1</b> Video ressourcer</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="visual2.html"><a href="visual2.html#koordinat-systemer"><i class="fa fa-check"></i><b>4.2</b> Koordinat systemer</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="visual2.html"><a href="visual2.html#zoom-coord_cartesian-expand_limits"><i class="fa fa-check"></i><b>4.2.1</b> Zoom (<code>coord_cartesian()</code>, <code>expand_limits()</code>)</a></li>
+<li class="chapter" data-level="4.2.2" data-path="visual2.html"><a href="visual2.html#transformering-af-akserne---log-sqrt-osv-scale_x_continuous."><i class="fa fa-check"></i><b>4.2.2</b> Transformering af akserne - log, sqrt osv (<code>scale_x_continuous</code>).</a></li>
+<li class="chapter" data-level="4.2.3" data-path="visual2.html"><a href="visual2.html#flip-coordinates-coord_flip"><i class="fa fa-check"></i><b>4.2.3</b> Flip coordinates (<code>coord_flip</code>)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="visual2.html"><a href="visual2.html#mere-om-farver-og-punkt-former"><i class="fa fa-check"></i><b>4.3</b> Mere om farver og punkt former</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="visual2.html"><a href="visual2.html#automatisk-farver"><i class="fa fa-check"></i><b>4.3.1</b> Automatisk farver</a></li>
+<li class="chapter" data-level="4.3.2" data-path="visual2.html"><a href="visual2.html#manuelle-farver"><i class="fa fa-check"></i><b>4.3.2</b> Manuelle farver</a></li>
+<li class="chapter" data-level="4.3.3" data-path="visual2.html"><a href="visual2.html#punkt-former"><i class="fa fa-check"></i><b>4.3.3</b> Punkt former</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="visual2.html"><a href="visual2.html#annotations-geom_text"><i class="fa fa-check"></i><b>4.4</b> Annotations (<code>geom_text</code>)</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="visual2.html"><a href="visual2.html#tilføjelse-af-etiketter-direkte-på-plottet."><i class="fa fa-check"></i><b>4.4.1</b> Tilføjelse af etiketter direkte på plottet.</a></li>
+<li class="chapter" data-level="4.4.2" data-path="visual2.html"><a href="visual2.html#pakken-ggrepel-for-at-tilføje-tekst-labeller"><i class="fa fa-check"></i><b>4.4.2</b> Pakken <code>ggrepel</code> for at tilføje tekst labeller</a></li>
+<li class="chapter" data-level="4.4.3" data-path="visual2.html"><a href="visual2.html#tilføjelse-af-rektangler-i-regioner-af-interesse-annotate"><i class="fa fa-check"></i><b>4.4.3</b> Tilføjelse af rektangler i regioner af interesse (<code>annotate</code>)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="visual2.html"><a href="visual2.html#adskille-plots-med-facets-facet_gridfacet_wrap"><i class="fa fa-check"></i><b>4.5</b> Adskille plots med facets (<code>facet_grid</code>/<code>facet_wrap</code>)</a></li>
+<li class="chapter" data-level="4.6" data-path="visual2.html"><a href="visual2.html#gemme-dit-plot"><i class="fa fa-check"></i><b>4.6</b> Gemme dit plot</a></li>
+<li class="chapter" data-level="4.7" data-path="visual2.html"><a href="visual2.html#problemstillinger-3"><i class="fa fa-check"></i><b>4.7</b> Problemstillinger</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>5</b> Bearbejdning - tidyverse dag 1</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data.html"><a href="data.html#idéen-med-tidyverse"><i class="fa fa-check"></i><b>5.1</b> Idéen med tidyverse</a></li>
+<li class="chapter" data-level="5.2" data-path="data.html"><a href="data.html#video-ressourcer-2"><i class="fa fa-check"></i><b>5.2</b> Video ressourcer</a></li>
+<li class="chapter" data-level="5.3" data-path="data.html"><a href="data.html#oversigt-over-pakker"><i class="fa fa-check"></i><b>5.3</b> Oversigt over pakker</a></li>
+<li class="chapter" data-level="5.4" data-path="data.html"><a href="data.html#principper-af-tidy-data"><i class="fa fa-check"></i><b>5.4</b> Principper af ‘tidy’ data</a></li>
+<li class="chapter" data-level="5.5" data-path="data.html"><a href="data.html#lidt-om-tibbles"><i class="fa fa-check"></i><b>5.5</b> Lidt om <code>tibbles</code></a></li>
+<li class="chapter" data-level="5.6" data-path="data.html"><a href="data.html#transition-fra-base-r-til-tidyverse"><i class="fa fa-check"></i><b>5.6</b> Transition fra base-R til tidyverse</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="data.html"><a href="data.html#om-titanic-datasættet"><i class="fa fa-check"></i><b>5.6.1</b> Om <strong>Titanic</strong> datasættet</a></li>
+<li class="chapter" data-level="5.6.2" data-path="data.html"><a href="data.html#titanic-rengøring"><i class="fa fa-check"></i><b>5.6.2</b> Titanic: Rengøring</a></li>
+<li class="chapter" data-level="5.6.3" data-path="data.html"><a href="data.html#pipe"><i class="fa fa-check"></i><b>5.6.3</b> Pipe</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="data.html"><a href="data.html#bearbejdning-af-data-dplyr"><i class="fa fa-check"></i><b>5.7</b> Bearbejdning af data: <code>dplyr</code></a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="data.html"><a href="data.html#dplyr-verbs-select"><i class="fa fa-check"></i><b>5.7.1</b> dplyr verbs: <code>select()</code></a></li>
+<li class="chapter" data-level="5.7.2" data-path="data.html"><a href="data.html#dplyr-verbs-filter"><i class="fa fa-check"></i><b>5.7.2</b> dplyr verbs: <code>filter()</code></a></li>
+<li class="chapter" data-level="5.7.3" data-path="data.html"><a href="data.html#sammenligningsoperatorer"><i class="fa fa-check"></i><b>5.7.3</b> Sammenligningsoperatorer</a></li>
+<li class="chapter" data-level="5.7.4" data-path="data.html"><a href="data.html#kombinere-filter-og-select"><i class="fa fa-check"></i><b>5.7.4</b> Kombinere <code>filter()</code> og <code>select()</code></a></li>
+<li class="chapter" data-level="5.7.5" data-path="data.html"><a href="data.html#dplyr-verbs-mutate"><i class="fa fa-check"></i><b>5.7.5</b> dplyr verbs: <code>mutate()</code></a></li>
+<li class="chapter" data-level="5.7.6" data-path="data.html"><a href="data.html#rename"><i class="fa fa-check"></i><b>5.7.6</b> <code>rename()</code></a></li>
+<li class="chapter" data-level="5.7.7" data-path="data.html"><a href="data.html#dplyr-verbs-recode"><i class="fa fa-check"></i><b>5.7.7</b> dplyr verbs: <code>recode()</code></a></li>
+<li class="chapter" data-level="5.7.8" data-path="data.html"><a href="data.html#dplyr-verbs-arrange"><i class="fa fa-check"></i><b>5.7.8</b> dplyr verbs: <code>arrange()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="data.html"><a href="data.html#visualisering-bruge-som-input-i-ggplot2"><i class="fa fa-check"></i><b>5.8</b> Visualisering: bruge som input i ggplot2</a></li>
+<li class="chapter" data-level="5.9" data-path="data.html"><a href="data.html#ekstra-funktioner-som-er-nyttige-at-vide"><i class="fa fa-check"></i><b>5.9</b> Ekstra funktioner som er nyttige at vide</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="data.html"><a href="data.html#pull"><i class="fa fa-check"></i><b>5.9.1</b> Pull</a></li>
+<li class="chapter" data-level="5.9.2" data-path="data.html"><a href="data.html#slice"><i class="fa fa-check"></i><b>5.9.2</b> Slice</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="data.html"><a href="data.html#problemstillinger-4"><i class="fa fa-check"></i><b>5.10</b> Problemstillinger</a></li>
+<li class="chapter" data-level="5.11" data-path="data.html"><a href="data.html#kommentarer"><i class="fa fa-check"></i><b>5.11</b> Kommentarer</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data2.html"><a href="data2.html"><i class="fa fa-check"></i><b>6</b> Bearbejdning - tidyverse dag 2</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="data2.html"><a href="data2.html#introduktion-og-læringsmålene"><i class="fa fa-check"></i><b>6.1</b> Introduktion og læringsmålene</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="data2.html"><a href="data2.html#læringsmålene"><i class="fa fa-check"></i><b>6.1.1</b> Læringsmålene</a></li>
+<li class="chapter" data-level="6.1.2" data-path="data2.html"><a href="data2.html#videoer"><i class="fa fa-check"></i><b>6.1.2</b> Videoer</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="data2.html"><a href="data2.html#kombinationen-af-group_by-og-summarise-i-dplyr-pakken"><i class="fa fa-check"></i><b>6.2</b> Kombinationen af <code>group_by()</code> og <code>summarise()</code> i <code>dplyr</code>-pakken</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="data2.html"><a href="data2.html#reference-af-summarise-funktioner"><i class="fa fa-check"></i><b>6.2.1</b> Reference af <code>summarise()</code>-funktioner</a></li>
+<li class="chapter" data-level="6.2.2" data-path="data2.html"><a href="data2.html#flere-summeringsstatistikker-på-én-gang"><i class="fa fa-check"></i><b>6.2.2</b> Flere summeringsstatistikker på én gang</a></li>
+<li class="chapter" data-level="6.2.3" data-path="data2.html"><a href="data2.html#mere-avanceret-group_by"><i class="fa fa-check"></i><b>6.2.3</b> Mere avanceret <code>group_by()</code></a></li>
+<li class="chapter" data-level="6.2.4" data-path="data2.html"><a href="data2.html#funktionen-ungroup"><i class="fa fa-check"></i><b>6.2.4</b> Funktionen <code>ungroup()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="data2.html"><a href="data2.html#pivot_longerpivot_wider-fra-tidyr-pakken"><i class="fa fa-check"></i><b>6.3</b> <code>pivot_longer()</code>/<code>pivot_wider()</code> fra <code>tidyr</code>-pakken</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="data2.html"><a href="data2.html#oversigt-over-tidyr-pakken"><i class="fa fa-check"></i><b>6.3.1</b> Oversigt over <code>tidyr</code> pakken</a></li>
+<li class="chapter" data-level="6.3.2" data-path="data2.html"><a href="data2.html#reshape-data-fra-wide-til-long-med-pivot_longer"><i class="fa fa-check"></i><b>6.3.2</b> Reshape data fra wide til long med <code>pivot_longer()</code></a></li>
+<li class="chapter" data-level="6.3.3" data-path="data2.html"><a href="data2.html#separate"><i class="fa fa-check"></i><b>6.3.3</b> <code>separate()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="data2.html"><a href="data2.html#eksempel-titanic-opsummeringsstatistikker"><i class="fa fa-check"></i><b>6.4</b> Eksempel: Titanic opsummeringsstatistikker</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="data2.html"><a href="data2.html#pivot_wider"><i class="fa fa-check"></i><b>6.4.1</b> <code>pivot_wider()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="data2.html"><a href="data2.html#left_join-forbinde-dataframes"><i class="fa fa-check"></i><b>6.5</b> <code>left_join()</code>: forbinde dataframes</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="data2.html"><a href="data2.html#left_join-fra-dplyr-pakken"><i class="fa fa-check"></i><b>6.5.1</b> <code>left_join()</code> fra dplyr-pakken</a></li>
+<li class="chapter" data-level="6.5.2" data-path="data2.html"><a href="data2.html#anvend-left_join-på-vores-datasæt."><i class="fa fa-check"></i><b>6.5.2</b> Anvend <code>left_join()</code> på vores datasæt.</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="data2.html"><a href="data2.html#problemstillinger-5"><i class="fa fa-check"></i><b>6.6</b> Problemstillinger</a></li>
+<li class="chapter" data-level="6.7" data-path="data2.html"><a href="data2.html#ekstra-links-1"><i class="fa fa-check"></i><b>6.7</b> Ekstra links</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html"><i class="fa fa-check"></i><b>7</b> Functional programming med purrr-pakken</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#inledning-og-læringsmålene"><i class="fa fa-check"></i><b>7.1</b> Inledning og læringsmålene</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#videorressourcer"><i class="fa fa-check"></i><b>7.1.1</b> Videorressourcer</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#iterative-processer-med-map-funktioner"><i class="fa fa-check"></i><b>7.2</b> Iterative processer med <code>map()</code> funktioner</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#introduktion-til-map-funktioner"><i class="fa fa-check"></i><b>7.2.1</b> Introduktion til <code>map()</code> funktioner</a></li>
+<li class="chapter" data-level="7.2.2" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#reference-for-de-forskellige-map-funktioner"><i class="fa fa-check"></i><b>7.2.2</b> Reference for de forskellige map-funktioner</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#brugerdefinerede-funktioner"><i class="fa fa-check"></i><b>7.3</b> Brugerdefinerede funktioner</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#simple-funktioner"><i class="fa fa-check"></i><b>7.3.1</b> Simple funktioner</a></li>
+<li class="chapter" data-level="7.3.2" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#brugerdefinerede-funktioner-med-map"><i class="fa fa-check"></i><b>7.3.2</b> Brugerdefinerede funktioner med map</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#effekten-af-map-på-vektorer-dataframe-eller-liste"><i class="fa fa-check"></i><b>7.4</b> Effekten af <code>map()</code> på vektorer, dataframe eller liste</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#input-vektor"><i class="fa fa-check"></i><b>7.4.1</b> <strong>Input: vektor</strong></a></li>
+<li class="chapter" data-level="7.4.2" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#input-dataframe"><i class="fa fa-check"></i><b>7.4.2</b> <strong>Input: dataframe</strong></a></li>
+<li class="chapter" data-level="7.4.3" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#input-liste"><i class="fa fa-check"></i><b>7.4.3</b> <strong>Input: liste</strong></a></li>
+<li class="chapter" data-level="7.4.4" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#liste-af-dataframes"><i class="fa fa-check"></i><b>7.4.4</b> <strong>Liste af dataframes</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#nesting-med-nest"><i class="fa fa-check"></i><b>7.5</b> Nesting med <code>nest()</code></a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#anvendelse-af-map-med-nested-data"><i class="fa fa-check"></i><b>7.5.1</b> Anvendelse af map() med nested data</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#andre-brugbar-purrr"><i class="fa fa-check"></i><b>7.6</b> Andre brugbar purrr</a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#map2-funktion-for-to-input-vektorer"><i class="fa fa-check"></i><b>7.6.1</b> <code>map2()</code> funktion for to input-vektorer</a></li>
+<li class="chapter" data-level="7.6.2" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#map_if-til-transformering-af-numeriske-variabler"><i class="fa fa-check"></i><b>7.6.2</b> <code>map_if()</code> til transformering af numeriske variabler</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#problemstillinger-6"><i class="fa fa-check"></i><b>7.7</b> Problemstillinger</a></li>
+<li class="chapter" data-level="7.8" data-path="functional-programming-med-purrr-pakken.html"><a href="functional-programming-med-purrr-pakken.html#ekstra-notater-og-næste-gang"><i class="fa fa-check"></i><b>7.8</b> Ekstra notater og næste gang</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html"><i class="fa fa-check"></i><b>8</b> Visualisering af trends</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#indledning"><i class="fa fa-check"></i><b>8.1</b> Indledning</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#læringsmål"><i class="fa fa-check"></i><b>8.1.1</b> Læringsmål</a></li>
+<li class="chapter" data-level="8.1.2" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#introduktion-til-kapitlet"><i class="fa fa-check"></i><b>8.1.2</b> Introduktion til kapitlet</a></li>
+<li class="chapter" data-level="8.1.3" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#videoressourcer"><i class="fa fa-check"></i><b>8.1.3</b> Videoressourcer</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#nest-og-map-eksempel-med-korrelation"><i class="fa fa-check"></i><b>8.2</b> <code>nest()</code> og <code>map()</code>: eksempel med korrelation</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#korrelation-over-flere-datasæt-på-en-gang"><i class="fa fa-check"></i><b>8.2.1</b> Korrelation over flere datasæt på en gang</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#lineær-regression---visualisering"><i class="fa fa-check"></i><b>8.3</b> Lineær regression - visualisering</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#lineære-trends"><i class="fa fa-check"></i><b>8.3.1</b> Lineære trends</a></li>
+<li class="chapter" data-level="8.3.2" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#geom_smooth-lm-trendlinjer"><i class="fa fa-check"></i><b>8.3.2</b> <code>geom_smooth()</code>: <code>lm</code> trendlinjer</a></li>
+<li class="chapter" data-level="8.3.3" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#geom_smooth-flere-lm-trendlinjer-på-samme-plot"><i class="fa fa-check"></i><b>8.3.3</b> <code>geom_smooth()</code>: flere <code>lm</code> trendlinjer på samme plot</a></li>
+<li class="chapter" data-level="8.3.4" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#trendlinjer-med-methodloess"><i class="fa fa-check"></i><b>8.3.4</b> Trendlinjer med <code>method=="loess"</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#plot-linear-regresion-estimates"><i class="fa fa-check"></i><b>8.4</b> Plot linear regresion estimates</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#anvendelse-af-lm-over-nestede-datasæt"><i class="fa fa-check"></i><b>8.4.1</b> Anvendelse af <code>lm()</code> over nestede datasæt</a></li>
+<li class="chapter" data-level="8.4.2" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#funktionen-glue-til-at-tilføje-etiketter"><i class="fa fa-check"></i><b>8.4.2</b> Funktionen <code>glue()</code> til at tilføje etiketter</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#multipel-regression-og-model-sammenligning"><i class="fa fa-check"></i><b>8.5</b> Multipel regression og model sammenligning</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#anova-til-at-sammenligne-de-forskellige-modeller"><i class="fa fa-check"></i><b>8.5.1</b> <code>anova</code> til at sammenligne de forskellige modeller</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#problemstillinger-7"><i class="fa fa-check"></i><b>8.6</b> Problemstillinger</a></li>
+<li class="chapter" data-level="8.7" data-path="visualisering-af-trends.html"><a href="visualisering-af-trends.html#ekstra"><i class="fa fa-check"></i><b>8.7</b> Ekstra</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>9</b> Clustering</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="clustering.html"><a href="clustering.html#indledning-og-læringsmål"><i class="fa fa-check"></i><b>9.1</b> Indledning og læringsmål</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="clustering.html"><a href="clustering.html#læringsmål-1"><i class="fa fa-check"></i><b>9.1.1</b> Læringsmål</a></li>
+<li class="chapter" data-level="9.1.2" data-path="clustering.html"><a href="clustering.html#indledning-til-kapitel"><i class="fa fa-check"></i><b>9.1.2</b> Indledning til kapitel</a></li>
+<li class="chapter" data-level="9.1.3" data-path="clustering.html"><a href="clustering.html#video-ressourcer-3"><i class="fa fa-check"></i><b>9.1.3</b> Video ressourcer</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="clustering.html"><a href="clustering.html#method-1-k-means-clustering"><i class="fa fa-check"></i><b>9.2</b> Method 1: K-means clustering</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="clustering.html"><a href="clustering.html#hvordan-fungerer-kmeans"><i class="fa fa-check"></i><b>9.2.1</b> Hvordan fungerer kmeans?</a></li>
+<li class="chapter" data-level="9.2.2" data-path="clustering.html"><a href="clustering.html#withinbetween-sum-of-squares"><i class="fa fa-check"></i><b>9.2.2</b> Within/between sum of squares</a></li>
+<li class="chapter" data-level="9.2.3" data-path="clustering.html"><a href="clustering.html#kør-k-means-i-r"><i class="fa fa-check"></i><b>9.2.3</b> Kør k-means i R</a></li>
+<li class="chapter" data-level="9.2.4" data-path="clustering.html"><a href="clustering.html#ryd-op-i-k-means-resultaterne-med-pakken-broom"><i class="fa fa-check"></i><b>9.2.4</b> Ryd op i k-means resultaterne med pakken <code>broom</code></a></li>
+<li class="chapter" data-level="9.2.5" data-path="clustering.html"><a href="clustering.html#plotcentroids"><i class="fa fa-check"></i><b>9.2.5</b> Plot cluster centroids</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="clustering.html"><a href="clustering.html#kmeans-hvor-mange-clusters"><i class="fa fa-check"></i><b>9.3</b> Kmeans: hvor mange clusters?</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="clustering.html"><a href="clustering.html#få-broom-output-for-forskellige-antal-clusters"><i class="fa fa-check"></i><b>9.3.1</b> Få Broom output for forskellige antal clusters</a></li>
+<li class="chapter" data-level="9.3.2" data-path="clustering.html"><a href="clustering.html#elbow-plot-glance"><i class="fa fa-check"></i><b>9.3.2</b> Elbow plot (glance)</a></li>
+<li class="chapter" data-level="9.3.3" data-path="clustering.html"><a href="clustering.html#automatisk-beslutning-med-pakken-nbclust"><i class="fa fa-check"></i><b>9.3.3</b> Automatisk beslutning med pakken <code>NbClust</code></a></li>
+<li class="chapter" data-level="9.3.4" data-path="clustering.html"><a href="clustering.html#visualisering-af-de-forskellige-antal-clusters-augment"><i class="fa fa-check"></i><b>9.3.4</b> Visualisering af de forskellige antal clusters (augment)</a></li>
+<li class="chapter" data-level="9.3.5" data-path="clustering.html"><a href="clustering.html#nestmap-ramme-fra-sidste-gang"><i class="fa fa-check"></i><b>9.3.5</b> Nest/map-ramme fra sidste gang</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="clustering.html"><a href="clustering.html#metode-2-hierarchical-clustering"><i class="fa fa-check"></i><b>9.4</b> Metode 2: Hierarchical clustering</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="clustering.html"><a href="clustering.html#vælge-ønsket-antal-clusters"><i class="fa fa-check"></i><b>9.4.1</b> Vælge ønsket antal clusters</a></li>
+<li class="chapter" data-level="9.4.2" data-path="clustering.html"><a href="clustering.html#lav-et-pænt-plot-af-dendrogrammet-med-ggplot2"><i class="fa fa-check"></i><b>9.4.2</b> Lav et pænt plot af dendrogrammet med ggplot2</a></li>
+<li class="chapter" data-level="9.4.3" data-path="clustering.html"><a href="clustering.html#afprøve-andre-metoder-på-hierachical-clustering"><i class="fa fa-check"></i><b>9.4.3</b> Afprøve andre metoder på hierachical clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="clustering.html"><a href="clustering.html#problemstillinger-8"><i class="fa fa-check"></i><b>9.5</b> Problemstillinger</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>10</b> Principal component analysis (PCA)</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#indledning-og-læringsmålene"><i class="fa fa-check"></i><b>10.1</b> Indledning og læringsmålene</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#læringsmålene-1"><i class="fa fa-check"></i><b>10.1.1</b> Læringsmålene</a></li>
+<li class="chapter" data-level="10.1.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#introduktion-til-kapitlet-1"><i class="fa fa-check"></i><b>10.1.2</b> Introduktion til kapitlet</a></li>
+<li class="chapter" data-level="10.1.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#videoressourcer-1"><i class="fa fa-check"></i><b>10.1.3</b> Videoressourcer</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#hvad-er-principal-component-analysis-pca"><i class="fa fa-check"></i><b>10.2</b> Hvad er principal component analysis (PCA)?</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#problemet-med-høj-dimensionelle-plots"><i class="fa fa-check"></i><b>10.2.1</b> Problemet med høj-dimensionelle plots</a></li>
+<li class="chapter" data-level="10.2.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#idéen-bag-pca-projektion-på-nye-akser"><i class="fa fa-check"></i><b>10.2.2</b> Idéen bag PCA: Projektion på nye akser</a></li>
+<li class="chapter" data-level="10.2.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#simpelt-eksempel-med-to-dimensioner"><i class="fa fa-check"></i><b>10.2.3</b> Simpelt eksempel med to dimensioner</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#fit-pca-to-data-in-r-med-prcomp"><i class="fa fa-check"></i><b>10.3</b> Fit PCA to data in R med <code>prcomp()</code></a></li>
+<li class="chapter" data-level="10.4" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#integrering-af-pca-resultater-med-broom-pakken"><i class="fa fa-check"></i><b>10.4</b> Integrering af PCA-resultater med broom-pakken</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#lave-plot-af-principal-componenets"><i class="fa fa-check"></i><b>10.4.1</b> Lave plot af principal componenets</a></li>
+<li class="chapter" data-level="10.4.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#forklarede-variance"><i class="fa fa-check"></i><b>10.4.2</b> Forklarede variance</a></li>
+<li class="chapter" data-level="10.4.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#rotationsmatrix-bidragene-fra-de-forskellige-variabler"><i class="fa fa-check"></i><b>10.4.3</b> Rotationsmatrix: bidragene fra de forskellige variabler</a></li>
+<li class="chapter" data-level="10.4.4" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pakken-factoextra"><i class="fa fa-check"></i><b>10.4.4</b> Pakken <code>factoextra</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#problemstillinger-9"><i class="fa fa-check"></i><b>10.5</b> Problemstillinger</a></li>
+<li class="chapter" data-level="10.6" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#ekstra-læsning"><i class="fa fa-check"></i><b>10.6</b> Ekstra læsning</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://sarah-ku.github.io/Visualisering_2025" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analyse og visualisering af biologiske datasæt – 2025</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="principal-component-analysis-pca" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Kapitel 10</span> Principal component analysis (PCA)<a href="principal-component-analysis-pca.html#principal-component-analysis-pca" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>“At lære datalogi er som at lære at stå på ski. Man er nødt til at gøre det.” – Claudia Perlich</p>
+<div id="indledning-og-læringsmålene" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Indledning og læringsmålene<a href="principal-component-analysis-pca.html#indledning-og-læringsmålene" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="læringsmålene-1" class="section level3 hasAnchor" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> Læringsmålene<a href="principal-component-analysis-pca.html#læringsmålene-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="goals">
+<p>Du skal være i stand til at</p>
+<ul>
+<li>Forstå koncepten bag principal component analysis (PCA)</li>
+<li>Benytte PCA i R og lave et plot af et datasæt i to dimensioner</li>
+<li>Vurdere den relative varians forklarede af de forskellige components</li>
+<li>Anvende PCA til at vurdere variablernes bidrag til de principal components</li>
+</ul>
+</div>
+<div class="checklist">
+<ul>
+<li>Se dagens forelæsning om Broom-pakken</li>
+<li>Se videoerne</li>
+<li>Læs 10.4.3 - lidt ekstra tekst om fortolkingen af rotation matrix</li>
+<li>Lav Quiz - Emne 10: PCA</li>
+<li>Lav problemstillingerne</li>
+</ul>
+</div>
+<p>Næste lektion: Workshop 4 om clustering og principal component analyse</p>
+</div>
+<div id="introduktion-til-kapitlet-1" class="section level3 hasAnchor" number="10.1.2">
+<h3><span class="header-section-number">10.1.2</span> Introduktion til kapitlet<a href="principal-component-analysis-pca.html#introduktion-til-kapitlet-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Principal component analysis (PCA) er en meget populær og ofte benyttet statistisk metode indenfor biologiske området. PCA er en metode til dimensionreduktion, der transformerer et datasæt med mange korrelerede variabler til et nyt sæt ortogonale (uafhængige) variable kaldet “principal components” (PC1-PCN, hvor N er antal variabler i datasættet). Det fleste tiden beskæftiger vi os med den første two principle components:</p>
+<ul>
+<li>PC1 fanger mest mulig varians i datasættet.</li>
+<li>PC2 fanger maksimal varians, som ikke allerede er fanget af PC1, og er orthogonal (vinkelret) på PC1.</li>
+</ul>
+<p>Ved at vælge de første komponenter (ofte 2 eller 3) reducerer vi datasættets dimension, mens vi bevarer størst mulig del af den samlede varians. PCA anvendes bl.a. til:</p>
+<ul>
+<li>Visualisering af højdimensionelle data i 2 eller 3 dimensioner.</li>
+<li>Identifikation af redundante variabler (variabler med høj korrelation).</li>
+<li>Forberedelse til andre metoder, som kræver uafhængige variable.</li>
+</ul>
+<p>I biologi bruges PCA typisk til at visualisere kontrol- og behandlingsprøver for at vurdere, om grupperne adskiller sig.</p>
+</div>
+<div id="videoressourcer-1" class="section level3 hasAnchor" number="10.1.3">
+<h3><span class="header-section-number">10.1.3</span> Videoressourcer<a href="principal-component-analysis-pca.html#videoressourcer-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Video 1 - hvad er PCA?</li>
+</ul>
+<p>** Du kan beskrive en dataframe med mange dimensionerne i færre dimensioner.
+** Du kan bruge den til at lave et plot med to dimensioner, der indfanger oplysning fra samtlige variabler i dataframen.</p>
+<div class="vembedr">
+<div>
+<iframe class="vimeo-embed" src="https://player.vimeo.com/video/556581604" width="533" height="300" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" data-external="1"></iframe>
+</div>
+</div>
+<hr />
+<ul>
+<li>Video 2 - hvordan man lave PCA i R og få output i tidy form</li>
+</ul>
+<div class="vembedr">
+<div>
+<iframe class="vimeo-embed" src="https://player.vimeo.com/video/556581588" width="533" height="300" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" data-external="1"></iframe>
+</div>
+</div>
+<hr />
+<ul>
+<li>Video 3 - hvordan man visualiserer de data (principal components, rotation matrix)</li>
+</ul>
+<div class="vembedr">
+<div>
+<iframe class="vimeo-embed" src="https://player.vimeo.com/video/556787141" width="533" height="300" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" data-external="1"></iframe>
+</div>
+</div>
+<ul>
+<li>Efter videoer - lidt ekstra læsning i 10.4.3 (bidragende af de forskellige variabler)</li>
+</ul>
+</div>
+</div>
+<div id="hvad-er-principal-component-analysis-pca" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Hvad er principal component analysis (PCA)?<a href="principal-component-analysis-pca.html#hvad-er-principal-component-analysis-pca" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="problemet-med-høj-dimensionelle-plots" class="section level3 hasAnchor" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> Problemet med høj-dimensionelle plots<a href="principal-component-analysis-pca.html#problemet-med-høj-dimensionelle-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>I sidste lektion arbejdede vi med <code>penguins</code>, hvor vi så, at der faktisk var fire numeriske variabler - altså fire dimensioner - som blev brugt til at lave k-means clustering.</p>
+<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="principal-component-analysis-pca.html#cb582-1" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb582-2"><a href="principal-component-analysis-pca.html#cb582-2" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb582-3"><a href="principal-component-analysis-pca.html#cb582-3" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb582-4"><a href="principal-component-analysis-pca.html#cb582-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year=</span><span class="fu">as.factor</span>(year))</span>
+<span id="cb582-5"><a href="principal-component-analysis-pca.html#cb582-5" tabindex="-1"></a></span>
+<span id="cb582-6"><a href="principal-component-analysis-pca.html#cb582-6" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 6 × 4
+#&gt;   bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+#&gt;            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+#&gt; 1           39.1          18.7               181        3750
+#&gt; 2           39.5          17.4               186        3800
+#&gt; 3           40.3          18                 195        3250
+#&gt; 4           36.7          19.3               193        3450
+#&gt; 5           39.3          20.6               190        3650
+#&gt; 6           38.9          17.8               181        3625</code></pre>
+<p>Når man laver et punkt plot for at vise de forskellige clusters, som er beregnet fra alle numeriske variabler, får man et problem - nemlig hvilke to variabler skal plottes? Man kan plotte hver eneste par af variabler. For eksempel kan man prøve en pakke, der hedder <code>GGally</code>, som automatisk kan plotte de forskellige par af numeriske variabler og beregner korrelationen mellem variablerne.</p>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="principal-component-analysis-pca.html#cb584-1" tabindex="-1"></a><span class="fu">require</span>(GGally)</span>
+<span id="cb584-2"><a href="principal-component-analysis-pca.html#cb584-2" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb584-3"><a href="principal-component-analysis-pca.html#cb584-3" tabindex="-1"></a>  <span class="fu">ggscatmat</span>(<span class="at">columns =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">6</span> ,<span class="at">color =</span> <span class="st">&quot;species&quot;</span>, <span class="at">corMethod =</span> <span class="st">&quot;pearson&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb584-4"><a href="principal-component-analysis-pca.html#cb584-4" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb584-5"><a href="principal-component-analysis-pca.html#cb584-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="10-PCA_files/figure-html/unnamed-chunk-6-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<p>Men denne løsning bliver hurtigt uoverskuelige for mange variabler.</p>
+</div>
+<div id="idéen-bag-pca-projektion-på-nye-akser" class="section level3 hasAnchor" number="10.2.2">
+<h3><span class="header-section-number">10.2.2</span> Idéen bag PCA: Projektion på nye akser<a href="principal-component-analysis-pca.html#idéen-bag-pca-projektion-på-nye-akser" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<!-- En løsning til problemet er at projicere datasættet ned til et mindre antal dimensioner (f.eks. kun 2 dimensioner). Disse dimensioner fanger oplysninger fra alle variablerne i datasættet, og derfor, når man laver et scatter plot, får man repræsenteret det hele datasæt i stedet for kun to udvalgte variabler. Metoden for at lave disse såkaldte 'projektioner' kaldes 'principal component analysis'. -->
+<p>Vi ønsker at beregne en ny variabel (PC1), som kan plottes på x-aksen og som bedst fanger den samlede variation i hele datasættet ved at maksimere den projicerede varians. Teknisk set finder man PC1 ved at danne kovarians- eller korrelationsmatrixen og vælge den egenvektor, der svarer til den største egenværdi, fordi netop den retning maksimerer variansen i projektionen. Vi bruger en funktion i R til at udføre PCA, men nogle nøgleord, som er nyttige at huske, er:</p>
+<ul>
+<li><strong>Centering og scaling:</strong> PCA kræver typisk, at de numeriske variabler er skaleret.</li>
+<li><strong>Eigenvalues:</strong> Fortæller, hvor meget varians hver component fanger.</li>
+<li><strong>Eigenvectors (loadings):</strong> Angiver, hvordan de oprindelige variabler kombineres til at danne komponenten.</li>
+</ul>
+</div>
+<div id="simpelt-eksempel-med-to-dimensioner" class="section level3 hasAnchor" number="10.2.3">
+<h3><span class="header-section-number">10.2.3</span> Simpelt eksempel med to dimensioner<a href="principal-component-analysis-pca.html#simpelt-eksempel-med-to-dimensioner" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Man kan forsøge at forstå, hvordan PCA fungerer, ved at kigge på et simpelt eksempel med 2 dimensioner:</p>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="principal-component-analysis-pca.html#cb585-1" tabindex="-1"></a><span class="co">#simulerer data med en høj korrelation</span></span>
+<span id="cb585-2"><a href="principal-component-analysis-pca.html#cb585-2" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">250</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb585-3"><a href="principal-component-analysis-pca.html#cb585-3" tabindex="-1"></a>b <span class="ot">&lt;-</span> a <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">250</span>,<span class="dv">0</span>,.<span class="dv">5</span>)</span>
+<span id="cb585-4"><a href="principal-component-analysis-pca.html#cb585-4" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(a,b)</span>
+<span id="cb585-5"><a href="principal-component-analysis-pca.html#cb585-5" tabindex="-1"></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(a,b)) <span class="sc">+</span> </span>
+<span id="cb585-6"><a href="principal-component-analysis-pca.html#cb585-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb585-7"><a href="principal-component-analysis-pca.html#cb585-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="10-PCA_files/figure-html/unnamed-chunk-7-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<p>Vi kan se her, at der er en meget stor korrelation mellem a og b. Selvom datasættet er plottet i 2 dimensioner, kan det næsten forklares af én linje - en såkaldt bedste rette linje, der passer bedst gennem punkterne.</p>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="principal-component-analysis-pca.html#cb586-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(a,b)</span>
+<span id="cb586-2"><a href="principal-component-analysis-pca.html#cb586-2" tabindex="-1"></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(a,b)) <span class="sc">+</span> </span>
+<span id="cb586-3"><a href="principal-component-analysis-pca.html#cb586-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb586-4"><a href="principal-component-analysis-pca.html#cb586-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb586-5"><a href="principal-component-analysis-pca.html#cb586-5" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="10-PCA_files/figure-html/unnamed-chunk-8-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<!-- Med andre ord kan vi næsten forklare datasættet i blot én dimension - punkternes afstand langs linjen. Når man tager alle punkterne og beskriver dem langs én linje, der bedst beskriver variansen i datasættet, kaldes denne linje for den første principal component (PC1). Man kan dernæst beskrive en anden linje, der er vinkelret på PC1, og som bedst forklarer variancen i de data, der ikke blev fanget af PC1 - dette kaldes for den anden principal component (PC2). -->
+<p>Lineær regression (<code>geom_smooth(method="lm")</code>) illustrerer, at dataene næsten kan beskrives på én linje. Den bedste linje gennem punkterne svarer til PC1, og PC2 findes som en ortogonal linje, der fanger den resterende varians. Vi kan se her PC1 og PC2 plottet:</p>
+<p><img src="plots/pca_dem.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>Når vi tager PC1 og PC2 og plotter dem som henholdsvis x-aksen og y-aksen, svarer det til en drejning af akserne i plottet (vi finder PC1 og PC2 fra funktionen <code>prcomp</code>, som jeg forklarer i næste sektion):</p>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="principal-component-analysis-pca.html#cb587-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">augment</span>(<span class="fu">prcomp</span>(df),df)</span>
+<span id="cb587-2"><a href="principal-component-analysis-pca.html#cb587-2" tabindex="-1"></a><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(<span class="at">x=</span>.fittedPC1,<span class="at">y=</span>.fittedPC2)) <span class="sc">+</span> </span>
+<span id="cb587-3"><a href="principal-component-analysis-pca.html#cb587-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb587-4"><a href="principal-component-analysis-pca.html#cb587-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb587-5"><a href="principal-component-analysis-pca.html#cb587-5" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
+<p><img src="10-PCA_files/figure-html/unnamed-chunk-10-1.svg" width="384" style="display: block; margin: auto;" /></p>
+<p>Vi kan se her, at dataene fylder pladsen på plottet bedre end før (og bemærk at akseskalaen er blevet meget mindre på den nye y-akse, da dataene spreder sig meget mindre langs PC2 i forhold til PC1.)</p>
+<p>Dette er kun et eksempel, hvor vores oprindelige data ligger i to dimensioner (to variabler), for at gøre det nemt at visualisere dem i et plot, men de fleste datasæt (fx penguins, iris osv.) har flere end to dimensioner. Vi kan godt lave den samme proces, hvor vi definerer PC1, som forklarer så meget af variansen i dataene som muligt, og dernæst PC2, som forklarer noget af variansen, der ikke blev fanget af PC1, og dernæst PC3 osv., alt efter hvor mange dimensioner dataene har. I mange praktiske situationer vælger man de første to komponenter, som er de vigtigste, da de forklarer mest af variansen i dataene i forhold til de andre komponenter.</p>
+<p>“So to sum up, the idea of PCA is simple — reduce the number of variables of a data set, while preserving as much information as possible.” <a href="https://builtin.com/data-science/step-step-explanation-principal-component-analysis" class="uri">https://builtin.com/data-science/step-step-explanation-principal-component-analysis</a></p>
+</div>
+</div>
+<div id="fit-pca-to-data-in-r-med-prcomp" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Fit PCA to data in R med <code>prcomp()</code><a href="principal-component-analysis-pca.html#fit-pca-to-data-in-r-med-prcomp" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="principal-component-analysis-pca.html#cb588-1" tabindex="-1"></a><span class="fu">library</span>(broom)</span></code></pre></div>
+<p>Lad os skifte tilbage til nogle virkelige data for at benytte <code>prcomp</code>: datasættet <code>penguins</code>. Med <code>prcomp()</code> fokuserer vi kun på numeriske variabler, så vi bruger <code>select</code> med <code>where(is.numeric)</code> og anvender derefter skalering ved at specificere <code>scale = TRUE</code> inde i funktionen <code>prcomp</code>.</p>
+<!-- ```{r} -->
+<!-- biopsy <- read_csv("https://wilkelab.org/classes/SDS348/data_sets/biopsy.csv") -->
+<!-- ``` -->
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="principal-component-analysis-pca.html#cb589-1" tabindex="-1"></a>pca_fit <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span></span>
+<span id="cb589-2"><a href="principal-component-analysis-pca.html#cb589-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span> <span class="co"># behold kun numeriske kolonner</span></span>
+<span id="cb589-3"><a href="principal-component-analysis-pca.html#cb589-3" tabindex="-1"></a>  <span class="fu">prcomp</span>(<span class="at">scale =</span> <span class="cn">TRUE</span>) <span class="co"># udfør PCA på skaleret data</span></span>
+<span id="cb589-4"><a href="principal-component-analysis-pca.html#cb589-4" tabindex="-1"></a></span>
+<span id="cb589-5"><a href="principal-component-analysis-pca.html#cb589-5" tabindex="-1"></a><span class="fu">summary</span>(pca_fit)</span></code></pre></div>
+<pre><code>#&gt; Importance of components:
+#&gt;                           PC1    PC2     PC3     PC4
+#&gt; Standard deviation     1.6569 0.8821 0.60716 0.32846
+#&gt; Proportion of Variance 0.6863 0.1945 0.09216 0.02697
+#&gt; Cumulative Proportion  0.6863 0.8809 0.97303 1.00000</code></pre>
+<p><code>Proportion of Variance</code> indikerer, hvor meget af variansen i dataene, der blev forklaret af de forskellige komponenter. Vi kan se, at <code>PC1</code> forklarer omkring 69% og de første to komponenter sammen forklarer 88% af variansen i dataene. Derfor, hvis vi viser et plot af de første to komponenter, ved vi, at vi har fanget rigtig mange oplysninger om de fire variabler i datasættet.</p>
+</div>
+<div id="integrering-af-pca-resultater-med-broom-pakken" class="section level2 hasAnchor" number="10.4">
+<h2><span class="header-section-number">10.4</span> Integrering af PCA-resultater med broom-pakken<a href="principal-component-analysis-pca.html#integrering-af-pca-resultater-med-broom-pakken" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Der er flere ting, som kan være nyttige at gøre med vores PCA-resultater:</p>
+<ul>
+<li>Lave et plot af datasættet ud fra de første to principal components</li>
+<li>Se, hvor meget af variansen i datasættet der er forklaret af de forskellige komponenter</li>
+<li>Bruge rotationsmatricen til at se, hvordan variablerne forholder sig i forhold til hinanden</li>
+</ul>
+<div id="lave-plot-af-principal-componenets" class="section level3 hasAnchor" number="10.4.1">
+<h3><span class="header-section-number">10.4.1</span> Lave plot af principal componenets<a href="principal-component-analysis-pca.html#lave-plot-af-principal-componenets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For at lave vores plot af principal components kan vi benytte funktionen <code>augment()</code>, ligesom vi gjorde i vores sidste lektion med k-means clustering. Her får vi værdierne for hver af de fire principal components sammen med det oprindelige datasæt.</p>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="principal-component-analysis-pca.html#cb591-1" tabindex="-1"></a>pca_fit_augment <span class="ot">&lt;-</span> pca_fit <span class="sc">%&gt;%</span> </span>
+<span id="cb591-2"><a href="principal-component-analysis-pca.html#cb591-2" tabindex="-1"></a>  <span class="fu">augment</span>(penguins) <span class="co"># tilføj det originale datasæt igen</span></span>
+<span id="cb591-3"><a href="principal-component-analysis-pca.html#cb591-3" tabindex="-1"></a></span>
+<span id="cb591-4"><a href="principal-component-analysis-pca.html#cb591-4" tabindex="-1"></a>pca_fit_augment</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 333 × 13
+#&gt;    .rownames species island    bill_length_mm bill_depth_mm flipper_length_mm
+#&gt;    &lt;chr&gt;     &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
+#&gt;  1 1         Adelie  Torgersen           39.1          18.7               181
+#&gt;  2 2         Adelie  Torgersen           39.5          17.4               186
+#&gt;  3 3         Adelie  Torgersen           40.3          18                 195
+#&gt;  4 4         Adelie  Torgersen           36.7          19.3               193
+#&gt;  5 5         Adelie  Torgersen           39.3          20.6               190
+#&gt;  6 6         Adelie  Torgersen           38.9          17.8               181
+#&gt;  7 7         Adelie  Torgersen           39.2          19.6               195
+#&gt;  8 8         Adelie  Torgersen           41.1          17.6               182
+#&gt;  9 9         Adelie  Torgersen           38.6          21.2               191
+#&gt; 10 10        Adelie  Torgersen           34.6          21.1               198
+#&gt; # ℹ 323 more rows
+#&gt; # ℹ 7 more variables: body_mass_g &lt;int&gt;, sex &lt;fct&gt;, year &lt;fct&gt;,
+#&gt; #   .fittedPC1 &lt;dbl&gt;, .fittedPC2 &lt;dbl&gt;, .fittedPC3 &lt;dbl&gt;, .fittedPC4 &lt;dbl&gt;</code></pre>
+<p>Vi kan tage <code>pca_fit_augment</code> og lave et plot af de første to principal components:</p>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="principal-component-analysis-pca.html#cb593-1" tabindex="-1"></a>pca_fit_augment  <span class="sc">%&gt;%</span> </span>
+<span id="cb593-2"><a href="principal-component-analysis-pca.html#cb593-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>.fittedPC1, <span class="at">y=</span>.fittedPC2, <span class="at">color =</span> species)) <span class="sc">+</span> </span>
+<span id="cb593-3"><a href="principal-component-analysis-pca.html#cb593-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb593-4"><a href="principal-component-analysis-pca.html#cb593-4" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="10-PCA_files/figure-html/unnamed-chunk-14-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p>Vi kan også integrere de clusters, som vi fik fra funktionen <code>kmeans()</code>, i vores PCA ved at anvende funktionen <code>augment()</code> på resultaterne fra <code>kmeans</code> og vores data, som allerede har resultaterne fra <code>pca</code>. Da både PCA og k-means fanger oplysninger om datastrukturen baseret på de fire numeriske variabler, kan man forvente en bedre sammenligning mellem de to (i forhold til at sammenligne clusters med et plot med kun to af variablerne).</p>
+<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="principal-component-analysis-pca.html#cb594-1" tabindex="-1"></a>penguins_scaled <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span> scale</span>
+<span id="cb594-2"><a href="principal-component-analysis-pca.html#cb594-2" tabindex="-1"></a></span>
+<span id="cb594-3"><a href="principal-component-analysis-pca.html#cb594-3" tabindex="-1"></a>kclust <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(penguins_scaled,<span class="at">centers =</span> <span class="dv">3</span>)</span>
+<span id="cb594-4"><a href="principal-component-analysis-pca.html#cb594-4" tabindex="-1"></a></span>
+<span id="cb594-5"><a href="principal-component-analysis-pca.html#cb594-5" tabindex="-1"></a>kclust <span class="sc">%&gt;%</span> <span class="fu">augment</span>(pca_fit_augment)  <span class="sc">%&gt;%</span> </span>
+<span id="cb594-6"><a href="principal-component-analysis-pca.html#cb594-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>.fittedPC1, <span class="at">y=</span>.fittedPC2, <span class="at">color =</span> .cluster)) <span class="sc">+</span> </span>
+<span id="cb594-7"><a href="principal-component-analysis-pca.html#cb594-7" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb594-8"><a href="principal-component-analysis-pca.html#cb594-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="10-PCA_files/figure-html/unnamed-chunk-15-1.svg" width="480" style="display: block; margin: auto;" /></p>
+</div>
+<div id="forklarede-variance" class="section level3 hasAnchor" number="10.4.2">
+<h3><span class="header-section-number">10.4.2</span> Forklarede variance<a href="principal-component-analysis-pca.html#forklarede-variance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Næst vil vi se på variansen i datasættet, som er blevet fanget af hver af de forskellige komponenter. Man kan udtrække oplysningerne ved at benytte funktionen <code>tidy()</code> fra pakken <code>broom</code> og ved at angive <code>matrix = "eigenvalues"</code> inden for <code>tidy</code>.</p>
+<p>Det kaldes “eigenvalues”, fordi hvis man kigger på matematikken bag principal component analysis, tager man udgangspunkt i en covariance matrix. En covariance matrix beskriver sammenhængen eller korrelationen mellem de forskellige variabler. Man bruger denne covariance matrix til at beregne de såkaldte eigenvalues og deres tilsvarende eigenvectors.</p>
+<p>Det er faktisk den største eigenvalue, der fortæller os om den første principal component - det fortæller os, hvor meget af variansen i datasættet den første principal component fanger - jo større den er i forhold til de andre eigenvalues, jo mere af variansen kan man forklare med den første principal component. Og den næststørste fortæller os om den anden principal component og så videre.</p>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="principal-component-analysis-pca.html#cb595-1" tabindex="-1"></a>pca_fit_tidy <span class="ot">&lt;-</span> pca_fit <span class="sc">%&gt;%</span></span>
+<span id="cb595-2"><a href="principal-component-analysis-pca.html#cb595-2" tabindex="-1"></a>  <span class="fu">tidy</span>(<span class="at">matrix =</span> <span class="st">&quot;eigenvalues&quot;</span>)</span>
+<span id="cb595-3"><a href="principal-component-analysis-pca.html#cb595-3" tabindex="-1"></a>pca_fit_tidy</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 4 × 4
+#&gt;      PC std.dev percent cumulative
+#&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+#&gt; 1     1   1.66   0.686       0.686
+#&gt; 2     2   0.882  0.195       0.881
+#&gt; 3     3   0.607  0.0922      0.973
+#&gt; 4     4   0.328  0.0270      1</code></pre>
+<p>Lad os visualisere disse tal som procenttal ved at specificere <code>labels = scales::percent_format()</code> inden for <code>scale_y_continuous</code> - så vi bare ændrer på de tal, der kan ses på y-aksen.</p>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="principal-component-analysis-pca.html#cb597-1" tabindex="-1"></a>pca_fit_tidy <span class="sc">%&gt;%</span></span>
+<span id="cb597-2"><a href="principal-component-analysis-pca.html#cb597-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> PC, <span class="at">y =</span> percent)) <span class="sc">+</span></span>
+<span id="cb597-3"><a href="principal-component-analysis-pca.html#cb597-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">fill=</span><span class="st">&quot;steelblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb597-4"><a href="principal-component-analysis-pca.html#cb597-4" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb597-5"><a href="principal-component-analysis-pca.html#cb597-5" tabindex="-1"></a>    <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>(), <span class="co">#omdann labels til procentformat</span></span>
+<span id="cb597-6"><a href="principal-component-analysis-pca.html#cb597-6" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb597-7"><a href="principal-component-analysis-pca.html#cb597-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="10-PCA_files/figure-html/unnamed-chunk-17-1.svg" width="288" style="display: block; margin: auto;" /></p>
+<p>På den ene side, hvis der er meget varians, der er forklaret af de første komponenter tilsammen, betyder det, at der er en del redundans i datasættet, fordi mange af variablerne har en tæt sammenhæng med hinanden. På den anden side, hvis der er en meget lille andel af variansen, der er forklaret af de første komponenter tilsammen, betyder det, at det er svært at beskrive datasættet i færre dimensioner (fordi der næsten ingen sammenhæng er mellem variablerne) - i dette tilfælde, hvor datasættet er mere komplekst, er PCA mindre effektiv.</p>
+</div>
+<div id="rotationsmatrix-bidragene-fra-de-forskellige-variabler" class="section level3 hasAnchor" number="10.4.3">
+<h3><span class="header-section-number">10.4.3</span> Rotationsmatrix: bidragene fra de forskellige variabler<a href="principal-component-analysis-pca.html#rotationsmatrix-bidragene-fra-de-forskellige-variabler" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Eigenvalues kan anvendes til at undersøge variansen i datasættet, men deres tilsvarende eigenvectors fortæller os om, hvordan de forskellige variabler kombineres for at opnå de endelige principal component værdier, som vi fx bruger i et scatter plot. Eigenvectors bruges til at lave en matrix, der kaldes en ‘rotationsmatrix’.</p>
+<p>Jeg anvender funktionen <code>pivot_wider</code> for at gøre vores matrix mere overskuelig at se på. Vi kan se, at vi har variablerne her på rækkerne og de forskellige principal components i kolonnerne.</p>
+<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb598-1"><a href="principal-component-analysis-pca.html#cb598-1" tabindex="-1"></a>pca_fit_rotate <span class="ot">&lt;-</span> pca_fit <span class="sc">%&gt;%</span></span>
+<span id="cb598-2"><a href="principal-component-analysis-pca.html#cb598-2" tabindex="-1"></a>  <span class="fu">tidy</span>(<span class="at">matrix =</span> <span class="st">&quot;rotation&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb598-3"><a href="principal-component-analysis-pca.html#cb598-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">&quot;PC&quot;</span>, <span class="at">names_prefix =</span> <span class="st">&quot;PC&quot;</span>, <span class="at">values_from =</span> <span class="st">&quot;value&quot;</span>)</span>
+<span id="cb598-4"><a href="principal-component-analysis-pca.html#cb598-4" tabindex="-1"></a>pca_fit_rotate</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 4 × 5
+#&gt;   column               PC1      PC2    PC3    PC4
+#&gt;   &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+#&gt; 1 bill_length_mm     0.454 -0.600   -0.642  0.145
+#&gt; 2 bill_depth_mm     -0.399 -0.796    0.426 -0.160
+#&gt; 3 flipper_length_mm  0.577 -0.00579  0.236 -0.782
+#&gt; 4 body_mass_g        0.550 -0.0765   0.592  0.585</code></pre>
+<p>Denne rotationsmatrix fortæller os, hvordan man beregner værdierne for de principal components for alle observationer. For eksempel tager vi vores første observation, beregner 0.45 gange bill length, og så minus 0.4 gange bill depth, og så plus 0.58 x flipper length og så plus 0.55 x body_mass. Og så har vi værdien for observationen langs den første principal component.</p>
+<p>Man kan lave et plot af hver af de principal components, der viser, hvordan hvert variable bidrage til componentens værdier:</p>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb600-1"><a href="principal-component-analysis-pca.html#cb600-1" tabindex="-1"></a>pca_fit <span class="sc">%&gt;%</span></span>
+<span id="cb600-2"><a href="principal-component-analysis-pca.html#cb600-2" tabindex="-1"></a>  <span class="fu">tidy</span>(<span class="at">matrix =</span> <span class="st">&quot;rotation&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb600-3"><a href="principal-component-analysis-pca.html#cb600-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value, column,<span class="at">fill=</span><span class="fu">as.factor</span>(PC))) <span class="sc">+</span></span>
+<span id="cb600-4"><a href="principal-component-analysis-pca.html#cb600-4" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb600-5"><a href="principal-component-analysis-pca.html#cb600-5" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>PC,<span class="at">ncol=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb600-6"><a href="principal-component-analysis-pca.html#cb600-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb600-7"><a href="principal-component-analysis-pca.html#cb600-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Contribution to principal component&quot;</span>) <span class="sc">+</span></span>
+<span id="cb600-8"><a href="principal-component-analysis-pca.html#cb600-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Variable&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb600-9"><a href="principal-component-analysis-pca.html#cb600-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Rotation matrix values&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb600-10"><a href="principal-component-analysis-pca.html#cb600-10" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette=</span><span class="st">&quot;Set1&quot;</span>)</span></code></pre></div>
+<p><img src="10-PCA_files/figure-html/unnamed-chunk-19-1.svg" width="672" style="display: block; margin: auto;" /></p>
+<p>Her er eksempelvis to fortolkinger ud fra ovenstående plot:</p>
+<ul>
+<li>Pingviner med en større flipper length ville være plottet på højre på den første principal component, men til venstre hvis man plotter din 4. principal componoent.</li>
+<li>Pingviner med en store bill_depth ville være plottet på venstre på både den første principal compenent og den anden principal component.</li>
+</ul>
+<p>Vi kan anvende rotationsmatrixen til at se, hvordan de forskellige variabler relaterer til hinanden. Variabler, der er tæt på hinanden i plottet, ligner hinanden. Vi kan se, at <code>flipper_length_mm</code> og <code>body_mass_g</code> ligner hinanden ret meget i vores datasæt, mens <code>bill_depth_mm</code> befinder sig over til venstre langs den første principal component, hvilket indikerer, at den måske indeholder nogle oplysninger om pingvinerne, der ikke kunne fanges i de andre variabler.</p>
+<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="principal-component-analysis-pca.html#cb601-1" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb601-2"><a href="principal-component-analysis-pca.html#cb601-2" tabindex="-1"></a>pca_fit_rotate <span class="sc">%&gt;%</span></span>
+<span id="cb601-3"><a href="principal-component-analysis-pca.html#cb601-3" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>PC1,<span class="at">y=</span>PC2,<span class="at">colour=</span>column)) <span class="sc">+</span> </span>
+<span id="cb601-4"><a href="principal-component-analysis-pca.html#cb601-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb601-5"><a href="principal-component-analysis-pca.html#cb601-5" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label=</span>column)) <span class="sc">+</span> </span>
+<span id="cb601-6"><a href="principal-component-analysis-pca.html#cb601-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="10-PCA_files/figure-html/unnamed-chunk-20-1.svg" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pakken-factoextra" class="section level3 hasAnchor" number="10.4.4">
+<h3><span class="header-section-number">10.4.4</span> Pakken <code>factoextra</code><a href="principal-component-analysis-pca.html#pakken-factoextra" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<!-- To save work making a plot manually, we can just plot this values directly from `pca_fit` using a package `factoextra`: -->
+<p>R-pakken <code>factoextra</code> kan anvendes til automatisk at lave et lignende plot fra rotationsmatrixen, og den arbejder oven på <code>ggplot2</code>, så man kan ændre temaet osv. Du kan se, hvordan det fungerer i følgende kode.</p>
+<ul>
+<li>Man får variansprocenten på akserne.</li>
+<li>Placeringen af pilhovederne kommer fra rotationsmatrixen.</li>
+<li>Jo mindre vinklen mellem to linjer er, og jo tættere de er på hinanden, jo større er sammenhængen mellem de to variable.</li>
+<li>Jo tættere pilhovederne er på cirklen, desto større indflydelse har den pågældende variabel på de principal components.</li>
+</ul>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="principal-component-analysis-pca.html#cb602-1" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
+<span id="cb602-2"><a href="principal-component-analysis-pca.html#cb602-2" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(pca_fit, <span class="at">col.var=</span><span class="st">&quot;steelblue&quot;</span>,<span class="at">repel =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb602-3"><a href="principal-component-analysis-pca.html#cb602-3" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="10-PCA_files/figure-html/unnamed-chunk-21-1.svg" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="problemstillinger-9" class="section level2 hasAnchor" number="10.5">
+<h2><span class="header-section-number">10.5</span> Problemstillinger<a href="principal-component-analysis-pca.html#problemstillinger-9" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Problem 1</strong>) Quiz på Absalon</p>
+<hr />
+<p>Vi arbejder med en breast cancer datasæt. Here is the description from Kaggle <a href="https://www.kaggle.com/datasets/yasserh/breast-cancer-dataset" class="uri">https://www.kaggle.com/datasets/yasserh/breast-cancer-dataset</a>:</p>
+<ul>
+<li>Breast cancer is the most common cancer amongst women in the world. It accounts for 25% of all cancer cases, and affected over 2.1 Million people in 2015 alone. It starts when cells in the breast begin to grow out of control. These cells usually form tumors that can be seen via X-ray or felt as lumps in the breast area.</li>
+<li>The key challenges against it’s detection is how to classify tumors into malignant (cancerous) or benign(non cancerous)_</li>
+</ul>
+<p>Download følgende datasæt ved at køre følgende kode chunk:</p>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="principal-component-analysis-pca.html#cb603-1" tabindex="-1"></a>cancer <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">url</span>(<span class="st">&quot;https://www.dropbox.com/s/4qa37itw9wtwtjg/breast-cancer.csv?dl=1&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>id)</span>
+<span id="cb603-2"><a href="principal-component-analysis-pca.html#cb603-2" tabindex="-1"></a>cancer <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
+<pre><code>#&gt; Rows: 569
+#&gt; Columns: 31
+#&gt; $ diagnosis               &lt;chr&gt; &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;…
+#&gt; $ radius_mean             &lt;dbl&gt; 17.990, 20.570, 19.690, 11.420, 20.290, 12.450…
+#&gt; $ texture_mean            &lt;dbl&gt; 10.38, 17.77, 21.25, 20.38, 14.34, 15.70, 19.9…
+#&gt; $ perimeter_mean          &lt;dbl&gt; 122.80, 132.90, 130.00, 77.58, 135.10, 82.57, …
+#&gt; $ area_mean               &lt;dbl&gt; 1001.0, 1326.0, 1203.0, 386.1, 1297.0, 477.1, …
+#&gt; $ smoothness_mean         &lt;dbl&gt; 0.11840, 0.08474, 0.10960, 0.14250, 0.10030, 0…
+#&gt; $ compactness_mean        &lt;dbl&gt; 0.27760, 0.07864, 0.15990, 0.28390, 0.13280, 0…
+#&gt; $ concavity_mean          &lt;dbl&gt; 0.30010, 0.08690, 0.19740, 0.24140, 0.19800, 0…
+#&gt; $ concave.points_mean     &lt;dbl&gt; 0.14710, 0.07017, 0.12790, 0.10520, 0.10430, 0…
+#&gt; $ symmetry_mean           &lt;dbl&gt; 0.2419, 0.1812, 0.2069, 0.2597, 0.1809, 0.2087…
+#&gt; $ fractal_dimension_mean  &lt;dbl&gt; 0.07871, 0.05667, 0.05999, 0.09744, 0.05883, 0…
+#&gt; $ radius_se               &lt;dbl&gt; 1.0950, 0.5435, 0.7456, 0.4956, 0.7572, 0.3345…
+#&gt; $ texture_se              &lt;dbl&gt; 0.9053, 0.7339, 0.7869, 1.1560, 0.7813, 0.8902…
+#&gt; $ perimeter_se            &lt;dbl&gt; 8.589, 3.398, 4.585, 3.445, 5.438, 2.217, 3.18…
+#&gt; $ area_se                 &lt;dbl&gt; 153.40, 74.08, 94.03, 27.23, 94.44, 27.19, 53.…
+#&gt; $ smoothness_se           &lt;dbl&gt; 0.006399, 0.005225, 0.006150, 0.009110, 0.0114…
+#&gt; $ compactness_se          &lt;dbl&gt; 0.049040, 0.013080, 0.040060, 0.074580, 0.0246…
+#&gt; $ concavity_se            &lt;dbl&gt; 0.05373, 0.01860, 0.03832, 0.05661, 0.05688, 0…
+#&gt; $ concave.points_se       &lt;dbl&gt; 0.015870, 0.013400, 0.020580, 0.018670, 0.0188…
+#&gt; $ symmetry_se             &lt;dbl&gt; 0.03003, 0.01389, 0.02250, 0.05963, 0.01756, 0…
+#&gt; $ fractal_dimension_se    &lt;dbl&gt; 0.006193, 0.003532, 0.004571, 0.009208, 0.0051…
+#&gt; $ radius_worst            &lt;dbl&gt; 25.38, 24.99, 23.57, 14.91, 22.54, 15.47, 22.8…
+#&gt; $ texture_worst           &lt;dbl&gt; 17.33, 23.41, 25.53, 26.50, 16.67, 23.75, 27.6…
+#&gt; $ perimeter_worst         &lt;dbl&gt; 184.60, 158.80, 152.50, 98.87, 152.20, 103.40,…
+#&gt; $ area_worst              &lt;dbl&gt; 2019.0, 1956.0, 1709.0, 567.7, 1575.0, 741.6, …
+#&gt; $ smoothness_worst        &lt;dbl&gt; 0.1622, 0.1238, 0.1444, 0.2098, 0.1374, 0.1791…
+#&gt; $ compactness_worst       &lt;dbl&gt; 0.6656, 0.1866, 0.4245, 0.8663, 0.2050, 0.5249…
+#&gt; $ concavity_worst         &lt;dbl&gt; 0.71190, 0.24160, 0.45040, 0.68690, 0.40000, 0…
+#&gt; $ concave.points_worst    &lt;dbl&gt; 0.26540, 0.18600, 0.24300, 0.25750, 0.16250, 0…
+#&gt; $ symmetry_worst          &lt;dbl&gt; 0.4601, 0.2750, 0.3613, 0.6638, 0.2364, 0.3985…
+#&gt; $ fractal_dimension_worst &lt;dbl&gt; 0.11890, 0.08902, 0.08758, 0.17300, 0.07678, 0…</code></pre>
+<p>I variablen <code>diagnosis</code>: M betyder ‘Malignant’ og B betyder ‘Benign’ - du kan overveje at ændre på variablen i dit indlæste datasæt for at gøre det mere klart.</p>
+<hr />
+<p><strong>Problem 2</strong>) Først vil vi gerne visualisere datasættet <em>uden at bruge principal component analyse</em>. Anvend funktionen <code>ggscatmat</code> fra pakken <code>GGally</code> til at lave et plot, hvor man sammenligne fem af variablerne.</p>
+<ul>
+<li>Der er mange variabler, derfor kan man angive en tilfældig sample af fem variabler med <code>columns = sample(2:31,5)</code> som parameter indenfor funktionen <code>ggscatmat</code>(husk at installere og indlæse <code>GGally</code>-pakken).</li>
+<li>Giv farver efter factor variablen <code>diagnosis</code> og vælger “pearson” som parameteren <code>corMethod</code>.</li>
+<li>Prøv at køre din kode et par gange, så du får forskellige samplings af fem variabler. Opfatter du, at der er en del redundans i datasættet (dvs., er der stærke korrelationer mellem de forskellige variabler, der gør at hvis man ved en værdi fra den ene, kan man gætte på den tilsvarende værdi fra den anden)?</li>
+</ul>
+<hr />
+<p><strong>Problem 3</strong>) Benyt funktionen <code>prcomp()</code> til at beregne en principal component analysis af datasættet:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Husk at det skal kun være numeriske variabler og angiv <code>scale=TRUE</code> inde i funktionen.</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Anvend <code>augment()</code>-funktionen til at tilføje dit rå datasæt til ovenstående resultater fra <code>prcomp</code>.</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Brug den til at lave et scatter plot af de første to principal components, hvor du giver farver efter variablen <code>diagnosis</code></li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>Skriv kort om man kan skelne imellem Malignant og Benign tumours (variablen <code>diagnosis</code>) ud fra de første to principal components.</li>
+</ol></li>
+<li><ol start="5" style="list-style-type: decimal">
+<li>Skriv også kort - hvilke af de to components er bedre til at skelne mellem Malignant og Benign tumours?</li>
+</ol></li>
+</ul>
+<!-- * Hvad er proportionen af variansen, der er forklaret af den første principal component? -->
+<!-- * Hvad er proportionen af variansen, som er forklaret af de første to principal components tilsammen? -->
+<!-- --- -->
+<!-- __Problem 4__) *Augment og plot* Anvend `augment()`-funktionen til at tilføje dit rå datasæt til ovenstående resultater fra `prcomp`. -->
+<!-- * Brug den til at lave et scatter plot af de første to principal components -->
+<!-- * Giv farver efter variablen `diagnosis` -->
+<!-- * Skriv kort om man kan skelne imellem Malignant og Benign tumours (variablen `diagnosis`) ud fra de første to principal components. -->
+<!-- * Skriv også kort - hvilke af de to components er bedre til at skelne mellem Malignant og Benign tumours? -->
+<hr />
+<p><strong>Problem 4</strong>) <em>Integrere kmeans clustering</em>. Lav et clustering med <code>kmeans</code> på datasættet, med to clusters (husk at udvælge numeriske variabler og scale inden du anvender funktionen <code>kmeans</code>), og:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Augment resultaterne af <code>kmeans</code> til dit datasæt, der allerede har <code>prcomp</code> resultater tilføjet.</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Lav et plot og give farver efter <code>.cluster</code> og former efter <code>diagnosis</code>.</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Sammenligne dine to clusters med <code>diagnosis</code>.</li>
+</ol></li>
+</ul>
+<hr />
+<p><strong>Problem 5</strong>) <em>tidy form og variansen</em> Anvende <code>tidy(matrix = "eigenvalues")</code> på din PCA resultater til at få bidragen af de forskellige components til den overordnet varianse i datasættet.</p>
+<ul>
+<li>Lav et barplot som viser de components på x-aksen og <code>percent</code> på y-aksen.</li>
+</ul>
+<hr />
+<p><strong>Problem 6</strong>) <em>tidy form og rotation matrix</em></p>
+<p><strong>a</strong>) Anvende <code>tidy(matrix = "rotation")</code> til at få den rotation matrix og lav følgende:</p>
+<ul>
+<li>Anvend funktionen <code>pivot_wider</code> til at få den til wide form</li>
+<li>Lav et scatter plot som viser bidragerne af de forskellige variabler på den første og den anden principal components</li>
+<li>Anvend <code>geom_text_repel</code> til at give labels til de variabler (kan være en god idé at anvend <code>show.legend=F</code>)</li>
+</ul>
+<p><strong>b</strong>) Værdierne i den rotation matrix fortæller, hvordan en givet variabel bidrager til den endelige principal component beregning (dvs. værdierne som er plottet i <strong>Problem 4</strong>). Fk. variablen <code>radius_mean</code> har en positiv værdi i PC2, som gøre, at en højere værdi af <code>radius_mean</code> vil resultatere i en højere værdi på PC2 for en givet observation.</p>
+<ul>
+<li>Kig på placeringen af variablen <code>compactness_mean</code> på plottet. Bidrager den negativ eller positiv værdi til PC1?</li>
+<li>Kig igen på dit plot i <strong>Problem 4</strong>) - hvad effekt ville en forhøjet værdi af <code>compactness_mean</code> have på den PC1-værdien til en givet tumour? Ville det gøre det mindre eller mere sandsynligt, at den er “benign”?</li>
+</ul>
+<hr />
+<p><strong>Problem 7)</strong> Udvidelse af <strong>Problem 4)</strong>: Fra din augmented resultater med både dine principal components og clusters: Beregne middelværdierne af din første to principal components for hver af de to clusters. Tilføj dine beregnede middelværdierne til plottet som “x”.</p>
+<hr />
+<p>Åbn “world happiness data” og</p>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="principal-component-analysis-pca.html#cb605-1" tabindex="-1"></a>happiness <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://www.dropbox.com/scl/fi/6rt17anzk31mjyexm16o6/world_happiness_data.csv?rlkey=44qxe2voahqvaxnxlgy01i2ls&amp;dl=1&quot;</span>)</span>
+<span id="cb605-2"><a href="principal-component-analysis-pca.html#cb605-2" tabindex="-1"></a>happiness <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
+<pre><code>#&gt; Rows: 146
+#&gt; Columns: 7
+#&gt; $ Country                   &lt;chr&gt; &quot;Finland&quot;, &quot;Denmark&quot;, &quot;Iceland&quot;, &quot;Switzerlan…
+#&gt; $ `GDP per capita`          &lt;dbl&gt; 1.892, 1.953, 1.936, 2.026, 1.945, 2.209, 1.…
+#&gt; $ `Social support`          &lt;dbl&gt; 1.258, 1.243, 1.320, 1.226, 1.206, 1.155, 1.…
+#&gt; $ `Healthy life expectancy` &lt;dbl&gt; 0.775, 0.777, 0.803, 0.822, 0.787, 0.790, 0.…
+#&gt; $ `Freedom of life choices` &lt;dbl&gt; 0.736, 0.719, 0.718, 0.677, 0.651, 0.700, 0.…
+#&gt; $ Generosity                &lt;dbl&gt; 0.109, 0.188, 0.270, 0.147, 0.271, 0.120, 0.…
+#&gt; $ `Corruption perception`   &lt;dbl&gt; 0.534, 0.532, 0.191, 0.461, 0.419, 0.388, 0.…</code></pre>
+<p><strong>Problem 8)</strong> Lav en principal component analyse på dataframen <code>happiness</code>:</p>
+<ul>
+<li>Lav et scatter plot af de first to principal components</li>
+<li>Giv hvert punkt sin egen label efter <code>Country</code></li>
+</ul>
+<hr />
+<p><strong>Problem 9)</strong> Lav barplots der viser bidragene af variablerne til hvert component og angiv en foltolking til en af variablerne.</p>
+<hr />
+<p><strong>Problem 10)</strong> Har lande med et “Generosity” af mere end 0.15 signifikant højere værdier på den anden principal component?</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Opret en kolon, <code>is_generous</code> med dine to grupper (“Yes” hvis <code>Generosity</code> &gt; 0.15 og “No” hvis ikke).</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Plotte de “generøs” lande med egen farve på din punkt plot, der viser de første to principal componenter.</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Lav en passende test for at svarer på ovenstående spørgsmålet</li>
+</ol></li>
+</ul>
+<hr />
+<p><strong>Problem 11</strong> EKSTRA: Kan du lav samme test til de andre principal components (OBS: der er 6 PCs - kan du komme frem til en løsning med funktionel programmering?)</p>
+<hr />
+<p><strong>Problem 12)</strong> EKSTRA: Gå ind i Kaggle linket til breast cancer dataset (<a href="https://www.kaggle.com/datasets/yasserh/breast-cancer-dataset" class="uri">https://www.kaggle.com/datasets/yasserh/breast-cancer-dataset</a>) og klik på “Code”. I den “Search” klik på “Filters” til højre og vælge “R” som language. Kig på analyserne, som andre har lavet på samme datasæt.</p>
+</div>
+<div id="ekstra-læsning" class="section level2 hasAnchor" number="10.6">
+<h2><span class="header-section-number">10.6</span> Ekstra læsning<a href="principal-component-analysis-pca.html#ekstra-læsning" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Step by step explanation: <a href="https://builtin.com/data-science/step-step-explanation-principal-component-analysis" class="uri">https://builtin.com/data-science/step-step-explanation-principal-component-analysis</a></p>
+<p>PCA tidyverse style fra claus wilke: <a href="https://clauswilke.com/blog/2020/09/07/pca-tidyverse-style/" class="uri">https://clauswilke.com/blog/2020/09/07/pca-tidyverse-style/</a></p>
+<p>More PCA in tidyverse framework: <a href="https://tbradley1013.github.io/2018/02/01/pca-in-a-tidy-verse-framework/" class="uri">https://tbradley1013.github.io/2018/02/01/pca-in-a-tidy-verse-framework/</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="clustering.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/10-PCA.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

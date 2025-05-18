@@ -23,7 +23,7 @@
 <meta name="author" content="Sarah Rennie" />
 
 
-<meta name="date" content="2025-05-17" />
+<meta name="date" content="2025-05-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -460,6 +460,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="clustering.html"><a href="clustering.html#problemstillinger-8"><i class="fa fa-check"></i><b>9.5</b> Problemstillinger</a></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html"><i class="fa fa-check"></i><b>10</b> Principal component analysis (PCA)</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#indledning-og-læringsmålene"><i class="fa fa-check"></i><b>10.1</b> Indledning og læringsmålene</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#læringsmålene-1"><i class="fa fa-check"></i><b>10.1.1</b> Læringsmålene</a></li>
+<li class="chapter" data-level="10.1.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#introduktion-til-kapitlet-1"><i class="fa fa-check"></i><b>10.1.2</b> Introduktion til kapitlet</a></li>
+<li class="chapter" data-level="10.1.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#videoressourcer-1"><i class="fa fa-check"></i><b>10.1.3</b> Videoressourcer</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#hvad-er-principal-component-analysis-pca"><i class="fa fa-check"></i><b>10.2</b> Hvad er principal component analysis (PCA)?</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#problemet-med-høj-dimensionelle-plots"><i class="fa fa-check"></i><b>10.2.1</b> Problemet med høj-dimensionelle plots</a></li>
+<li class="chapter" data-level="10.2.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#idéen-bag-pca-projektion-på-nye-akser"><i class="fa fa-check"></i><b>10.2.2</b> Idéen bag PCA: Projektion på nye akser</a></li>
+<li class="chapter" data-level="10.2.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#simpelt-eksempel-med-to-dimensioner"><i class="fa fa-check"></i><b>10.2.3</b> Simpelt eksempel med to dimensioner</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#fit-pca-to-data-in-r-med-prcomp"><i class="fa fa-check"></i><b>10.3</b> Fit PCA to data in R med <code>prcomp()</code></a></li>
+<li class="chapter" data-level="10.4" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#integrering-af-pca-resultater-med-broom-pakken"><i class="fa fa-check"></i><b>10.4</b> Integrering af PCA-resultater med broom-pakken</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#lave-plot-af-principal-componenets"><i class="fa fa-check"></i><b>10.4.1</b> Lave plot af principal componenets</a></li>
+<li class="chapter" data-level="10.4.2" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#forklarede-variance"><i class="fa fa-check"></i><b>10.4.2</b> Forklarede variance</a></li>
+<li class="chapter" data-level="10.4.3" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#rotationsmatrix-bidragene-fra-de-forskellige-variabler"><i class="fa fa-check"></i><b>10.4.3</b> Rotationsmatrix: bidragene fra de forskellige variabler</a></li>
+<li class="chapter" data-level="10.4.4" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#pakken-factoextra"><i class="fa fa-check"></i><b>10.4.4</b> Pakken <code>factoextra</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#problemstillinger-9"><i class="fa fa-check"></i><b>10.5</b> Problemstillinger</a></li>
+<li class="chapter" data-level="10.6" data-path="principal-component-analysis-pca.html"><a href="principal-component-analysis-pca.html#ekstra-læsning"><i class="fa fa-check"></i><b>10.6</b> Ekstra læsning</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://sarah-ku.github.io/Visualisering_2025" target="blank">Published with bookdown</a></li>
 
@@ -483,7 +508,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Analyse og visualisering af biologiske datasæt – 2025</h1>
 <p class="author"><em>Sarah Rennie</em></p>
-<p class="date"><em>2025-05-17</em></p>
+<p class="date"><em>2025-05-18</em></p>
 </div>
 <div id="lidt-om-kurset" class="section level1 unnumbered hasAnchor">
 <h1>Lidt om kurset<a href="index.html#lidt-om-kurset" class="anchor-section" aria-label="Anchor link to header"></a></h1>

@@ -1,6 +1,3 @@
----
-always_allow_html: true
----
 
 
 # Principal component analysis (PCA)
