@@ -1,0 +1,20 @@
+delete_merged_file: true
+name: Visualisering_2025
+output_dir: "docs"         # put built site into docs/
+output:
+  bookdown::gitbook:
+    css: assets/style.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: true
+    code_folding: show
+language:
+  ui:
+    chapter_name: "Kapitel "
+
+new_session: yes
+
+before_chapter_script: "_common.R"
+
+
