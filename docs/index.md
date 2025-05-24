@@ -1,7 +1,7 @@
 ---
 title:       "Analyse og visualisering af biologiske datasæt – 2025"
 author:      "Sarah Rennie"
-date:        "2025-05-18"
+date:        "2025-05-24"
 site:        bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]

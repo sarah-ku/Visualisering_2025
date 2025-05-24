@@ -6,6 +6,8 @@ fig:unnamed-chunk-60
 fig:unnamed-chunk-20
 fig:unnamed-chunk-23
 fig:unnamed-chunk-7
+fig:unnamed-chunk-6
+fig:unnamed-chunk-12
 baser
 inledning-til-kapitel
 rstudio
@@ -237,3 +239,18 @@ rotationsmatrix-bidragene-fra-de-forskellige-variabler
 pakken-factoextra
 problemstillinger-9
 ekstra-læsning
+emner-fra-eksperimental-design
+inledning-og-læringsmålene-1
+video-ressourcer-4
+grundlæggende-principper-i-eksperimentelt-design
+randomisering-og-replikation
+eksempel-med-datasættet-toothgrowth
+case-studies-simpsons-paradoks
+optagelse-på-berkeley
+case-studies-anscombes-kvartet
+undersøgelse-af-batch-effekter
+principal-component-analyse
+ekstra-heatmap
+ekstra-batch-effect-correction-med-combat-funktionen
+problemstillinger-10
+yderligere-læsning
