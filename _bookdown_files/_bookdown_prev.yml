@@ -1,0 +1,19 @@
+delete_merged_file: true
+book_filename: "index"       # → this tells Bookdown to name the main page index.html
+output_dir: "docs"
+
+rmd_files:
+  - "index.Rmd"              # ← MUST be first
+  - "01-basics.Rmd"
+  - "02-rmark.Rmd"
+  - "03-visual.Rmd"
+  - "04-visual2.Rmd"
+  - "05-tidyverse1_LY.Rmd"
+  - "06-tidyverse2_LY.Rmd"
+
+new_session: yes
+before_chapter_script: "_common.R"
+
+language:
+  ui:
+    chapter_name: "Kapitel "
