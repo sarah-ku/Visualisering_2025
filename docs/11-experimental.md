@@ -1036,6 +1036,28 @@ __d__) Denne gang, beregn andelen af flyvninger, der er forsinkede, for hver kom
 
 __e__) Kan du forklare dette? Hint: kig eksempelvis på rådataene og især lufthavnen "Phoenix".
 
+---
+
+__Problem 8__) _Accounting for batch effect with ANOVA_
+
+Indlæs `npk`:
+
+
+``` r
+data(npk)
+```
+
+Data beskrivelse:
+
+* `yield`: udbyttet (lb per plot)
+* `N`: tilførsel af kvælstof
+
+__a__) Formuler to lineære modeller, der kan bruges til at undersøge, om tilførsel af kvælstof (`N`) har en signifikant effekt på udbyttet (`yield`), når der er taget højde for forsøgsblokkene (`block`):
+
+
+
+__b__) Brug `anova()` til at sammenligne de to modeller og afgør, hvilken der passer bedst. Skriv din konklusion i én kort sætning, og indsæt den relevante p-værdi som inline-kode.
+
 ## Yderligere læsning
 
 Simpson's paradox og airlines: http://ritsokiguess.site/docs/2018/04/07/simpson-s-paradox-log-linear-modelling-and-the-tidyverse/
