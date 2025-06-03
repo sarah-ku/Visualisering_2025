@@ -23,7 +23,7 @@
 <meta name="author" content="Sarah Rennie" />
 
 
-<meta name="date" content="2025-05-24" />
+<meta name="date" content="2025-06-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -707,7 +707,7 @@ Figure 12.1: We don’t use all these packages here but R/tidyverse has a good s
 <p>For hver af de fem folds beregner jeg statistikken “mean absolute error”, der tager afstanden mellem de forventede værdier (<code>predicted_mass</code>) og de virkelige værdier (<code>actual_mass</code>) og tager herefter middelværdien (over deres absolutte værdier dvs. uden minus tegn). Jo mindre “mae” er, jo bedre er modellen.</p>
 <div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb668-1"><a href="maskinslæring-i-tidyverse.html#cb668-1" tabindex="-1"></a><span class="co"># mindre mae = bedre model</span></span>
 <span id="cb668-2"><a href="maskinslæring-i-tidyverse.html#cb668-2" tabindex="-1"></a>mae_df <span class="ot">&lt;-</span> prediction_df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="st">&quot;mae&quot;</span> <span class="ot">=</span> <span class="fu">mean</span>(<span class="fu">abs</span>(actual_mass <span class="sc">-</span> predicted_mass)))</span></code></pre></div>
-<p>Her er et plot af statistikken “mae” for de forskellige folds. I gennemsnit er det 240.8068422, hvilket betyder, at vores forudsigelser i gennemsnit er ude/forkerte med knap 300 g - ikke dårligt, når den gennemsnitlige pingvin vejer 4207.06 g.</p>
+<p>Her er et plot af statistikken “mae” for de forskellige folds. I gennemsnit er det 234.3201254, hvilket betyder, at vores forudsigelser i gennemsnit er ude/forkerte med knap 300 g - ikke dårligt, når den gennemsnitlige pingvin vejer 4207.06 g.</p>
 <div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="maskinslæring-i-tidyverse.html#cb669-1" tabindex="-1"></a>mae_df <span class="sc">%&gt;%</span> </span>
 <span id="cb669-2"><a href="maskinslæring-i-tidyverse.html#cb669-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>mae,<span class="at">x=</span>id,<span class="at">fill=</span>id)) <span class="sc">+</span> </span>
 <span id="cb669-3"><a href="maskinslæring-i-tidyverse.html#cb669-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>,<span class="at">colour=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
@@ -726,8 +726,8 @@ Figure 12.1: We don’t use all these packages here but R/tidyverse has a good s
 <pre><code>#&gt; # A tibble: 1 × 1
 #&gt;     mae
 #&gt;   &lt;dbl&gt;
-#&gt; 1  226.</code></pre>
-<p>Man kan se, at vores endelige model laver forudsigelser, som i gennemsnit er 226 g væk fra pingvinernes virkelige vægt (det vil sige, at forudsigelsen kan være over eller under den virkelige værdi, men i gennemsnit er afstanden fra den virkelige værdi 230 g).</p>
+#&gt; 1  245.</code></pre>
+<p>Man kan se, at vores endelige model laver forudsigelser, som i gennemsnit er 244.8 g væk fra pingvinernes virkelige vægt (det vil sige, at forudsigelsen kan være over eller under den virkelige værdi, men i gennemsnit er afstanden fra den virkelige værdi 230 g).</p>
 </div>
 </div>
 <div id="klassifikationsmodeller" class="section level2 hasAnchor" number="12.4">

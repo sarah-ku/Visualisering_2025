@@ -23,7 +23,7 @@
 <meta name="author" content="Sarah Rennie" />
 
 
-<meta name="date" content="2025-05-24" />
+<meta name="date" content="2025-06-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -944,8 +944,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>.x</code> refererer til en værdi i vektoren. Hvis man tager heltallet <code>1:10</code> og anvender <code>map</code>, så tager man hvert tal for sig og beregner en funktion med det - i det følgende simulerer man et tal fra den normale fordeling med parameteren <code>mean=.x</code>:</li>
 </ul>
 <div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="functional-programming-med-purrr-pakken.html#cb416-1" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(<span class="sc">~</span><span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="at">mean=</span>.x))</span></code></pre></div>
-<pre><code>#&gt;  [1]  1.129392  2.458021  3.943341  4.789213  6.076137  6.022297  5.763757
-#&gt;  [8]  7.790363 12.628365  9.100211</code></pre>
+<pre><code>#&gt;  [1] -0.1132611  2.5882753  4.1138387  4.5218792  3.2997500  5.6213820
+#&gt;  [7]  7.3145379  8.8194875  9.9595844  9.9831531</code></pre>
 </div>
 <div id="input-dataframe" class="section level3 hasAnchor" number="7.4.2">
 <h3><span class="header-section-number">7.4.2</span> <strong>Input: dataframe</strong><a href="functional-programming-med-purrr-pakken.html#input-dataframe" class="anchor-section" aria-label="Anchor link to header"></a></h3>

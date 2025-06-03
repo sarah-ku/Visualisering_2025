@@ -1,0 +1,11 @@
+# _output.yml
+bookdown::gitbook:
+  css: assets/style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">Visualisering_2025</a></li>
+      after: |
+        <li><a href="https://sarah-ku.github.io/Visualisering_2025" target="blank">Published with bookdown</a></li>
+    download: false
+    edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
